@@ -9,6 +9,22 @@
 <body>
   
   <div class="container">
+    <div class="row mt-4">
+      <div class="col">
+        <form role="form" method="post" accept-charset="utf-8" action="<?php echo base_url().$class.'/'.$method;?>/crud/?rNum=<?php echo $rNum?>">
+          <!-- <input type="hidden" name="pc_id" value="<php echo $pc_id; ?>"> -->
+          <label for="">Nama Pegawai</label>
+          <input type="text" name="nama_peg" class="form-control"><br>
+          <label for="">nama keluarga</label>
+          <input type="text" name="pf_nama" class="form-control"><br>
+          <label for="">nama pendidikan </label>
+          <input type="text" name="ppend_nama" class="form-control"><br><br>
+
+          <button type="submit" id="submit_simpan" name="submit_crud" value="simpan" >Simpan</button>
+          <button type="submit" id="submit_reset" name="submit_crud" value="reset" >Reset</button>
+        </form>
+      </div>
+    </div>
     <div class="row">
       <div class="col">
         <table class="table" border="1" cellpadding="2" cellspacing="2">
@@ -24,13 +40,14 @@
           <tbody>
             <?php
               $no = 1;
-              foreach ($pegawai->result() as $r){
+              foreach ($rec_peg->result() as $r){
             ?>
             <tr>
+              <!-- memanggil data sesuai nama field di view -->
               <td><?php echo $no ?></td>
-              <td><?php echo $r->pc_nama; ?></td>
-              <td><?php echo $r->pf_nama; ?></td>
-              <td><?php echo $r->ppend_nama; ?></td>
+              <td><?php echo $r->nama_calon; ?></td>
+              <td><?php echo $r->nama_keluarga; ?></td>
+              <td><?php echo $r->nama_pendidikan; ?></td>
               <td><?php echo anchor('home/hapus/'.$r->pc_id, 'Delete') ?></td>
             </tr>
             <?php
@@ -39,20 +56,6 @@
             ?>
           </tbody>
         </table>
-      </div>
-    </div>
-    <div class="row mt-4">
-      <div class="col">
-        <?= form_open('home/tambah') ?>
-          <label for="">Nama Pegawai</label>
-          <input type="text" name="nama_calon"><br>
-          <label for="">nama keluarga</label>
-          <input type="text" name="nama_kel"><br>
-          <label for="">nama pendidikan </label>
-          <input type="text" name="nama_pend"><br><br>
-
-          <button type="submit">insert data</button>
-        <?= form_close() ?>
       </div>
     </div>
   </div>
