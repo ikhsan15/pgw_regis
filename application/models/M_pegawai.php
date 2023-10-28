@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_pegawai extends CI_Model{
+class M_Pegawai extends CI_Model{
 
   public function insert_table($table, $data){
     $this->db->insert($table, $data);
@@ -9,30 +9,37 @@ class M_pegawai extends CI_Model{
     return $insertId;
   }
 
-  function update_table($table, $data, $cond) {
+  public function update_table($table, $data, $cond) {
     $this->db->where($cond);
     $this->db->update($table, $data);
   }
 
-  function delete_table($table, $cond) {
+  public function delete_table($table, $cond) {
     $this->db->where($cond);
     $this->db->delete($table);
   }
 
-  // public function save_batch($data){
-	// 	return $this->db->insert_batch('pgw_test', $data);
-	// }
-
-  // function getUsers(){
-  //   $this->db->select('*');
-  //   $fetched_records = $this->db->get('users');
-  //   $users = $fetched_records->result_array();
-  //   return $users;
-  // }
-  // function updateUser($id, $field, $value){
-  //   $data = array($field => $value);
-  //   $this->db->where('id', $id);
-  //   $this->db->update('users', $data);
-  // }
+  public function show_agama(){
+    $query = "SELECT * FROM pgw_agama
+              ORDER BY pa_id
+              ";
+    return $this->db->query($query);
+  }
+  
+  function show_combo($table, $fieldId, $fieldName, $clause, $fieldOrder, $value) {
+		$list = '';
+    $sql  = " SELECT	".$fieldId.", ".$fieldName."
+              FROM	".$table."
+              WHERE	".$clause."
+              ORDER BY ".$fieldOrder;
+    $rhQ      = $this->db->query($sql);
+    foreach($rhQ->result() as $rrQ){
+      $field_id		= $rrQ->$fieldId;
+      $field_name	= $rrQ->$fieldName;
+      ($value == $field_id) ? $selected = "selected" : $selected = "";
+      $list	.= '<option value="'.$field_id.'" '.$selected.'>'.$field_name.'</option>';
+    }
+    return $list;
+    }
   
 }

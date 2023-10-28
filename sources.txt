@@ -1,0 +1,9 @@
+sources
+
+jquery add remove
+https://jogjatech.com/blog/tutorial/tutorial-codeigniter-add-or-remove-multiple-input-fields-with-jquery/
+
+multiple insert
+https://www.mynotescode.com/multiple-insert-dengan-codeigniter/
+https://www.itsolutionstuff.com/post/codeigniter-add-remove-multiple-input-fields-dynamically-with-jqueryexample.html
+https://www.youtube.com/watch?v=V3tcw2MSNL8
