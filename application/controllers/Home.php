@@ -68,26 +68,20 @@ class Home extends CI_Controller {
 				$inp_pc_alamat_ktp				= $this->input->post('inp_pc_alamat_ktp');
 				$inp_pc_alamat_sekarang		= $this->input->post('inp_pc_alamat_sekarang');
 				$inp_pc_telp							= $this->input->post('inp_pc_telp');
-				$res_inp_pc_telp 					= preg_replace("/[^0-9]/", "", $inp_pc_telp);
-
+				// $res_inp_pc_telp 					= preg_replace("/[^0-9]/", "", $inp_pc_telp);
 				$inp_pc_email							= $this->input->post('inp_pc_email');
 				$inp_pc_gender						= $this->input->post('inp_pc_gender');
 				$inp_pa_id_agama					= $this->input->post('inp_pa_id_agama');
 				$inp_pc_kewarganegaraan		= $this->input->post('inp_pc_kewarganegaraan');
-
 				$inp_pc_anak_ke						= $this->input->post('inp_pc_anak_ke');
-				if(empty($inp_pc_anak_ke)){
-					$inp_pc_anak_ke = 1;
-				}
+				// if(empty($inp_pc_anak_ke)){
+				// 	$inp_pc_anak_ke = 1;
+				// }
 				$inp_pc_anak_ke_dari			= $this->input->post('inp_pc_anak_ke_dari');
-				if(empty($inp_pc_anak_ke_dari)){
-					$inp_pc_anak_ke_dari = 1;
-				}
-
 				$inp_psn_id_status_nikah	= $this->input->post('inp_psn_id_status_nikah');
 				$inp_pc_jumlah_anak				= $this->input->post('inp_pc_jumlah_anak');
 				
-				die(print_r($res_inp_pc_telp));
+				// die(print_r($inp_pc_telp));
 				// die(print_r('qwerty'));
 
 				if($inp_pc_nama != ''){
@@ -124,7 +118,8 @@ class Home extends CI_Controller {
 				else{
 					die(print_r('kosonggg'));
 				}
-								 
+				
+			
 				// insert into table pgw_keluarga
 				$jumlah = count($this->input->post('inp_pf_nama'));
 				for($i=0; $i<$jumlah; $i++){
@@ -135,12 +130,12 @@ class Home extends CI_Controller {
 					$inp_pf_kerja				= $this->input->post('inp_pf_kerja')[$i];
 
 					$data = array(
-						'pc_id'							=> $rNum,
-						'pf_nama'						=> $inp_pf_nama,
-						'pf_hubungan'				=> $inp_pf_hubungan,
-						'inp_pf_tgl_lahir'	=> $inp_pf_tgl_lahir,
-						'inp_pf_pendidikan'	=> $inp_pf_pendidikan,
-						'inp_pf_kerja'			=> $inp_pf_kerja
+						'pc_id'					=> $rNum,
+						'pf_nama'				=> "'".pg_escape_string($inp_pf_nama)."'",
+						'pf_hubungan'		=> "'".pg_escape_string($inp_pf_hubungan)."'",
+						'pf_tgl_lahir'	=> "'".pg_escape_string($inp_pf_tgl_lahir)."'",
+						'pf_pendidikan'	=> "'".pg_escape_string($inp_pf_pendidikan)."'",
+						'pf_kerja'			=> "'".pg_escape_string($inp_pf_kerja)."'"
 					);
 					// if($rNum2 > 0){
 					// 	$this->M_Pegawai->update_table('public.pgw_keluarga', $data, 'pf_id='.$rNum2);
@@ -163,29 +158,6 @@ class Home extends CI_Controller {
 			}
 		}
 
-		// if($rNum > 0){
-		// 	// $orderByrNum	= " ORDER BY pc_id=".$rNum." desc, pc_id";
-		// 	$query_rnum		= "SELECT * FROM public.v_data_calon_pegawai WHERE pc_id = ".$rNum;
-		// 	$rhNum				= $this->db->query($query_rnum);
-		// 	$rrNum				= $rhNum->row();
-
-		// 	$nama_calon			= $rrNum->nama_calon;
-		// 	$nama_keluarga	= $rrNum->nama_keluarga;
-		// 	$status_di_keluarga	= $rrNum->status_di_keluarga;
-    // }
-		// if($rNum2 > 0){
-		// 	// $orderByrNum	= " ORDER BY pc_id=".$rNum." desc, pc_id";
-		// 	$query_rnum		= "SELECT * FROM public.v_data_calon_pegawai WHERE pc_id = ".$rNum." AND ( pf_id = ".$rNum2." OR ppend_id = ".$rNum2.")";
-		// 	$rhNum				= $this->db->query($query_rnum);
-		// 	$rrNum				= $rhNum->row();
-
-		// 	$nama_calon			= $rrNum->nama_calon;
-		// 	$nama_keluarga	= $rrNum->nama_keluarga;
-		// 	$status_di_keluarga	= $rrNum->status_di_keluarga;
-
-		// 	$nama_pendidikan	= $rrNum->nama_pendidikan;
-    // }
-
 		$data['judul']				= $judul;
 		$data['current_url']	= current_url();
 		$data['class']				= $this->router->fetch_class();
@@ -204,7 +176,6 @@ class Home extends CI_Controller {
 		$data['pc_telp']							= $pc_telp;
 		$data['pc_email']							= $pc_email;
 		$data['pc_gender']						= $pc_gender;
-		// $data['list_agama'] 					= $this->M_Pegawai->show_agama()->result();
 		$data['list_agama']						= $this->M_Pegawai->show_combo("public.pgw_agama", "pa_id", "pa_nama", "pa_id > 0", "pa_nama", $pa_nama);
 		$data['pc_kewarganegaraan']		= $pc_kewarganegaraan;
 		$data['pc_anak_ke']						= $pc_anak_ke;

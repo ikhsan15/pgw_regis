@@ -18,13 +18,6 @@ class M_Pegawai extends CI_Model{
     $this->db->where($cond);
     $this->db->delete($table);
   }
-
-  public function show_agama(){
-    $query = "SELECT * FROM pgw_agama
-              ORDER BY pa_id
-              ";
-    return $this->db->query($query);
-  }
   
   function show_combo($table, $fieldId, $fieldName, $clause, $fieldOrder, $value) {
 		$list = '';
