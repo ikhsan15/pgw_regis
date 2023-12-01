@@ -46,7 +46,7 @@ class Home extends CI_Controller {
 		$pf_tgl_lahir		= '';
 		$pf_pendidikan	= '';
 		$pf_kerja				= '';
-
+// die(print_r($pc_tgl_lahir));
 		if($mode == 'crud'){
       $action		= $this->input->post('submit_crud');
 
