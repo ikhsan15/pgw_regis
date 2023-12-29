@@ -1,222 +1,626 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Mazer Admin Dashboard</title>
+  <title><?= $judul ?></title>
 
-  <link rel="shortcut icon" href="<?php echo base_url('/assets/mazer/assets/compiled/svg/favicon.svg'); ?>" type="image/x-icon">
-  <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAiCAYAAADRcLDBAAAEs2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS41LjAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgZXhpZjpQaXhlbFhEaW1lbnNpb249IjMzIgogICBleGlmOlBpeGVsWURpbWVuc2lvbj0iMzQiCiAgIGV4aWY6Q29sb3JTcGFjZT0iMSIKICAgdGlmZjpJbWFnZVdpZHRoPSIzMyIKICAgdGlmZjpJbWFnZUxlbmd0aD0iMzQiCiAgIHRpZmY6UmVzb2x1dGlvblVuaXQ9IjIiCiAgIHRpZmY6WFJlc29sdXRpb249Ijk2LjAiCiAgIHRpZmY6WVJlc29sdXRpb249Ijk2LjAiCiAgIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiCiAgIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIKICAgeG1wOk1vZGlmeURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiCiAgIHhtcDpNZXRhZGF0YURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJwcm9kdWNlZCIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWZmaW5pdHkgRGVzaWduZXIgMS4xMC4xIgogICAgICBzdEV2dDp3aGVuPSIyMDIyLTAzLTMxVDEwOjUwOjIzKzAyOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cjw/eHBhY2tldCBlbmQ9InIiPz5V57uAAAABgmlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kc8rRFEUxz9maORHo1hYKC9hISNGTWwsRn4VFmOUX5uZZ36oeTOv954kW2WrKLHxa8FfwFZZK0WkZClrYoOe87ypmWTO7dzzud97z+nec8ETzaiaWd4NWtYyIiNhZWZ2TvE946WZSjqoj6mmPjE1HKWkfdxR5sSbgFOr9Ll/rXoxYapQVik8oOqGJTwqPL5i6Q5vCzeo6dii8KlwpyEXFL519LjLLw6nXP5y2IhGBsFTJ6ykijhexGra0ITl5bRqmWU1fx/nJTWJ7PSUxBbxJkwijBBGYYwhBgnRQ7/MIQIE6ZIVJfK7f/MnyUmuKrPOKgZLpEhj0SnqslRPSEyKnpCRYdXp/9++msneoFu9JgwVT7b91ga+LfjetO3PQ9v+PgLvI1xkC/m5A+h7F32zoLXug38dzi4LWnwHzjeg8UGPGbFfySvuSSbh9QRqZ6H+Gqrm3Z7l9zm+h+iafNUV7O5Bu5z3L/wAdthn7QIme0YAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAJTSURBVFiF7Zi9axRBGIefEw2IdxFBRQsLWUTBaywSK4ubdSGVIY1Y6HZql8ZKCGIqwX/AYLmCgVQKfiDn7jZeEQMWfsSAHAiKqPiB5mIgELWYOW5vzc3O7niHhT/YZvY37/swM/vOzJbIqVq9uQ04CYwCI8AhYAlYAB4Dc7HnrOSJWcoJcBS4ARzQ2F4BZ2LPmTeNuykHwEWgkQGAet9QfiMZjUSt3hwD7psGTWgs9pwH1hC1enMYeA7sKwDxBqjGnvNdZzKZjqmCAKh+U1kmEwi3IEBbIsugnY5avTkEtIAtFhBrQCX2nLVehqyRqFoCAAwBh3WGLAhbgCRIYYinwLolwLqKUwwi9pxV4KUlxKKKUwxC6ZElRCPLYAJxGfhSEOCz6m8HEXvOB2CyIMSk6m8HoXQTmMkJcA2YNTHm3congOvATo3tE3A29pxbpnFzQSiQPcB55IFmFNgFfEQeahaAGZMpsIJIAZWAHcDX2HN+2cT6r39GxmvC9aPNwH5gO1BOPFuBVWAZue0vA9+A12EgjPadnhCuH1WAE8ivYAQ4ohKaagV4gvxi5oG7YSA2vApsCOH60WngKrA3R9IsvQUuhIGY00K4flQG7gHH/mLytB4C42EgfrQb0mV7us8AAMeBS8mGNMR4nwHamtBB7B4QRNdaS0M8GxDEog7iyoAguvJ0QYSBuAOcAt71Kfl7wA8DcTvZ2KtOlJEr+ByyQtqqhTyHTIeB+ONeqi3brh+VgIN0fohUgWGggizZFTplu12yW8iy/YLOGWMpDMTPXnl+Az9vj2HERYqPAAAAAElFTkSuQmCC" type="image/png">
+  <!-- Material Design Iconic Font -->
+  <link rel="stylesheet" href="<?php echo base_url('/assets/material-design-iconic-font_2/css/material-design-iconic-font.css'); ?>">
+
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="<?php echo base_url('/assets/css/style.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('/assets/bootstrap-5.3.2/dist/css/bootstrap.css'); ?>">
+  <!-- <link rel="stylesheet" href="<?php echo base_url('/assets/bootstrap-5.3.2/dist/css/bootstrap.min.css'); ?>"> -->
+  <link rel="stylesheet" href="<?php echo base_url('/assets/fontawesome-6.4.2/css/all.min.css'); ?>">
+
+  <!-- Datepicker CSS -->
+  <link rel="stylesheet" href="<?php echo base_url('/assets/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('/assets/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css'); ?>">
+  <!-- <link rel="stylesheet" href="<?php echo base_url('/assets/datepicker/datepicker.min.css'); ?>"> -->
+
+  <script type="text/javascript" src="<?php echo base_url('/assets/js/titik.js'); ?>"></script>
+
+  <!-- Jquery core -->
+  <script src="<?php echo base_url('/assets/js/jquery-3.7.1.min.js'); ?>"></script>
+
+  <!-- Datepicker JS -->
+  <script src="<?php echo base_url('/assets/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.js'); ?>"></script>
+  <script src="<?php echo base_url('/assets/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js'); ?>"></script>
   
-  <link rel="stylesheet" href="<?php echo base_url('/assets/mazer/assets/compiled/css/app.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('/assets/mazer/assets/compiled/css/app-dark.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('/assets/mazer/assets/compiled/css/iconly.css'); ?>">
+  <!-- Jquery step -->
+  <script src="<?php echo base_url('/assets/js/jquery.steps.js');?>"></script>
+  <!-- Main JS -->
+  <script src="<?php echo base_url('/assets/js/main.js');?>"></script>
+
 </head>
-
 <body>
-  
-  <script src="<?php echo base_url('/assets/mazer/assets/static/js/initTheme.js'); ?>"></script>
-  <div id="app">
-    <div id="sidebar">
-      <div class="sidebar-wrapper active">
-        <div class="sidebar-header position-relative">
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="logo">
-              <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('/assets/mazer/assets/compiled/svg/logo.svg'); ?>" alt="Logo" srcset=""></a>
-            </div>
-            <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                  role="img" class="iconify iconify--system-uicons" width="20" height="20"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
-                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                  <path
-                    d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
-                    opacity=".3">
-                  </path>
-                  <g transform="translate(-210 -1)">
-                    <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
-                    <circle cx="220.5" cy="11.5" r="4"></circle>
-                    <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2"></path>
-                  </g>
-                </g>
-              </svg>
-              <div class="form-check form-switch fs-6">
-                <input class="form-check-input  me-0" type="checkbox" id="toggle-dark" style="cursor: pointer">
-                <label class="form-check-label"></label>
-              </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                role="img" class="iconify iconify--mdi" width="20" height="20" preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
-                </path>
-              </svg>
-            </div>
-            <div class="sidebar-toggler  x">
-              <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="sidebar-menu">
-          <ul class="menu">
-            <li class="sidebar-title">Menu</li>
-            <li class="sidebar-item active ">
-              <a href="<?php echo base_url(); ?>" class='sidebar-link'>
-                <i class="bi bi-grid-fill"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-            <li class="sidebar-item  has-sub">
-              <a href="#" class='sidebar-link'>
-                <i class="bi bi-stack"></i>
-                <span>Data Calon Pegawai</span>
-              </a>
-              <ul class="submenu ">
-                <li class="submenu-item  ">
-                  <a href="<?php echo base_url('CalonPgw'); ?>" class="submenu-link">Data Diri</a>
-                </li>
-                <li class="submenu-item  ">
-                  <a href="<?php echo base_url('/assets/mazer/component-alert.html'); ?>" class="submenu-link">Alert</a>
-                </li>
-                <li class="submenu-item  ">
-                  <a href="<?php echo base_url('/assets/mazer/component-badge.html'); ?>" class="submenu-link">Badge</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div id="main">
-      <header class="mb-3">
-        <a href="#" class="burger-btn d-block d-xl-none">
-          <i class="bi bi-justify fs-3"></i>
-        </a>
-      </header>
 
-      <div class="page-heading">
-        <h3>Profile Statistics</h3>
-      </div> 
-      <div class="page-content"> 
-        <section class="row">
-          <div class="col-12 col-lg-9">
-            <div class="row">
-              <div class="col-6 col-lg-3 col-md-6">
-                <div class="card">
-                  <div class="card-body px-4 py-4-5">
-                    <div class="row">
-                      <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                        <div class="stats-icon purple mb-2">
-                          <i class="iconly-boldShow"></i>
-                        </div>
-                      </div>
-                      <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                        <h6 class="text-muted font-semibold">Profile Views</h6>
-                        <h6 class="font-extrabold mb-0">112.000</h6>
-                      </div>
-                    </div> 
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 col-lg-3 col-md-6">
-                <div class="card"> 
-                  <div class="card-body px-4 py-4-5">
-                    <div class="row">
-                      <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                        <div class="stats-icon blue mb-2">
-                          <i class="iconly-boldProfile"></i>
-                        </div>
-                      </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                        <h6 class="text-muted font-semibold">Followers</h6>
-                        <h6 class="font-extrabold mb-0">183.000</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 col-lg-3 col-md-6">
-                <div class="card">
-                  <div class="card-body px-4 py-4-5">
-                    <div class="row">
-                      <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                        <div class="stats-icon green mb-2">
-                          <i class="iconly-boldAdd-User"></i>
-                        </div>
-                      </div>
-                      <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                        <h6 class="text-muted font-semibold">Following</h6>
-                        <h6 class="font-extrabold mb-0">80.000</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 col-lg-3 col-md-6">
-                <div class="card">
-                  <div class="card-body px-4 py-4-5">
-                    <div class="row">
-                      <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                        <div class="stats-icon red mb-2">
-                          <i class="iconly-boldBookmark"></i>
-                        </div>
-                      </div>
-                      <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                        <h6 class="text-muted font-semibold">Saved Post</h6>
-                        <h6 class="font-extrabold mb-0">112</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col">
+      <div class="wrapper">
+        <h4></h4>
+        <form role="form" enctype="multipart/form-data" data-parsley-validate="" class="form-horizontal form-label-left" method="post" accept-charset="utf-8" action="<?php echo base_url().$class;?>/f_pegawai/crud/?rNum=<?php echo $rNum ?>">          
+          <div class="text">
+            Contact us Form
           </div>
-          <div class="col-12 col-lg-3">
-            <div class="card">
-              <div class="card-body py-4 px-4">
-                <div class="d-flex align-items-center">
-                  <div class="avatar avatar-xl">
-                    <img src="<?php echo base_url('/assets/mazer/assets/compiled/jpg/1.jpg'); ?>" alt="Face 1">
+          <div id="wizard">
+            <!-- Section 1 - Data Umum -- START -->
+            <h4></h4>
+            <section>
+              <h4>A. Data Umum</h4>
+              <div class="form-row-hor">
+                <div class="row">
+                  <div class="col-md-9">
+                    <label for="exampleInputFile">Cover</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="userfile" name="userfile" onchange="readURL(this);">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                    </div>
                   </div>
-                  <div class="ms-3 name">
-                    <h5 class="font-bold">John Duck</h5>
-                    <h6 class="text-muted mb-0">@johnducky</h6>
+                  <div class="col-md-3">
+                    <br>
+                    <img id="cover" class="rounded float-end" class="img-thumbnail" width="70%" 
+                        src="https://img.icons8.com/wired/64/000000/no-image.png" 
+                      alt="image cover" />
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-      </div>
+              <div class="form-row">
+                <div class="input-data">
+                  <input type="text" id="inp_pc_nama" name="inp_pc_nama" required>
+                  <div class="underline"></div>
+                  <label for="inp_pc_nama">Nama Lengkap</label>
+                </div>
+                <div class="input-data">
+                  <input type="text" id="inp_pc_no_ktp" name="inp_pc_no_ktp" required>
+                  <div class="underline"></div>
+                  <label for="inp_pc_no_ktp">No. KTP</label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="input-data">
+                  <input type="text" id="inp_pc_tmp_lahir" name="inp_pc_tmp_lahir" required>
+                  <div class="underline"></div>
+                  <label for="inp_pc_tmp_lahir">Tempat Lahir</label>
+                </div>
+                <div class="input-data">
+                  <input type="text" id="inp_pc_tgl_lahir" name="inp_pc_tgl_lahir" onkeypress="return /[]/i.test(event.key)" onpaste="return false;" onCopy="return false" onCut="return false" required>
+                  <div class="underline"></div>
+                  <label for="inp_pc_tgl_lahir">Tanggal Lahir</label>
+                </div>
+              </div>
+              <!-- <div class="form-row">
+                <div class="input-data">
+                  <input id ="date_input" dateformat="d M y" type="date"/>
+                  <span class="datepicker_label" style="pointer-events: none;"></span>
+                </div>
+              </div> -->
+              <div class="form-row textarea">
+                <div class="input-data textarea">
+                  <textarea rows="3" cols="80" id="inp_pc_alamat_ktp" name="inp_pc_alamat_ktp" required></textarea>
+                  <div class="underline"></div>
+                  <label for="inp_pc_alamat_ktp">Alamat rumah sesuai KTP</label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="input-data textarea">
+                  <textarea rows="3" cols="80" id="inp_pc_alamat_sekarang" name="inp_pc_alamat_sekarang" required></textarea>
+                  <div class="underline"></div>
+                  <label for="inp_pc_alamat_sekarang">Alamat rumah sekarang</label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="input-data">
+                <input type="number" id="inp_pc_telp" name="inp_pc_telp" onkeypress="return /[0-9]/i.test(event.key)" onpaste="return false;" onCopy="return false" onCut="return false" required>
+                  <div class="underline"></div>
+                  <label for="inp_pc_telp">No. WA</label>
+                </div>
+                <div class="input-data">
+                <input type="email" id="inp_pc_email" name="inp_pc_email" required>
+                  <div class="underline"></div>
+                  <label for="inp_pc_email">Email</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6" id="gender_label">
+                  <label for="inp_pc_gender">Jenis Kelamin</label>
+                  <div class="form-row">
+                    <div class="wrapper" id="radio_pc_gender">
+                      <input type="radio" name="inp_pc_gender" value="1" id="pc_gender_1" checked>
+                      <input type="radio" name="inp_pc_gender" value="2" id="pc_gender_2">
+                      <label for="pc_gender_1" class="option pc_gender_1">
+                        <div class="dot"></div>
+                        <span>Pria</span>
+                      </label>
+                      <label for="pc_gender_2" class="option pc_gender_2">
+                        <div class="dot"></div>
+                        <span>Wanita</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-row">
+                    <div class="input-data">
+                      <select class="form-control select2" name="inp_pa_id_agama"  id="inp_pa_id_agama">
+                        <option value="">---</option>
+                        <?php echo $list_agama; ?>
+                      </select>
+                      <div class="underline"></div>
+                      <label for="inp_pa_id_agama" id="select_opt">Agama</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="input-data">
+                  <input type="text" id="inp_pc_kewarganegaraan" name="inp_pc_kewarganegaraan" required>
+                  <div class="underline"></div>
+                  <label for="inp_pc_kewarganegaraan">Kewarganegaraan</label>
+                </div>
+              </div>         
+              <div class="form-row">
+                <div class="input-data">
+                  <input type="number" id="inp_pc_anak_ke" name="inp_pc_anak_ke" required>
+                  <div class="underline"></div>
+                  <label for="inp_pc_anak_ke">Anak Ke</label>
+                </div>
+                <div class="input-data">
+                  <input type="number" id="inp_pc_anak_ke_dari" name="inp_pc_anak_ke_dari" required>
+                  <div class="underline"></div>
+                  <label for="inp_pc_anak_ke_dari">dari</label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="input-data">
+                  <select class="form-control select2" name="inp_psn_id_status_nikah"  id="inp_psn_id_status_nikah">
+                    <option value="">---</option>
+                    <?= $list_status_nikah; ?>
+                  </select>
+                  <div class="underline"></div>
+                  <label for="inp_psn_id_status_nikah" id="select_opt">Status Perkawinan</label>
+                </div>
+                <div class="input-data">
+                  <input type="number" id="inp_pc_jumlah_anak" name="inp_pc_jumlah_anak" required>
+                  <div class="underline"></div>
+                  <label for="inp_pc_jumlah_anak">Jumlah Anak</label>
+                </div>
+              </div>
+            </section>
+            <!-- Section 1 - Data Umum -- END -->
+            <!-- Section 2 - Data Keluarga -- START -->
+            <h4></h4>
+            <section>
+              <h4>B. Data Keluarga</h4>
+              <div class="container">
+                <div class="form-row">
+                  <div class="input-data">
+                    <input type="text" id="inp_pf_nama" name="inp_pf_nama[]" required>
+                    <div class="underline"></div>
+                    <label for="inp_pf_nama">Nama</label>
+                  </div>
+                  <div class="input-data">
+                    <input type="text" id="inp_pf_hubungan" name="inp_pf_hubungan[]" required>
+                    <div class="underline"></div>
+                    <label for="inp_pf_hubungan">Hubungan</label>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="input-data">
+                    <input type="date" id="inp_pf_tgl_lahir" name="inp_pf_tgl_lahir[]" onkeypress="return /[]/i.test(event.key)" onpaste="return false;" onCopy="return false" onCut="return false" required>
+                    <div class="underline"></div>
+                    <label for="inp_pf_tgl_lahir">Tanggal Lahir</label>
+                  </div>
+                  <div class="input-data">
+                    <input type="text" id="inp_pf_pendidikan" name="inp_pf_pendidikan[]" required>
+                    <div class="underline"></div>
+                    <label for="inp_pf_pendidikan">Pendidikan</label>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="input-data">
+                    <input type="text" id="inp_pf_kerja" name="inp_pf_kerja[]" required>
+                    <div class="underline"></div>
+                    <label for="inp_pf_kerja">Pekerjaan</label>
+                  </div>
+                  <div class="input-data">
+                  </div>
+                </div>
+              </div>
 
-      <footer>
-        <div class="footer clearfix mb-0 text-muted">
-          <div class="float-start">
-            <p>2023 &copy; Mazer</p>
+              <div class="container">
+                <div class="ln_solid"></div>
+                <div id="nextkolom" name="nextkolom"></div>
+                <button type="button" id="jumlahkolom" value="1" style="display:none"></button>
+              </div>
+
+              <div class="container">
+                <div class="form-row">
+                  <div class="input-data">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                      <button type="button" class="btn btn-info tambah-form">Tambah Form</button>
+                      <button type="submit" class="btn btn-info" id="simpan_simpan" name="submit_crud" value="simpan" >Simpan</button>
+                      <button type="submit" class="btn btn-info" id="submit_reset" name="submit_crud" value="reset" >Reset</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </section>
+            <!-- Section 2 - Data Keluarga -- END -->
+            <!-- Section 3 - Data Pekerjaan -- START -->
+            <h4></h4>
+            <section>
+              <h4>C. Data Pekerjaan</h4>
+              <div class="container">
+
+                <div class="container">
+                  <div class="form-row">
+                    <div class="input-data">
+                      <input type="text" id="inp_pk_nama" name="inp_pk_nama[]" required>
+                      <div class="underline"></div>
+                      <label for="inp_pk_nama">Nama Perusahaan</label>
+                    </div>
+                  </div>
+                  <div class="form-row textarea">
+                    <div class="input-data textarea">
+                      <textarea rows="3" cols="80" id="inp_pk_alamat" name="inp_pk_alamat[]" required></textarea>
+                      <div class="underline"></div>
+                      <label for="inp_pk_alamat">Alamat Perusahaan</label>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="input-data">
+                      <input type="text" id="inp_pk_divisi" name="inp_pk_divisi[]" required>
+                      <div class="underline"></div>
+                      <label for="inp_pk_divisi">Divisi</label>
+                    </div>
+                    <div class="input-data">
+                      <input type="text" id="inp_pk_jabatan" name="inp_pk_jabatan[]" required>
+                      <div class="underline"></div>
+                      <label for="inp_pk_jabatan">Jabatan</label>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="input-data">
+                      <input type="date" id="inp_pk_masuk" name="inp_pk_masuk[]" required>
+                      <div class="underline"></div>
+                      <label for="inp_pk_masuk">Tanggal Masuk</label>
+                    </div>
+                    <div class="input-data">
+                      <input type="date" id="inp_pk_keluar" name="inp_pk_keluar[]" required>
+                      <div class="underline"></div>
+                      <label for="inp_pk_keluar">Tanggal Keluar</label>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="input-data">
+                      <input type="text" id="inp_pk_gapok" name="inp_pk_gapok[]" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" required>
+                      <div class="underline"></div>
+                      <label for="inp_pk_gapok">Gaji Pokok</label>
+                    </div>
+                    <div class="input-data">
+                    </div>
+                  </div>
+
+                  <div class="ln_solid"></div>
+                  <div id="next_k_tunjangan" name="next_k_tunjangan"></div>
+                  <button type="button" id="jumlah_k_tunjangan" value="1" style="display:none"></button>
+
+                  <div class="form-row">
+                    <div class="input-data">
+                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button type="button" class="btn btn-info tambah_k_tunjangan">Tambah Tunjangan Lainnya</button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <div class="container">
+                  <div class="ln_solid"></div>
+                  <div id="next_k_kerja" name="next_k_kerja"></div>
+                  <button type="button" id="jumlah_k_kerja" value="1" style="display:none"></button>
+                </div>
+
+                <div class="container">
+                  <div class="form-row">
+                    <div class="input-data">
+                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button type="button" class="btn btn-info tambah_k_kerja">Tambah Form</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              
+            </section>
+            <!-- Section 3 - Data Pekerjaan -- END -->
           </div>
-          <div class="float-end">
-            <p>Crafted with
-              <span class="text-danger">
-                <i class="bi bi-heart-fill icon-mid"></i>
-              </span>
-              by <a href="https://saugi.me">Saugi</a>
-            </p>
-          </div>
-        </div>
-      </footer>
+        </form>
+      </div>
     </div>
   </div>
+</div>
 
-  <script src="<?php echo base_url('/assets/mazer/assets/static/js/components/dark.js'); ?>"></script>
-  <script src="<?php echo base_url('/assets/mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js'); ?>"></script>
-  <script src="<?php echo base_url('/assets/mazer/assets/compiled/js/app.js'); ?>"></script>
-  <!-- Need: Apexcharts -->
-  <script src="<?php echo base_url('/assets/mazer/assets/extensions/apexcharts/apexcharts.min.js'); ?>"></script>
-  <script src="<?php echo base_url('/assets/mazer/assets/static/js/pages/dashboard.js'); ?>"></script>
+<!-- partial -->
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#cover')
+        .attr('src', e.target.result)
+        .width(150)
+        .height(200);
+      };
+    reader.readAsDataURL(input.files[0]);
+    }
+  }  
+</script> 
+
+<script type="text/javascript">
+
+  // start - add other column for table pgw_keluarga
+  $(document).ready(function() {
+
+    var i=2;
+    $(".tambah-form").on('click', function(){
+      row = '<div class="rec-element">'+
+      
+              '<div class="form-row">'+
+                '<div class="input-data">'+
+                  '<div class="input-group">'+
+                  '<span class="input-group-btn">'+
+                    '<button type="button" class="btn btn-warning del-element"><i class="fa fa-minus-square"></i> Hapus</button>'+
+                  '</span>'+
+                '</div>'+
+                '<div class="ln_solid"></div>'+
+                '</div>'+
+              '</div>'+
+
+              '<div class="form-row">'+
+                '<div class="input-data">'+
+                  '<input type="text" name="inp_pf_nama[]" id="inp_pf_nama'+i+'" alt="'+i+'" required>'+
+                  '<div class="underline"></div>'+
+                  '<label for="inp_pf_nama">Nama '+i+
+                  '</label>'+
+                '</div>'+
+                '<div class="input-data">'+
+                  '<input type="text" name="inp_pf_hubungan[]" id="inp_pf_hubungan'+i+'" alt="'+i+'" required>'+
+                  '<div class="underline"></div>'+
+                  '<label for="inp_pf_hubungan">Hubungan '+i+
+                  '</label>'+
+                '</div>'+
+              '</div>'+
+
+              '<div class="form-row">'+
+                '<div class="input-data">'+
+                  '<input type="date" name="inp_pf_tgl_lahir[]" id="inp_pf_tgl_lahir'+i+'" alt="'+i+'" required>'+
+                  '<div class="underline"></div>'+
+                  '<label for="inp_pf_tgl_lahir">Tanggal Lahir '+i+
+                  '</label>'+
+                '</div>'+
+
+                '<div class="input-data">'+
+                  '<input type="text" name="inp_pf_pendidikan[]" id="inp_pf_pendidikan'+i+'" alt="'+i+'" required>'+
+                  '<div class="underline"></div>'+
+                  '<label for="inp_pf_pendidikan">Pendidikan '+i+
+                  '</label>'+
+                '</div>'+
+              '</div>'+
+
+              '<div class="form-row">'+
+                '<div class="input-data">'+
+                  '<input type="text" name="inp_pf_kerja[]" id="inp_pf_kerja'+i+'" alt="'+i+'" required>'+
+                  '<div class="underline"></div>'+
+                  '<label for="inp_pf_kerja">Pekerjaan '+i+
+                  '</label>'+
+                '</div>'+
+                '<div class="input-data">'+
+                '</div>'+
+              '</div>'+
+
+            '</div>';
+
+      $(row).insertBefore("#nextkolom");
+      $('#jumlahkolom').val(i+1);
+      i++;      
+      
+    });
+
+    $(document).on('click','.del-element',function (e) {        
+      e.preventDefault()
+      i--;
+      //$(this).parents('.form-row').fadeOut(400);
+      $(this).parents('.rec-element').remove();
+      $('#jumlahkolom').val(i-1);
+    });
+
+    $(".inp_pf_tgl_lahir[]").on("change", function(){
+      $(".inp_pf_tgl_lahir[]").val($(this).val());
+    });
+    
+  });
+  // end - add other column for table pgw_keluarga
+
+  // start - add other column for table pgw_kerja
+  $(document).ready(function() {
+
+    var i=2;
+    $(".tambah_k_kerja").on('click', function(){
+      row = '<div class="rec-element">'+
+  
+          '<div class="form-row">'+
+            '<div class="input-data">'+
+              '<div class="input-group">'+
+              '<span class="input-group-btn">'+
+                '<button type="button" class="btn btn-warning del-element"><i class="fa fa-minus-square"></i> Hapus</button>'+
+              '</span>'+
+            '</div>'+
+            '<div class="ln_solid"></div>'+
+            '</div>'+
+          '</div>'+
+          '<div class="form-row">'+
+            '<div class="input-data">'+
+              '<input type="text" name="inp_pk_nama[]" id="inp_pk_nama'+i+'" alt="'+i+'" required>'+
+              '<div class="underline"></div>'+
+              '<label for="inp_pk_nama">Nama Perusahaan '+i+
+              '</label>'+
+            '</div>'+
+          '</div>'+
+          '<div class="form-row textarea">'+
+            '<div class="input-data">'+
+              '<input type="text" name="inp_pk_alamat[]" id="inp_pk_alamat'+i+'" alt="'+i+'" required>'+
+              '<div class="underline"></div>'+
+              '<label for="inp_pk_alamat">Alamat Perusahaan '+i+
+              '</label>'+
+            '</div>'+
+          '</div>'+
+          '<div class="form-row">'+
+            '<div class="input-data">'+
+              '<input type="text" name="inp_pk_divisi[]" id="inp_pk_divisi'+i+'" alt="'+i+'" required>'+
+              '<div class="underline"></div>'+
+              '<label for="inp_pk_divisi">Divisi '+i+
+              '</label>'+
+            '</div>'+
+            '<div class="input-data">'+
+              '<input type="text" name="inp_pk_jabatan[]" id="inp_pk_jabatan'+i+'" alt="'+i+'" required>'+
+              '<div class="underline"></div>'+
+              '<label for="inp_pk_jabatan">Jabatan '+i+
+              '</label>'+
+            '</div>'+
+          '</div>'+
+          '<div class="form-row">'+
+            '<div class="input-data">'+
+              '<input type="date" name="inp_pk_masuk[]" id="inp_pk_masuk'+i+'" alt="'+i+'" required>'+
+              '<div class="underline"></div>'+
+              '<label for="inp_pk_masuk">Divisi '+i+
+              '</label>'+
+            '</div>'+
+            '<div class="input-data">'+
+              '<input type="date" name="inp_pk_keluar[]" id="inp_pk_keluar'+i+'" alt="'+i+'" required>'+
+              '<div class="underline"></div>'+
+              '<label for="inp_pk_keluar">Jabatan '+i+
+              '</label>'+
+            '</div>'+
+          '</div>'+
+          '<div class="form-row">'+
+            '<div class="input-data">'+
+              '<input type="text" name="inp_pk_gapok[]" id="inp_pk_gapok'+i+'" alt="'+i+'" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" required>'+
+              '<div class="underline"></div>'+
+              '<label for="inp_pf_kerja">Pekerjaan '+i+
+              '</label>'+
+            '</div>'+
+            '<div class="input-data">'+
+            '</div>'+
+          '</div>'+
+          '<div class="ln_solid"></div>'+
+          '<div id="next_k_tunjangan" name="next_k_tunjangan"></div>'+
+          '<button type="button" id="jumlah_k_tunjangan'+i+'" alt="'+i+'" value="1" style="display:none"></button>'+
+
+          '<div class="form-row">'+
+            '<div class="input-data">'+
+              '<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">'+
+                '<button type="button" alt="'+i+'" class="btn btn-info tambah_k_tunjangan">Tambah Tunjangan Lainnya</button>'+
+              '</div>'+
+            '</div>'+
+          '</div>'+
+
+        '</div>';
+
+      $(row).insertBefore("#next_k_kerja");
+      $('#jumlah_k_kerja').val(i+1);
+      i++;      
+      
+    });
+
+    $(document).on('click','.del-element',function (e) {        
+      e.preventDefault()
+      i--;
+      //$(this).parents('.form-row').fadeOut(400);
+      $(this).parents('.rec-element').remove();
+      $('#jumlah_k_kerja').val(i-1);
+    });
+
+  });
+  // end - add other column for table pgw_kerja
+
+  // start - add other column for table pgw_tunjangan
+  $(document).ready(function() {
+
+    var i=1;
+    $(".tambah_k_tunjangan").on('click', function(){
+      row = '<div class="rec-element">'+
+              '<div class="form-row">'+
+                '<div class="input-data">'+
+                  '<div class="input-group">'+
+                  '<span class="input-group-btn">'+
+                    '<button type="button" class="btn btn-warning del-element"><i class="fa fa-minus-square"></i> Hapus</button>'+
+                  '</span>'+
+                '</div>'+
+                '<div class="ln_solid"></div>'+
+                '</div>'+
+                '<div class="input-data">'+
+                  '<input type="text" name="inp_pf_nama[]" id="inp_pf_nama'+i+'" alt="'+i+'" required>'+
+                  '<div class="underline"></div>'+
+                  '<label for="inp_pf_nama">Nama Tunjangan'+i+
+                  '</label>'+
+                '</div>'+
+                '<div class="input-data">'+
+                  '<input type="text" name="inp_pf_hubungan[]" id="inp_pf_hubungan'+i+'" alt="'+i+'" required>'+
+                  '<div class="underline"></div>'+
+                  '<label for="inp_pf_hubungan">Nominal '+i+
+                  '</label>'+
+                '</div>'+
+              '</div>'+
+            '</div>';
+
+      $(row).insertBefore("#next_k_tunjangan");
+      $('#jumlah_k_tunjangan').val(i+1);
+      i++;      
+      
+    });
+
+    $(document).on('click','.del-element',function (e) {        
+      e.preventDefault()
+      i--;
+      //$(this).parents('.form-row').fadeOut(400);
+      $(this).parents('.rec-element').remove();
+      $('#jumlah_k_tunjangan').val(i-1);
+    });
+
+  });
+  // end - add other column for table pgw_tunjangan
+
+  // start - datepicker
+  $(function(){
+    $("#inp_pc_tgl_lahir").datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        todayHighlight: true,
+        // language: 'id',
+    });
+
+    // $( "#tambah_bbm" ).click(function() {
+    //   $qty_bbm	= parseInt($( "#jml_bbm" ).val());
+    // });
+
+  });
+  // end - datepicker
+  // start - select option
+  $(function () {
+		$('.select2').select2();
+	});
+  // end - select option
+</script>
+
 
 </body>
-
 </html>

@@ -8,6 +8,7 @@ class Home extends CI_Controller {
 		error_reporting(0);
 		// $this->load->helper('security');
     $this->load->model('M_Pegawai');
+		$this->load->library('Pdf');
   }
 	
 	public function index(){
@@ -46,7 +47,7 @@ class Home extends CI_Controller {
 		$pf_tgl_lahir		= '';
 		$pf_pendidikan	= '';
 		$pf_kerja				= '';
-// die(print_r($pc_tgl_lahir));
+		// die(print_r($pc_tgl_lahir));
 		if($mode == 'crud'){
       $action		= $this->input->post('submit_crud');
 
@@ -195,6 +196,11 @@ class Home extends CI_Controller {
 				
 		$this->load->view('v_home', $data);
 	}
+
+	public function export_tcpdf($pc_id){
+    $data['data_pribadi'] = $this->M_Pegawai->getPdf($pc_id);
+		$this->load->view('laporan_tcpdf', $data);
+  }
 
 	public function updateuser(){
 		// POST values
