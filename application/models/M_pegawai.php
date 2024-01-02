@@ -42,5 +42,10 @@ class M_Pegawai extends CI_Model{
     $query = $this->db->get();
     return $query->result();
   }
+
+  function getData(){
+		$data_siswa = $this->db->get('pgw_calon');
+		return $data_siswa->result();
+	}
   
 }

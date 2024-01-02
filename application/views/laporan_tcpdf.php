@@ -14,14 +14,15 @@
   $pdf->SetAutoPageBreak(TRUE, "26");
   $pdf->SetFont('times', '', 12, '', 'false');
 
+
   foreach ($data_pribadi as $row) 
     {
       $html='
         <table cellspacing="" cellpadding="3">
           <tr bgcolor="#ffffff">
-            <td width="25%" align="center" rowspan="6"><img src="'.base_url('/assets/img/logo.png').'"></td>
+            <td width="25%" align="center"rowspan="6"><img src="'.base_url('foto_pgw/'.$row->pc_foto).'" width="110" height="120">GAMBAR 1</td>
             <td width="50%" align="center"></td>
-            <td width="25%" align="center"rowspan="6"><img src="'.base_url('/assets/img/pgw_images/'.$row->pc_foto).'" width="110" height="120"></td>
+            <td width="25%" align="center"rowspan="6"><img src="'.base_url('/foto_pgw/Pertemuan_3-1_pak_nasrul.png').'" width="110" height="120">GAMBAR 2</td>
           </tr>
           <tr bgcolor="#ffffff">
             <td width="50%" align="center"></td>
@@ -47,7 +48,7 @@
           <tr bgcolor="#ffffff">
             <td width="25%" align="left">Posisi yang dilamar</td>
             <td width="5%" align="center">:</td>
-            <td width="70%" align="left">'.$row->jab_lmr.'</td>
+            <td width="70%" align="left">'.$row->pc_foto.'</td>
           </tr>
           <tr bgcolor="#ffffff">
             <td width="100%"></td>
