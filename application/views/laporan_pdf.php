@@ -15,10 +15,10 @@
 		?>
 		<tr>
 			<td><?php echo $no++; ?></td>
-			<td><?php echo $row->pc_nama; ?></td>
-			<td><?php echo $row->kelas; ?></td>
-			<td><?php echo $row->jenis_kelamin; ?></td>
-			<td><?php echo $row->alamat; ?></td>
+			<td><?php echo $row->pc_foto; ?></td>
+			<td width="25%" align="center"rowspan="6"><img src="http://localhost/pgw_regis/foto_pgw/Pertemuan_3-1_pak_nasrul.png" width="110" height="120">GAMBAR 1</td>
+			<td width="25%" align="center"rowspan="6"><img src="'<?php echo base_url('/foto_pgw/'.$row->pc_foto); ?>'" width="110" height="120">GAMBAR 1</td>
+			<td width="25%" align="center"rowspan="6"><img src="'<?php echo base_url().'/foto_pgw/Pertemuan_3-1_pak_nasrul.png'; ?>'" width="110" height="120">GAMBAR 2</td>
 		</tr>
 		<?php
 	}

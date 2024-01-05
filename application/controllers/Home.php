@@ -205,24 +205,24 @@ class Home extends CI_Controller {
 
   public function laporan_pdfmn(){
    // panggil library yang kita buat sebelumnya yang bernama pdfgenerator
-	//  $data['data_pribadi'] = $this->M_Pegawai->getPdf($pc_id);
-	 $data['data_pribadi'] = $this->db->query("SELECT * FROM public.pgw_calon WHERE pc_id=".$rNum);
-	//  $data['data_pribadi'] = $this->M_Pegawai->show_combo("public.pgw_calon", "pc_id", "pc_nama", "pc_id=".$rNum, "pa_nama", $pc_nama);
-   $this->load->library('Pdfgenerator');
+		//  $data['data_pribadi'] = $this->M_Pegawai->getPdf($pc_id);
+		$data['data_pribadi'] = $this->db->query("SELECT * FROM public.pgw_calon WHERE pc_id=".$rNum);
+		//  $data['data_pribadi'] = $this->M_Pegawai->show_combo("public.pgw_calon", "pc_id", "pc_nama", "pc_id=".$rNum, "pa_nama", $pc_nama);
+  	$this->load->library('Pdfgenerator');
     
-   // title dari pdf
-   $this->data['title_pdf'] = 'Laporan Penjualan Toko Kita';
-   // filename dari pdf ketika didownload
-   $file_pdf = 'laporan_penjualan_toko_kita';
-   // setting paper
-   $paper = 'A4';
-   //orientasi paper potrait / landscape
-   $orientation = "portrait";
-   
-   $html = $this->load->view('laporan_pdf',$this->data, true);	    
-     
-   // run dompdf
-   $this->pdfgenerator->generate($html, $file_pdf, $paper, $orientation);   
+		// title dari pdf
+		$this->data['title_pdf'] = 'Laporan Penjualan Toko Kita';
+		// filename dari pdf ketika didownload
+		$file_pdf = 'laporan_penjualan_toko_kita';
+		// setting paper
+		$paper = 'A4';
+		//orientasi paper potrait / landscape
+		$orientation = "portrait";
+		
+		$html = $this->load->view('laporan_pdf',$this->data, true);	    
+			
+		// run dompdf
+		$this->pdfgenerator->generate($html, $file_pdf, $paper, $orientation);   
   }
 
   public function laporan_pdf(){
@@ -230,6 +230,7 @@ class Home extends CI_Controller {
 		$data['siswa'] = $this->M_pegawai->getData();
 		$this->load->library('pdf');
 		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->filename = "laporan-data-siswa.pdf";
 		$this->pdf->load_view('laporan_pdf', $data);
 	}
