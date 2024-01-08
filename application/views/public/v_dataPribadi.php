@@ -298,7 +298,7 @@
                       <tr>
                         <th>No.</th>
                         <th>Nama Lengkap</th>
-                        <th>No. KTP</th>
+                        <th>Foto</th>
                         <th>Tempat Lahir</th>
                         <th>Tanggal Lahir</th>
 
@@ -328,7 +328,12 @@
                       <!-- memanggil data sesuai nama field di view -->
                       <td><?php echo $no ?></td>
                       <td><?php echo $r->pc_nama ?></td>
-                      <td><?php echo $r->pc_foto ?></td>
+                      <!-- <td><?php echo $r->pc_foto ?></td> -->
+                      <td>
+                        <?php if(!empty($r->pc_foto)){ ?>
+                          <img src="<?php echo base_url().'foto_pgw/'.$r->pc_foto; ?>" class="img-thumbnail" width="70px" height="70px">
+                        <?php } ?>
+                      </td>
                       <td><?php echo $r->pc_tmp_lahir ?></td>
                       <td><?php echo $r->pc_tgl_lahir ?></td>
 
@@ -349,12 +354,12 @@
                         <!-- <a class="btn btn-app" href="<?php echo base_url('Pdfview'); ?>">
                           <i class="fas fa-edit"></i> Edit
                         </a> -->
-                        <a class="btn btn-app" href="<?php echo base_url('Home/laporan_pdf/'); ?>">
-                          <i class="fas fa-edit"></i> Edit
-                        </a>
-                        <!-- <a href="<?php echo base_url('Home/export_tcpdf/').$r->pc_id ?>" target="blank">
+                        <!-- <a class="btn btn-app" href="<?php echo base_url('Home/laporan_pdf/'); ?>">
                           <i class="fas fa-edit"></i> Edit
                         </a> -->
+                        <a href="<?php echo base_url('Home/export_tcpdf/').$r->pc_id ?>" target="blank">
+                          <i class="fas fa-edit"></i> Edit
+                        </a>
                       </td>
                       <!-- <td><?php echo anchor('home/test/?rNum='.$r->pc_id, 'Update') ?></td> -->
                       <!-- <td><?php echo anchor('home/hapus/'.$r->pc_id, 'Delete') ?></td> -->
@@ -444,6 +449,18 @@
       "responsive": true,
     });
   });
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#cover')
+        .attr('src', e.target.result)
+        .width(150)
+        .height(200);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
 </script>
 </body>
 </html>

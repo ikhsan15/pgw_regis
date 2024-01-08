@@ -8,8 +8,8 @@ class Home extends CI_Controller {
 		error_reporting(0);
 		// $this->load->helper('security');
     $this->load->model('M_Pegawai');
-		// $this->load->library('Pdf');
-    $this->load->library('pdfgenerator');
+		$this->load->library('pdf_report');
+    // $this->load->library('pdfgenerator');
   }
 	
 	public function index(){
