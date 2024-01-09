@@ -106,16 +106,18 @@ class Home extends CI_Controller {
 						'pc_jumlah_anak'			=> $inp_pc_jumlah_anak
 					);
 					// die(print_r($data));
-					if($rNum > 0){
-						$this->M_Pegawai->update_table('public.pgw_calon', $data, 'pc_id='.$rNum);
-					}
+					// if($rNum > 0){
+					// 	$this->M_Pegawai->update_table('public.pgw_calon', $data, 'pc_id='.$rNum);
+					// }
 					// elseif($rNum > 0 && $rNum2 > 0){
 					// 	$this->M_Pegawai->update_table('public.pgw_calon', $data, 'pc_id='.$rNum);
 					// }
-					else{
+					// else{
 						// die(print_r('masuk'));
-						$rNum	= $this->M_Pegawai->insert_table('public.pgw_calon', $data);
-					}
+						// $rNum	= $this->M_Pegawai->insert_table('public.pgw_calon', $data);
+						$this->M_Pegawai->insert_table('public.pgw_calon', $data);
+						redirect(base_url());
+					// }
 				}
 				else{
 					die(print_r('kosonggg'));
@@ -144,14 +146,13 @@ class Home extends CI_Controller {
 					// }
 					// else{
 						$this->M_Pegawai->insert_table('public.pgw_keluarga', $data);
+						redirect(base_url());
 					// }
 				}
 				
 				redirect($this->router->fetch_class().'/'.$this->router->fetch_method().'/?rNum='.$rNum);
 			}
 			elseif($action == 'hapus'){
-				print_r('asd');
-				// $this->db->delete('pgw_test', ['pt_id' => $pt_id]);
 				$this->Mainmodel->delete_table('public.pgw_keluarga', 'pc_id='.$rNum);
 				redirect($this->router->fetch_class().'/'.$this->router->fetch_method());
 			}

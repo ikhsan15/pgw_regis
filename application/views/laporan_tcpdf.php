@@ -19,7 +19,7 @@
   foreach ($data_pribadi as $row) 
     {
       
-      die(base_url());
+      // die(base_url());
       $html='
         <table cellspacing="" cellpadding="3">
           <tr bgcolor="#ffffff">

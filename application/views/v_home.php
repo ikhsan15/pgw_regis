@@ -43,8 +43,11 @@
       <div class="wrapper">
         <h4></h4>
         <form role="form" enctype="multipart/form-data" data-parsley-validate="" class="form-horizontal form-label-left" method="post" accept-charset="utf-8" action="<?php echo base_url().$class;?>/f_pegawai/crud/?rNum=<?php echo $rNum ?>">          
-          <div class="text">
-            Contact us Form
+          <div class="form-header" >
+            <img src="<?php echo base_url();?>assets/Logo Gema Insani - Horizontal.png" border="0" alt="">
+          </div>
+          <div class="form-header">
+            <h3>Pendaftaran Online Pegawai Gema Insani</h3>
           </div>
           <div id="wizard">
             <!-- Section 1 - Data Umum -- START -->
@@ -54,11 +57,11 @@
               <div class="form-row-hor">
                 <div class="row">
                   <div class="col-md-9">
-                    <label for="exampleInputFile">Cover</label>
+                    <label for="exampleInputFile">Upload Foto 3x4</label>
                     <div class="input-group">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="userfile" name="userfile" onchange="readURL(this);">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        <!-- <label class="custom-file-label" for="exampleInputFile">Upload Foto</label> -->
                       </div>
                     </div>
                   </div>
@@ -148,6 +151,7 @@
                   <div class="form-row">
                     <div class="input-data">
                       <select class="form-control select2" name="inp_pa_id_agama"  id="inp_pa_id_agama">
+                      <!-- <select class="form-control select2" onfocus='this.size=5;' onblur='this.size=0;' onchange='this.size=1; this.blur();'> -->
                         <option value="">---</option>
                         <?php echo $list_agama; ?>
                       </select>
@@ -244,8 +248,6 @@
                   <div class="input-data">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button type="button" class="btn btn-info tambah-form">Tambah Form</button>
-                      <button type="submit" class="btn btn-info" id="simpan_simpan" name="submit_crud" value="simpan" >Simpan</button>
-                      <button type="submit" class="btn btn-info" id="submit_reset" name="submit_crud" value="reset" >Reset</button>
                     </div>
                   </div>
                 </div>
@@ -307,18 +309,6 @@
                     <div class="input-data">
                     </div>
                   </div>
-
-                  <div class="ln_solid"></div>
-                  <div id="next_k_tunjangan" name="next_k_tunjangan"></div>
-                  <button type="button" id="jumlah_k_tunjangan" value="1" style="display:none"></button>
-
-                  <div class="form-row">
-                    <div class="input-data">
-                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="button" class="btn btn-info tambah_k_tunjangan">Tambah Tunjangan Lainnya</button>
-                      </div>
-                    </div>
-                  </div>
                   
                 </div>
 
@@ -333,6 +323,8 @@
                     <div class="input-data">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <button type="button" class="btn btn-info tambah_k_kerja">Tambah Form</button>
+                        <button type="submit" class="btn btn-info" id="simpan_simpan" name="submit_crud" value="simpan" >Simpan</button>
+                        <button type="submit" class="btn btn-info" id="submit_reset" name="submit_crud" value="reset" >Reset</button>
                       </div>
                     </div>
                   </div>
@@ -521,17 +513,6 @@
             '<div class="input-data">'+
             '</div>'+
           '</div>'+
-          '<div class="ln_solid"></div>'+
-          '<div id="next_k_tunjangan" name="next_k_tunjangan"></div>'+
-          '<button type="button" id="jumlah_k_tunjangan'+i+'" alt="'+i+'" value="1" style="display:none"></button>'+
-
-          '<div class="form-row">'+
-            '<div class="input-data">'+
-              '<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">'+
-                '<button type="button" alt="'+i+'" class="btn btn-info tambah_k_tunjangan">Tambah Tunjangan Lainnya</button>'+
-              '</div>'+
-            '</div>'+
-          '</div>'+
 
         '</div>';
 
@@ -551,53 +532,6 @@
 
   });
   // end - add other column for table pgw_kerja
-
-  // start - add other column for table pgw_tunjangan
-  $(document).ready(function() {
-
-    var i=1;
-    $(".tambah_k_tunjangan").on('click', function(){
-      row = '<div class="rec-element">'+
-              '<div class="form-row">'+
-                '<div class="input-data">'+
-                  '<div class="input-group">'+
-                  '<span class="input-group-btn">'+
-                    '<button type="button" class="btn btn-warning del-element"><i class="fa fa-minus-square"></i> Hapus</button>'+
-                  '</span>'+
-                '</div>'+
-                '<div class="ln_solid"></div>'+
-                '</div>'+
-                '<div class="input-data">'+
-                  '<input type="text" name="inp_pf_nama[]" id="inp_pf_nama'+i+'" alt="'+i+'" required>'+
-                  '<div class="underline"></div>'+
-                  '<label for="inp_pf_nama">Nama Tunjangan'+i+
-                  '</label>'+
-                '</div>'+
-                '<div class="input-data">'+
-                  '<input type="text" name="inp_pf_hubungan[]" id="inp_pf_hubungan'+i+'" alt="'+i+'" required>'+
-                  '<div class="underline"></div>'+
-                  '<label for="inp_pf_hubungan">Nominal '+i+
-                  '</label>'+
-                '</div>'+
-              '</div>'+
-            '</div>';
-
-      $(row).insertBefore("#next_k_tunjangan");
-      $('#jumlah_k_tunjangan').val(i+1);
-      i++;      
-      
-    });
-
-    $(document).on('click','.del-element',function (e) {        
-      e.preventDefault()
-      i--;
-      //$(this).parents('.form-row').fadeOut(400);
-      $(this).parents('.rec-element').remove();
-      $('#jumlah_k_tunjangan').val(i-1);
-    });
-
-  });
-  // end - add other column for table pgw_tunjangan
 
   // start - datepicker
   $(function(){
@@ -619,6 +553,8 @@
 		$('.select2').select2();
 	});
   // end - select option
+
+
 </script>
 
 
