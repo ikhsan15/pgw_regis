@@ -685,7 +685,7 @@
             <!-- Section 10 - Data Pertanyaan -- START -->
             <h4></h4>
             <section>
-              <h4>I. H.	Informasi Tambahan</h4>
+              <h4>H.	Informasi Tambahan</h4>
               <div class="container">
 
                 <div class="container">
