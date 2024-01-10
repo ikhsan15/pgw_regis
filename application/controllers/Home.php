@@ -47,7 +47,16 @@ class Home extends CI_Controller {
 		$pf_hubungan		= '';
 		$pf_tgl_lahir		= '';
 		$pf_pendidikan	= '';
-		$pf_kerja				= '';
+		$pf_kerja				= '';		
+
+		//pgw_pendidikan
+		$ppend_nama					= '';
+		$ppend_alamat				= '';
+		$ppend_tingkat			= '';
+		$ppend_jurusan			= '';
+		$ppend_masuk				= '';
+		$ppend_keluar				= '';
+		$ppend_keterangan		= '';
 
 		//pgw_kerja
 		$pk_nama								= '';
@@ -60,6 +69,41 @@ class Home extends CI_Controller {
 		$pk_tunjangan_lainnya		= '';
 		$pk_tugas_kerja					= '';
 		$pk_alasan_pindah				= '';
+
+		//pgw_referensi_pro
+		$prp_nama				= '';
+		$prp_hubungan		= '';
+		$prp_jabatan		= '';
+		$prp_telp				= '';
+
+		//pgw_referensi_kerabat
+		$prk_nama				= '';
+		$prk_hubungan		= '';
+		$prk_jabatan		= '';
+
+		//pgw_kursus
+		$ps_nama			= '';
+		$ps_status		= '';
+		$ps_masuk			= '';
+		$ps_keluar		= '';
+
+		//pgw_request
+		$ppreq_gaji_min			= '';
+		$ppreq_fasilitas		= '';
+		$ppreq_gabung				= '';
+		$ppreq_penempatan		= '';
+
+		//pgw_pertanyaan
+		$pp_hobi						= '';
+		$pp_buta_warna			= '';
+		$pp_penyakit				= '';
+		$pp_lama_rawat			= '';
+		$pp_sakit_turunan		= '';
+		$pp_sakit_sekarang	= '';
+		$pp_kriminal				= '';
+		$pp_kriminal_waktu	= '';
+		$pp_kriminal_alasan	= '';
+		$pp_organisasi			= '';
 
 		if($mode == 'crud'){
       $action		= $this->input->post('submit_crud');
@@ -135,7 +179,8 @@ class Home extends CI_Controller {
 				// 	die(print_r('kosonggg'));
 				// }
 				
-			// die($rNum);
+				// die($rNum);
+
 				// insert into table pgw_keluarga
 				$jumlah = count($this->input->post('inp_pf_nama'));
 				for($i=0; $i<$jumlah; $i++){
@@ -162,38 +207,191 @@ class Home extends CI_Controller {
 					// }
 				}
 
-					// insert into table pgw_kerja
-					$jumlah = count($this->input->post('inp_pk_nama'));
-					for($i=0; $i<$jumlah; $i++){
-						$inp_pk_alamat 							= $this->input->post('inp_pk_alamat')[$i];
-						$inp_pk_divisi							= $this->input->post('inp_pk_divisi')[$i];
-						$inp_pk_jabatan							= $this->input->post('inp_pk_jabatan')[$i];
-						$inp_pk_masuk								= $this->input->post('inp_pk_masuk')[$i];
-						$inp_pk_keluar							= $this->input->post('inp_pk_keluar')[$i];
-						$inp_pk_gapok 							= $this->input->post('inp_pk_gapok')[$i];
-						$inp_pk_tunjangan_lainnya		= $this->input->post('inp_pk_tunjangan_lainnya')[$i];
-						$inp_pk_tugas_kerja					= $this->input->post('inp_pk_tugas_kerja')[$i];
-						$inp_pk_alasan_pindah				= $this->input->post('inp_pk_alasan_pindah')[$i];
+				// insert into table pgw_pendidikan
+				$jumlah = count($this->input->post('inp_ppend_nama'));
+				for($i=0; $i<$jumlah; $i++){
+					$inp_ppend_nama 						= $this->input->post('inp_ppend_nama')[$i];
+					$inp_ppend_keterangan 			= $this->input->post('inp_ppend_keterangan')[$i];
+					$inp_ppend_alamat						= $this->input->post('inp_ppend_alamat')[$i];
+					$inp_ppend_tingkat					= $this->input->post('inp_ppend_tingkat')[$i];
+					$inp_ppend_jurusan					= $this->input->post('inp_ppend_jurusan')[$i];
+					$inp_ppend_masuk						= $this->input->post('inp_ppend_masuk')[$i];
+					$inp_ppend_keluar 					= $this->input->post('inp_ppend_keluar')[$i];
+					$inp_pk_tunjangan_lainnya		= $this->input->post('inp_pk_tunjangan_lainnya')[$i];
+					$inp_pk_tugas_kerja					= $this->input->post('inp_pk_tugas_kerja')[$i];
+					$inp_pk_alasan_pindah				= $this->input->post('inp_pk_alasan_pindah')[$i];
+
+					$data = array(
+						'pc_id'								=> $rNum,
+						'ppend_nama'					=> "'".pg_escape_string($inp_ppend_nama)."'",
+						'ppend_keterangan'		=> "'".pg_escape_string($inp_ppend_keterangan)."'",
+						'ppend_alamat'				=> "'".pg_escape_string($inp_ppend_alamat)."'",
+						'ppend_tingkat'				=> "'".pg_escape_string($inp_ppend_tingkat)."'",
+						'ppend_jurusan'				=> "'".pg_escape_string($inp_ppend_jurusan)."'",
+						'ppend_masuk'					=> "'".pg_escape_string($inp_ppend_masuk)."'",
+						'ppend_keluar'				=> "'".pg_escape_string($inp_ppend_keluar)."'"
+					);
+					$this->M_Pegawai->insert_table('public.pgw_pendidikan', $data);
+					// redirect(base_url());
+				}
+
+				// insert into table pgw_kerja
+				$jumlah = count($this->input->post('inp_pk_nama'));
+				for($i=0; $i<$jumlah; $i++){
+					$inp_pk_nama 								= $this->input->post('inp_pk_nama')[$i];
+					$inp_pk_alamat 							= $this->input->post('inp_pk_alamat')[$i];
+					$inp_pk_divisi							= $this->input->post('inp_pk_divisi')[$i];
+					$inp_pk_jabatan							= $this->input->post('inp_pk_jabatan')[$i];
+					$inp_pk_masuk								= $this->input->post('inp_pk_masuk')[$i];
+					$inp_pk_keluar							= $this->input->post('inp_pk_keluar')[$i];
+					$inp_pk_gapok 							= $this->input->post('inp_pk_gapok')[$i];
+					$inp_pk_tunjangan_lainnya		= $this->input->post('inp_pk_tunjangan_lainnya')[$i];
+					$inp_pk_tugas_kerja					= $this->input->post('inp_pk_tugas_kerja')[$i];
+					$inp_pk_alasan_pindah				= $this->input->post('inp_pk_alasan_pindah')[$i];
+
+					$data = array(
+						'pc_id'									=> $rNum,
+						'pk_nama'								=> "'".pg_escape_string($inp_pk_nama)."'",
+						'pk_alamat'							=> "'".pg_escape_string($inp_pk_alamat)."'",
+						'pk_divisi'							=> "'".pg_escape_string($inp_pk_divisi)."'",
+						'pk_jabatan'						=> "'".pg_escape_string($inp_pk_jabatan)."'",
+						'pk_masuk'							=> "'".pg_escape_string($inp_pk_masuk)."'",
+						'pk_keluar'							=> "'".pg_escape_string($inp_pk_keluar)."'",
+						// $angka1= str_replace(".", "", $angkaa);
+						'pk_gapok'							=> "'".pg_escape_string(str_replace(".", "",$inp_pk_gapok))."'",
+						'pk_tunjangan_lainnya'	=> "'".pg_escape_string(str_replace(".", "",$inp_pk_tunjangan_lainnya))."'",
+						'pk_tugas_kerja'				=> "'".pg_escape_string($inp_pk_tugas_kerja)."'",
+						'pk_alasan_pindah'			=> "'".pg_escape_string($inp_pk_alasan_pindah)."'"
+					);
+					$this->M_Pegawai->insert_table('public.pgw_kerja', $data);
+					// redirect(base_url());
+				}
+
+				// insert into table pgw_referensi_pro
+				$jumlah = count($this->input->post('inp_prp_nama'));
+				for($i=0; $i<$jumlah; $i++){
+					$inp_prp_nama 			= $this->input->post('inp_prp_nama')[$i];
+					$inp_prp_hubungan 	= $this->input->post('inp_prp_hubungan')[$i];
+					$inp_prp_jabatan		= $this->input->post('inp_prp_jabatan')[$i];
+					$inp_prp_telp				= $this->input->post('inp_prp_telp')[$i];
+
+					$data = array(
+						'pc_id'					=> $rNum,
+						'prp_nama'			=> "'".pg_escape_string($inp_prp_nama)."'",
+						'prp_hubungan'	=> "'".pg_escape_string($inp_prp_hubungan)."'",
+						'prp_jabatan'		=> "'".pg_escape_string($inp_prp_jabatan)."'",
+						'prp_telp'			=> "'".pg_escape_string($inp_prp_telp)."'"
+					);
+					$this->M_Pegawai->insert_table('public.pgw_referensi_pro', $data);
+					// redirect(base_url());
+				}
+
+				// insert into table pgw_referensi_kerabat
+				$jumlah = count($this->input->post('inp_prk_nama'));
+				for($i=0; $i<$jumlah; $i++){
+					$inp_prk_nama 			= $this->input->post('inp_prk_nama')[$i];
+					$inp_prk_hubungan 	= $this->input->post('inp_prk_hubungan')[$i];
+					$inp_prk_jabatan		= $this->input->post('inp_prk_jabatan')[$i];
+
+					$data = array(
+						'pc_id'					=> $rNum,
+						'prk_nama'			=> "'".pg_escape_string($inp_prk_nama)."'",
+						'prk_hubungan'	=> "'".pg_escape_string($inp_prk_hubungan)."'",
+						'prk_jabatan'		=> "'".pg_escape_string($inp_prk_jabatan)."'"
+					);
+					$this->M_Pegawai->insert_table('public.pgw_referensi_kerabat', $data);
+					// redirect(base_url());
+				}
+
+				// insert into table pgw_request
+					// $jumlah = count($this->input->post('inp_ppreq_gaji_min'));
+					// for($i=0; $i<$jumlah; $i++){
+						$inp_ppreq_gaji_min 		= $this->input->post('inp_ppreq_gaji_min');
+						$inp_ppreq_fasilitas 		= $this->input->post('inp_ppreq_fasilitas');
+						$inp_ppreq_gabung				= $this->input->post('inp_ppreq_gabung');
+						$inp_ppreq_penempatan		= $this->input->post('inp_ppreq_penempatan');
 
 						$data = array(
-							'pc_id'									=> $rNum,
-							'pk_alamat'							=> "'".pg_escape_string($inp_pk_alamat)."'",
-							'pk_divisi'							=> "'".pg_escape_string($inp_pk_divisi)."'",
-							'pk_jabatan'						=> "'".pg_escape_string($inp_pk_jabatan)."'",
-							'pk_masuk'							=> "'".pg_escape_string($inp_pk_masuk)."'",
-							'pk_keluar'							=> "'".pg_escape_string($inp_pk_keluar)."'",
-							// $angka1= str_replace(".", "", $angkaa);
-							'pk_gapok'							=> "'".pg_escape_string($inp_pk_gapok)."'",
-							'pk_tunjangan_lainnya'	=> "'".pg_escape_string($inp_pk_tunjangan_lainnya)."'",
-							'pk_tugas_kerja'				=> "'".pg_escape_string($inp_pk_tugas_kerja)."'",
-							'pk_alasan_pindah'			=> "'".pg_escape_string($inp_pk_alasan_pindah)."'"
+							'pc_id'							=> $rNum,
+							'ppreq_gaji_min'		=> "'".pg_escape_string($inp_ppreq_gaji_min)."'",
+							'ppreq_fasilitas'		=> "'".pg_escape_string($inp_ppreq_fasilitas)."'",
+							'ppreq_gabung'			=> "'".pg_escape_string($inp_ppreq_gabung)."'",
+							'ppreq_penempatan'	=> "'".pg_escape_string($inp_ppreq_penempatan)."'"
 						);
-						$this->M_Pegawai->insert_table('public.pgw_kerja', $data);
+						$this->M_Pegawai->insert_table('public.pgw_request', $data);
 						// redirect(base_url());
-					}
+					// }
+					
+				// insert into table pgw_kursus
+				$jumlah = count($this->input->post('inp_ps_nama'));
+				for($i=0; $i<$jumlah; $i++){
+					$inp_ps_nama 			= $this->input->post('inp_ps_nama')[$i];
+					$inp_ps_status 		= $this->input->post('inp_ps_status')[$i];
+					$inp_ps_masuk			= $this->input->post('inp_ps_masuk')[$i];
+					$inp_ps_keluar		= $this->input->post('inp_ps_keluar')[$i];
+
+					$data = array(
+						'pc_id'				=> $rNum,
+						'ps_nama'			=> "'".pg_escape_string($inp_ps_nama)."'",
+						'ps_status'		=> "'".pg_escape_string($inp_ps_status)."'",
+						'ps_masuk'		=> "'".pg_escape_string($inp_ps_masuk)."'",
+						'ps_keluar'		=> "'".pg_escape_string($inp_ps_keluar)."'"
+					);
+					$this->M_Pegawai->insert_table('public.pgw_kursus', $data);
+					// redirect(base_url());
+				}
+
+				// insert into table pgw_bahasa
+				$jumlah = count($this->input->post('inp_pb_nama'));
+				for($i=0; $i<$jumlah; $i++){
+					$inp_pb_nama 				= $this->input->post('inp_pb_nama')[$i];
+					$inp_pb_keterangan 	= $this->input->post('inp_pb_keterangan')[$i];
+					$inp_pb_tulis				= $this->input->post('inp_pb_tulis')[$i];
+					$inp_pb_lisan				= $this->input->post('inp_pb_lisan')[$i];
+
+					$data = array(
+						'pc_id'						=> $rNum,
+						'pb_nama'					=> "'".pg_escape_string($inp_pb_nama)."'",
+						'pb_keterangan'		=> "'".pg_escape_string($inp_pb_keterangan)."'",
+						'pb_tulis'				=> $inp_pb_tulis,
+						'pb_lisan'				=> $inp_pb_lisan
+					);
+					$this->M_Pegawai->insert_table('public.pgw_bahasa', $data);
+					// redirect(base_url());
+				}
+
+				// insert into table pgw_pertanyaan
+				$inp_pp_hobi 						= $this->input->post('inp_pp_hobi');
+				$inp_ppreq_fasilitas 		= $this->input->post('inp_ppreq_fasilitas');
+				$inp_pp_buta_warna			= $this->input->post('inp_pp_buta_warna');
+				$inp_pp_penyakit				= $this->input->post('inp_pp_penyakit');
+				$inp_pp_lama_rawat 			= $this->input->post('inp_pp_lama_rawat');
+				$inp_pp_sakit_turunan		= $this->input->post('inp_pp_sakit_turunan');
+				$inp_pp_sakit_sekarang	= $this->input->post('inp_pp_sakit_sekarang');
+				$inp_pp_kriminal 				= $this->input->post('inp_pp_kriminal');
+				$inp_pp_kriminal_waktu	= $this->input->post('inp_pp_kriminal_waktu');
+				$inp_pp_kriminal_alasan	= $this->input->post('inp_pp_kriminal_alasan');
+				$inp_pp_organisasi			= $this->input->post('inp_pp_organisasi');
+
+				$data = array(
+					'pc_id'								=> $rNum,
+					'pp_hobi'							=> "'".pg_escape_string($inp_pp_hobi)."'",
+					'pp_buta_warna'				=> "'".pg_escape_string($inp_ppreq_fasilitas)."'",
+					'ppreq_gabung'				=> "'".pg_escape_string($inp_pp_buta_warna)."'",
+					'pp_penyakit'					=> "'".pg_escape_string($inp_pp_penyakit)."'",
+					'pp_lama_rawat'				=> "'".pg_escape_string($inp_pp_lama_rawat)."'",
+					'pp_sakit_turunan'		=> "'".pg_escape_string($inp_pp_sakit_turunan)."'",
+					'pp_sakit_sekarang'		=> "'".pg_escape_string($inp_pp_sakit_sekarang)."'",
+					'pp_kriminal'					=> "'".pg_escape_string($inp_pp_kriminal)."'",
+					'pp_kriminal_waktu'		=> "'".pg_escape_string($inp_pp_kriminal_waktu)."'",
+					'pp_kriminal_alasan'	=> "'".pg_escape_string($inp_pp_kriminal_alasan)."'",
+					'pp_organisasi'				=> "'".pg_escape_string($inp_pp_organisasi)."'"
+				);
+				$this->M_Pegawai->insert_table('public.pgw_pertanyaan', $data);
+
 				
-				redirect($this->router->fetch_class().'/'.$this->router->fetch_method().'/?rNum='.$rNum);
-				// redirect(base_url());
+				// redirect($this->router->fetch_class().'/'.$this->router->fetch_method().'/?rNum='.$rNum);
+				redirect(base_url());
 			}
 			// elseif($action == 'hapus'){
 			// 	$this->Mainmodel->delete_table('public.pgw_keluarga', 'pc_id='.$rNum);
@@ -239,6 +437,15 @@ class Home extends CI_Controller {
 		$data['pf_pendidikan']	= $pf_pendidikan;
 		$data['pf_kerja']				= $pf_kerja;
 
+		//pgw_pendidikan
+		$data['ppend_nama']					= $ppend_nama;
+		$data['ppend_keterangan']		= $ppend_keterangan;
+		$data['ppend_alamat']				= $ppend_alamat;
+		$data['ppend_tingkat']			= $ppend_tingkat;
+		$data['ppend_jurusan']			= $ppend_jurusan;
+		$data['ppend_masuk']				= $ppend_masuk;
+		$data['ppend_keluar']				= $ppend_keluar;
+
 		//pgw_kerja
 		$data['pk_nama']								= $pk_nama;
 		$data['pk_alamat']							= $pk_alamat;
@@ -250,6 +457,45 @@ class Home extends CI_Controller {
 		$data['pk_tunjangan_lainnya']		= $pk_tunjangan_lainnya;
 		$data['pk_tugas_kerja']					= $pk_tugas_kerja;
 		$data['pk_alasan_pindah']				= $pk_alasan_pindah;
+
+		//pgw_referensi_pro
+		$data['prp_nama']				= $prp_nama;
+		$data['prp_hubungan']		= $prp_hubungan;
+		$data['prp_jabatan']		= $prp_jabatan;
+		$data['prp_telp']				= $prp_telp;
+
+		//pgw_referensi_kerabat
+		$data['prk_nama']				= $prk_nama;
+		$data['prk_hubungan']		= $prk_hubungan;
+		$data['prk_jabatan']		= $prk_jabatan;
+
+		//pgw_request
+		$data['prk_nama']				= $prk_nama;
+		$data['prk_hubungan']		= $prk_hubungan;
+		$data['prk_jabatan']		= $prk_jabatan;
+
+		//pgw_kursus
+		$data['ppreq_gaji_min']			= $ppreq_gaji_min;
+		$data['ppreq_fasilitas']		= $ppreq_fasilitas;
+		$data['ppreq_gabung']				= $ppreq_gabung;
+		$data['ppreq_penempatan']		= $ppreq_penempatan;
+
+		//pgw_bahasa
+		$data['pb_nama']				= $pb_nama;
+		$data['pb_keterangan']	= $pb_keterangan;
+		$data['list_lv_bahasa']		= $this->M_Pegawai->show_combo("public.pgw_lv_bahasa", "pkb_id", "pkb_nama", "pkb_id > 0", "pkb_nama", $pkb_nama);
+
+		//pgw_pertanyaan
+		$data['pp_hobi']						= $pp_hobi;
+		$data['pp_buta_warna']			= $pp_buta_warna;
+		$data['pp_penyakit']				= $pp_penyakit;
+		$data['pp_lama_rawat']			= $pp_lama_rawat;
+		$data['pp_sakit_turunan']		= $pp_sakit_turunan;
+		$data['pp_sakit_sekarang']	= $pp_sakit_sekarang;
+		$data['pp_kriminal']				= $pp_kriminal;
+		$data['pp_kriminal_waktu']	= $pp_kriminal_waktu;
+		$data['pp_kriminal_alasan']	= $pp_kriminal_alasan;
+		$data['pp_organisasi']			= $pp_organisasi;
 				
 		$this->load->view('v_home', $data);
 	}
@@ -259,37 +505,6 @@ class Home extends CI_Controller {
 		$this->load->view('laporan_tcpdf', $data);
   }
 
-  public function laporan_pdfmn(){
-   // panggil library yang kita buat sebelumnya yang bernama pdfgenerator
-		//  $data['data_pribadi'] = $this->M_Pegawai->getPdf($pc_id);
-		$data['data_pribadi'] = $this->db->query("SELECT * FROM public.pgw_calon WHERE pc_id=".$rNum);
-		//  $data['data_pribadi'] = $this->M_Pegawai->show_combo("public.pgw_calon", "pc_id", "pc_nama", "pc_id=".$rNum, "pa_nama", $pc_nama);
-  	$this->load->library('Pdfgenerator');
-    
-		// title dari pdf
-		$this->data['title_pdf'] = 'Laporan Penjualan Toko Kita';
-		// filename dari pdf ketika didownload
-		$file_pdf = 'laporan_penjualan_toko_kita';
-		// setting paper
-		$paper = 'A4';
-		//orientasi paper potrait / landscape
-		$orientation = "portrait";
-		
-		$html = $this->load->view('laporan_pdf',$this->data, true);	    
-			
-		// run dompdf
-		$this->pdfgenerator->generate($html, $file_pdf, $paper, $orientation);   
-  }
-
-  public function laporan_pdf(){
-		$this->load->model('M_pegawai');
-		$data['siswa'] = $this->M_pegawai->getData();
-		$this->load->library('pdf');
-		$this->pdf->setPaper('A4', 'potrait');
-		$this->pdf->set_option('isRemoteEnabled', true);
-		$this->pdf->filename = "laporan-data-siswa.pdf";
-		$this->pdf->load_view('laporan_pdf', $data);
-	}
 
 	public function updateuser(){
 		// POST values
