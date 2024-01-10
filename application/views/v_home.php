@@ -307,6 +307,21 @@
                       <label for="inp_pk_gapok">Gaji Pokok</label>
                     </div>
                     <div class="input-data">
+                      <input type="text" id="inp_pk_tunjangan_lainnya" name="inp_pk_tunjangan_lainnya[]" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" required>
+                      <div class="underline"></div>
+                      <label for="inp_pk_tunjangan_lainnya">Tunjangan Lainnya</label>
+                    </div>
+                  </div>
+                  <div class="form-row textarea">
+                    <div class="input-data textarea">
+                      <textarea rows="3" cols="80" id="inp_pk_tugas_kerja" name="inp_pk_tugas_kerja[]" required></textarea>
+                      <div class="underline"></div>
+                      <label for="inp_pk_tugas_kerja">Tugas Kerja</label>
+                    </div>
+                    <div class="input-data textarea">
+                      <textarea rows="3" cols="80" id="inp_pk_alasan_pindah" name="inp_pk_alasan_pindah[]" required></textarea>
+                      <div class="underline"></div>
+                      <label for="inp_pk_alasan_pindah">Alasan pindah</label>
                     </div>
                   </div>
                   
@@ -324,7 +339,7 @@
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <button type="button" class="btn btn-info tambah_k_kerja">Tambah Form</button>
                         <button type="submit" class="btn btn-info" id="simpan_simpan" name="submit_crud" value="simpan" >Simpan</button>
-                        <button type="submit" class="btn btn-info" id="submit_reset" name="submit_crud" value="reset" >Reset</button>
+                        <!-- <button type="submit" class="btn btn-info" id="submit_reset" name="submit_crud" value="reset" >Reset</button> -->
                       </div>
                     </div>
                   </div>
@@ -493,13 +508,13 @@
             '<div class="input-data">'+
               '<input type="date" name="inp_pk_masuk[]" id="inp_pk_masuk'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_masuk">Divisi '+i+
+              '<label for="inp_pk_masuk">Tanggal Masuk '+i+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="date" name="inp_pk_keluar[]" id="inp_pk_keluar'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_keluar">Jabatan '+i+
+              '<label for="inp_pk_keluar">Tanggal Keluar '+i+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -507,10 +522,28 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_pk_gapok[]" id="inp_pk_gapok'+i+'" alt="'+i+'" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pf_kerja">Pekerjaan '+i+
+              '<label for="inp_pk_gapok">Gaji Pokok '+i+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
+              '<input type="text" name="inp_pk_tunjangan_lainnya[]" id="inp_pk_tunjangan_lainnya'+i+'" alt="'+i+'" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" required>'+
+              '<div class="underline"></div>'+
+              '<label for="inp_pk_tunjangan_lainnya">Tunjangan Lainnya '+i+
+              '</label>'+
+            '</div>'+
+          '</div>'+
+          '<div class="form-row textarea">'+
+            '<div class="input-data">'+
+              '<input type="text" name="inp_pk_tugas_kerja[]" id="inp_pk_tugas_kerja'+i+'" alt="'+i+'" required>'+
+              '<div class="underline"></div>'+
+              '<label for="inp_pk_tugas_kerja">Tugas Kerja '+i+
+              '</label>'+
+            '</div>'+
+            '<div class="input-data">'+
+              '<input type="text" name="inp_pk_alasan_pindah[]" id="inp_pk_alasan_pindah'+i+'" alt="'+i+'" required>'+
+              '<div class="underline"></div>'+
+              '<label for="inp_pk_alasan_pindah">Alasan Pindah '+i+
+              '</label>'+
             '</div>'+
           '</div>'+
 

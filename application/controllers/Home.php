@@ -25,7 +25,7 @@ class Home extends CI_Controller {
 		$rNum				= $this->input->get('rNum');
 		// $rNum2			= $this->input->get('rNum2');
 
-		// umum
+		//pgw_calon
 		$pc_nama							= '';
 		$pc_no_ktp						= '';
 		$pc_tmp_lahir					= '';
@@ -42,13 +42,25 @@ class Home extends CI_Controller {
 		$psn_id_status_nikah	= '';
 		$pc_jumlah_anak				= '';
 
-		// keluarga
+		//pgw_keluarga
 		$pf_nama				= '';
 		$pf_hubungan		= '';
 		$pf_tgl_lahir		= '';
 		$pf_pendidikan	= '';
 		$pf_kerja				= '';
-		// die(print_r($pc_tgl_lahir));
+
+		//pgw_kerja
+		$pk_nama								= '';
+		$pk_alamat							= '';
+		$pk_divisi							= '';
+		$pk_jabatan							= '';
+		$pk_masuk								= '';
+		$pk_keluar							= '';
+		$pk_gapok								= '';
+		$pk_tunjangan_lainnya		= '';
+		$pk_tugas_kerja					= '';
+		$pk_alasan_pindah				= '';
+
 		if($mode == 'crud'){
       $action		= $this->input->post('submit_crud');
 
@@ -114,16 +126,16 @@ class Home extends CI_Controller {
 					// }
 					// else{
 						// die(print_r('masuk'));
-						// $rNum	= $this->M_Pegawai->insert_table('public.pgw_calon', $data);
-						$this->M_Pegawai->insert_table('public.pgw_calon', $data);
-						redirect(base_url());
+						$rNum	= $this->M_Pegawai->insert_table('public.pgw_calon', $data);
+						// $this->M_Pegawai->insert_table('public.pgw_calon', $data);
+						// redirect(base_url());
 					// }
 				}
-				else{
-					die(print_r('kosonggg'));
-				}
+				// else{
+				// 	die(print_r('kosonggg'));
+				// }
 				
-			
+			// die($rNum);
 				// insert into table pgw_keluarga
 				$jumlah = count($this->input->post('inp_pf_nama'));
 				for($i=0; $i<$jumlah; $i++){
@@ -146,16 +158,47 @@ class Home extends CI_Controller {
 					// }
 					// else{
 						$this->M_Pegawai->insert_table('public.pgw_keluarga', $data);
-						redirect(base_url());
+						// redirect(base_url());
 					// }
 				}
+
+					// insert into table pgw_kerja
+					$jumlah = count($this->input->post('inp_pk_nama'));
+					for($i=0; $i<$jumlah; $i++){
+						$inp_pk_alamat 							= $this->input->post('inp_pk_alamat')[$i];
+						$inp_pk_divisi							= $this->input->post('inp_pk_divisi')[$i];
+						$inp_pk_jabatan							= $this->input->post('inp_pk_jabatan')[$i];
+						$inp_pk_masuk								= $this->input->post('inp_pk_masuk')[$i];
+						$inp_pk_keluar							= $this->input->post('inp_pk_keluar')[$i];
+						$inp_pk_gapok 							= $this->input->post('inp_pk_gapok')[$i];
+						$inp_pk_tunjangan_lainnya		= $this->input->post('inp_pk_tunjangan_lainnya')[$i];
+						$inp_pk_tugas_kerja					= $this->input->post('inp_pk_tugas_kerja')[$i];
+						$inp_pk_alasan_pindah				= $this->input->post('inp_pk_alasan_pindah')[$i];
+
+						$data = array(
+							'pc_id'									=> $rNum,
+							'pk_alamat'							=> "'".pg_escape_string($inp_pk_alamat)."'",
+							'pk_divisi'							=> "'".pg_escape_string($inp_pk_divisi)."'",
+							'pk_jabatan'						=> "'".pg_escape_string($inp_pk_jabatan)."'",
+							'pk_masuk'							=> "'".pg_escape_string($inp_pk_masuk)."'",
+							'pk_keluar'							=> "'".pg_escape_string($inp_pk_keluar)."'",
+							// $angka1= str_replace(".", "", $angkaa);
+							'pk_gapok'							=> "'".pg_escape_string($inp_pk_gapok)."'",
+							'pk_tunjangan_lainnya'	=> "'".pg_escape_string($inp_pk_tunjangan_lainnya)."'",
+							'pk_tugas_kerja'				=> "'".pg_escape_string($inp_pk_tugas_kerja)."'",
+							'pk_alasan_pindah'			=> "'".pg_escape_string($inp_pk_alasan_pindah)."'"
+						);
+						$this->M_Pegawai->insert_table('public.pgw_kerja', $data);
+						// redirect(base_url());
+					}
 				
 				redirect($this->router->fetch_class().'/'.$this->router->fetch_method().'/?rNum='.$rNum);
+				// redirect(base_url());
 			}
-			elseif($action == 'hapus'){
-				$this->Mainmodel->delete_table('public.pgw_keluarga', 'pc_id='.$rNum);
-				redirect($this->router->fetch_class().'/'.$this->router->fetch_method());
-			}
+			// elseif($action == 'hapus'){
+			// 	$this->Mainmodel->delete_table('public.pgw_keluarga', 'pc_id='.$rNum);
+			// 	redirect($this->router->fetch_class().'/'.$this->router->fetch_method());
+			// }
 			elseif($action == 'reset'){
 				redirect(base_url());
 			}
@@ -189,12 +232,24 @@ class Home extends CI_Controller {
 		$data['pc_foto']							= $pc_foto;
 
 
-		//keluarga
+		//pgw_keluarga
 		$data['pf_nama']				= $pf_nama;
 		$data['pf_hubungan']		= $pf_hubungan;
 		$data['pf_tgl_lahir']		= $pf_tgl_lahir;
 		$data['pf_pendidikan']	= $pf_pendidikan;
 		$data['pf_kerja']				= $pf_kerja;
+
+		//pgw_kerja
+		$data['pk_nama']								= $pk_nama;
+		$data['pk_alamat']							= $pk_alamat;
+		$data['pk_divisi']							= $pk_divisi;
+		$data['pk_jabatan']							= $pk_jabatan;
+		$data['pk_masuk']								= $pk_masuk;
+		$data['pk_keluar']							= $pk_keluar;
+		$data['pk_gapok']								= $pk_gapok;
+		$data['pk_tunjangan_lainnya']		= $pk_tunjangan_lainnya;
+		$data['pk_tugas_kerja']					= $pk_tugas_kerja;
+		$data['pk_alasan_pindah']				= $pk_alasan_pindah;
 				
 		$this->load->view('v_home', $data);
 	}
