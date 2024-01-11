@@ -80,6 +80,16 @@
               </div>
               <div class="form-row">
                 <div class="input-data">
+                  <select class="form-control select2" name="inp_pd_id_divisi_lamar"  id="inp_pd_id_divisi_lamar">
+                    <option value="">---</option>
+                    <?php echo $list_divisi_lamar; ?>
+                  </select>
+                  <div class="underline"></div>
+                  <label for="inp_pd_id_divisi_lamar" id="select_opt">Posisi yand dilamar <code>*</code></label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="input-data">
                   <input type="text" id="inp_pc_nama" name="inp_pc_nama" required>
                   <div class="underline"></div>
                   <label for="inp_pc_nama">Nama Lengkap <code>*</code></label>
@@ -536,7 +546,7 @@
             <!-- Section 7 - Data Request Calon -- START -->
             <h4></h4>
             <section>
-              <h4>G. Harapan Calon Pegawai</h4>
+              <h4>G. Minat</h4>
               <div class="container">
 
                 <div class="container">
@@ -1074,6 +1084,8 @@
               '<label for="inp_pk_tugas_kerja">Tugas Kerja '+i+
               '</label>'+
             '</div>'+
+          '</div>'+
+          '<div class="form-row textarea">'+
             '<div class="input-data">'+
               '<input type="text" name="inp_pk_alasan_pindah[]" id="inp_pk_alasan_pindah'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+

@@ -16,33 +16,32 @@
   $pdf->SetFont('times', '', 12, '', 'false');
 
 
-  foreach ($data_pribadi as $row) 
-    {
-      
-      // die(base_url());
-      $html='
-        <table cellspacing="" cellpadding="3">
-          <tr bgcolor="#ffffff">
-            <td width="20%"><img src="http://localhost/pgw_regis/foto_pgw/foto/Pertemuan_3-1_pak_nasrul.png">gambar 1</td>
-            <td width="50%" align="center"></td>
-            <td width="20%"><img src="/pgw_regis/foto_pgw/foto/'.$row->pc_foto.'">gambar 2</td>
-          </tr>
-          <tr bgcolor="#ffffff">
-            <td width="50%" align="center"></td>
-          </tr>
-          <tr bgcolor="#ffffff">
-            <td width="50%" align="left">'.$row->pc_nama.'</td>
-          </tr>
-          <tr bgcolor="#ffffff">
-            <td width="50%" align="center"></td>
-          </tr>
-          </tr>
-        </table>
+  foreach ($data_pribadi as $row) {
+    // die(base_url());
+    $html='
+      <table cellspacing="" cellpadding="3">
+        <tr bgcolor="#ffffff">
+          <td width="25%"><img src="/pgw_regis/assets/Logo Gema Insani - Horizontal.png"></td>
+          <td width="50%" align="center"></td>
+          <td width="25%"><img src="/pgw_regis/foto_pgw/foto/'.$row->pc_foto.'"></td>
+        </tr>	
+        <tr bgcolor="#ffffff">
+          <td width="50%" align="center"></td>
+        </tr>
+        <tr bgcolor="#ffffff">
+          <td width="50%" align="left">'.$row->pc_nama.'</td>
+        </tr>
+        <tr bgcolor="#ffffff">
+          <td width="50%" align="center"></td>
+        </tr>
+        </tr>
+      </table>
 
-        ';
-        // die($html);
-        // die(print_r($row->pc_foto));
-      }
+      ';
+      // die($html);
+      // die(print_r($row->pc_foto));
+    }
+    
 
   $pdf->writeHTML($html, true, false, true, false, '');
   // $pdf->Output('hasil.pdf', 'I');

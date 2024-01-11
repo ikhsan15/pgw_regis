@@ -15,7 +15,7 @@ class CalonPgw extends CI_Controller {
     // $this->load->view('public/v_dataPribadi');
 	}
 
-  function f_pegawai($mode = ''){
+  function f_pegawai($mode = '', $pc_id=0){
 		$judul			= 'Data Pegawai';
 		// $hSQL				= str_replace(' ', '+', $this->input->get('hSQL'));
 		$rNum				= $this->input->get('rNum');
@@ -36,6 +36,8 @@ class CalonPgw extends CI_Controller {
 		$pc_anak_ke_dari			= '';
 		$psn_id_status_nikah	= '';
 		$pc_jumlah_anak				= '';
+
+		// $pd_id_divisi_lamar = '';
 
 		if($mode == 'crud'){
       $action		= $this->input->post('submit_crud');
@@ -155,6 +157,8 @@ class CalonPgw extends CI_Controller {
 		// $data['hSQL']			  	= $hSQL;
 		$data['rNum']			  	= $rNum;
 		// $data['rNum2']				= $rNum2;
+
+		// $data['pd_nama_divisi']							= $pd_nama_divisi;
 		
 		// umum
 		$data['pc_nama']							= $pc_nama;
@@ -176,10 +180,49 @@ class CalonPgw extends CI_Controller {
 		$data['pc_foto']							= $pc_foto;
 
 		// $data['rec_pgwcalon']					= $this->M_Pegawai->show_combo("public.pgw_calon", "pc_id", "pc_nama", "pc_id > 0", "pc_nama", $pc_nama);
-		$data['rec_pgwcalon']					= $this->db->query("SELECT * FROM public.pgw_calon");
-				
+		// $data['rec_pgwcalon']					= $this->db->query("SELECT * FROM public.pgw_calon");
+		$data['rec_pgwcalon']					= $this->db->query("SELECT * FROM public.v_dt_pgw_calon ");
+		
+		
+		// $data['pd_id_divisi_lamar'] = $pd_id_divisi_lamar;
+		// $data['rec_kat']      = $this->M_Pegawai->tampil_data();
+		// $data['rec_kat']					= $this->db->query("SELECT * FROM public.pgw_calon where pc_id=".$rNum);
+				// die($data);
 		$this->load->view('public/v_dataPribadi', $data);
 	}
 }
+
+// function formawal($mode='', $pc_id=0){
+// 	// if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'Magang'){
+// 		// die($pc_id);
+// 		$pc_nama = '';
+// 		$pd_id_divisi_lamar = '';
+
+// 		if($mode == 'do_update'){
+// 			$query = "select * from pgw_calon where pc_id = ".$pc_id;
+// 			$row = $this->db->query($query);
+// 			$rr = $row->row();
+
+// 			$pc_nama = $rr->pc_nama;   
+// 			$pd_id_divisi_lamar = $rr->pd_id_divisi_lamar;
+// 		}
+
+// 		if($rNum > 0){ die(print_r('tesss'));
+// 			// $orderByrNum	= " ORDER BY pc_id=".$rNum." desc, pc_id";
+// 			$query_rnum		= "SELECT * FROM public.v_dt_pgw_calon WHERE pc_id = ".$rNum;
+// 			$rhNum				= $this->db->query($query_rnum);
+// 			$rrNum				= $rhNum->row();
+
+// 			$pd_nama_divisi			= $rrNum->pd_nama_divisi;
+//     }
+		
+// 		$data['pc_nama']  = $pc_nama;  
+// 		$data['pd_id_divisi_lamar'] = $pd_id_divisi_lamar;
+// 		$data['rec_kat']      = $this->M_Pegawai->tampil_data();
+// 	// }
+// 	// $this->load->view('kategori/v_data', $data);
+// 	die(print_r('asdasdads'));
+// 	$this->load->view('public/v_dataPribadi', $data);
+// }
 
 ?>

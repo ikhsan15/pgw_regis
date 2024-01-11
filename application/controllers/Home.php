@@ -26,6 +26,7 @@ class Home extends CI_Controller {
 		// $rNum2			= $this->input->get('rNum2');
 
 		//pgw_calon
+		$pd_id_divisi_lamar		= '';
 		$pc_nama							= '';
 		$pc_no_ktp						= '';
 		$pc_tmp_lahir					= '';
@@ -118,6 +119,7 @@ class Home extends CI_Controller {
         $this->upload->do_upload();
 
 				$hasil          					= $this->upload->data();
+				$inp_pd_id_divisi_lamar		= $this->input->post('inp_pd_id_divisi_lamar');
 				$inp_pc_nama							= $this->input->post('inp_pc_nama');
 				$inp_pc_no_ktp						= $this->input->post('inp_pc_no_ktp');
 				$inp_pc_tmp_lahir					= $this->input->post('inp_pc_tmp_lahir');
@@ -145,6 +147,7 @@ class Home extends CI_Controller {
 				if($inp_pc_nama != ''){
 					$data	= array(
 						'pc_foto'         		=> "'".pg_escape_string($hasil['file_name'])."'",
+						'pd_id_divisi_lamar'	=> $inp_pd_id_divisi_lamar,
 						'pc_nama'							=> "'".pg_escape_string($inp_pc_nama)."'",
 						'pc_no_ktp'						=> "'".pg_escape_string($inp_pc_no_ktp)."'",
 						'pc_tmp_lahir'				=> "'".pg_escape_string($inp_pc_tmp_lahir)."'",
@@ -159,7 +162,8 @@ class Home extends CI_Controller {
 						'pc_anak_ke'					=> $inp_pc_anak_ke,
 						'pc_anak_ke_dari'			=> $inp_pc_anak_ke_dari,
 						'psn_id_status_nikah'	=> $inp_psn_id_status_nikah,
-						'pc_jumlah_anak'			=> $inp_pc_jumlah_anak
+						'pc_jumlah_anak'			=> $inp_pc_jumlah_anak,
+						'pc_tgl_lamar'        => 'now()',
 					);
 					// die(print_r($data));
 					// if($rNum > 0){
@@ -411,6 +415,7 @@ class Home extends CI_Controller {
 		// $data['rNum2']				= $rNum2;
 		
 		// umum
+		$data['list_divisi_lamarl']		= $this->M_Pegawai->show_combo("public.pgw_divisi", "pd_id", "pd_nama_divisi", "pd_id > 0", "pd_nama_divisi", $pd_nama_divisi);
 		$data['pc_nama']							= $pc_nama;
 		$data['pc_no_ktp']						= $pc_no_ktp;
 		$data['pc_tmp_lahir']					= $pc_tmp_lahir;
@@ -502,9 +507,58 @@ class Home extends CI_Controller {
 
 	public function export_tcpdf($pc_id){
     $data['data_pribadi'] = $this->M_Pegawai->getPdf($pc_id);
+		$data['data_keluarga'] = $this->M_Pegawai->getPdfKel($pc_id);
 		$this->load->view('laporan_tcpdf', $data);
   }
 
+	public function formawal($mode='', $pc_id=0){
+		// if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'Magang'){
+			// die($pc_id);
+			$judul			= 'Data Pegawai';
+			$rNum				= $this->input->get('rNum');
+
+			$pd_id_divisi_lamar = '';
+	
+			// if($mode == 'do_update'){
+			// 	$query = "select * from pgw_calon where pc_id = ".$pc_id;
+			// 	$row = $this->db->query($query);
+			// 	$rr = $row->row();
+	
+			// 	$pc_nama = $rr->pc_nama;   
+			// 	$pd_id_divisi_lamar = $rr->pd_id_divisi_lamar;
+			// }
+				
+			$data['judul']				= $judul;
+			$data['current_url']	= current_url();
+			$data['class']				= $this->router->fetch_class();
+			$data['method']				= $this->router->fetch_method();
+			// $data['hSQL']			  	= $hSQL;
+			$data['rNum']			  	= $rNum;
+			
+			$data['rec_pgwcalon']				= $this->db->query("SELECT * FROM public.pgw_calon ");
+
+			$data['pd_id_divisi_lamar'] 				= $pd_id_divisi_lamar;			
+			$data['rec_pgw_calon']      				= $this->db->query("SELECT * FROM public.v_dt_pgw_calon WHERE pc_id = ".$rNum);
+			$data['rec_pgw_keluarga']						= $this->db->query("SELECT * FROM public.pgw_keluarga WHERE pc_id = ".$rNum);
+			$data['rec_pgw_pendidikan']					= $this->db->query("SELECT * FROM public.pgw_pendidikan WHERE pc_id = ".$rNum);
+			$data['rec_pgw_kerja']							= $this->db->query("SELECT * FROM public.pgw_kerja WHERE pc_id = ".$rNum);
+			$data['rec_pgw_referensi_pro']			= $this->db->query("SELECT * FROM public.pgw_referensi_pro WHERE pc_id = ".$rNum);
+			$data['rec_pgw_referensi_kerabat']	= $this->db->query("SELECT * FROM public.pgw_referensi_kerabat WHERE pc_id = ".$rNum);
+			$data['rec_pgw_request']						= $this->db->query("SELECT * FROM public.pgw_kursus WHERE pc_id = ".$rNum);
+			$data['rec_pgw_kursus']							= $this->db->query("SELECT * FROM public.pgw_kursus WHERE pc_id = ".$rNum);
+			$data['rec_pgw_bahasa']							= $this->db->query("SELECT * FROM public.pgw_bahasa WHERE pc_id = ".$rNum);
+			$data['rec_pgw_pertanyaan']					= $this->db->query("SELECT * FROM public.pgw_pertanyaan WHERE pc_id = ".$rNum);
+
+			//pgw_kerja
+			//pgw_referensi_pro
+			//pgw_referensi_kerabat
+			//pgw_request
+			//pgw_kursus
+			//pgw_bahasa
+			//pgw_pertanyaan
+
+			$this->load->view('public/v_dataPribadi', $data);
+	}
 
 	public function updateuser(){
 		// POST values

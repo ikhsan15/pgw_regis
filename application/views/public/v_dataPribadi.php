@@ -160,8 +160,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
-      <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <img src="<?php echo base_url('/assets/adminlte3/dist/img/AdminLTELogo.png'); ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light"><b>SICP</b></span>
     </a>
 
     <!-- Sidebar -->
@@ -169,7 +169,7 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="<?php echo base_url('/assets/adminlte3/dist/img/user2-160x160.jpg'); ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Alexander Pierce</a>
@@ -191,7 +191,6 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-table"></i>
@@ -202,17 +201,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../tables/data.html" class="nav-link active">
+                <a href="<?php echo base_url('CalonPgw'); ?>" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>DataTables</p>
+                  <p>List Data Calon Pegawai</p>
                 </a>
               </li>
+              <?php if($this->session->userdata('access') == 'Administrator'){ ?>
               <li class="nav-item">
-                <a href="../tables/jsgrid.html" class="nav-link">
+                <a href="<?php echo base_url('user'); ?>" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>jsGrid</p>
+                  <p>User</p>
                 </a>
               </li>
+              <?php } ?>
             </ul>
           </li>
         </ul>
@@ -229,12 +230,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Data Calon Pegawai</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">Data Calon Pegawai</li>
             </ol>
           </div>
         </div>
@@ -244,140 +245,729 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Form Data Diri</h3>
+        <?php if($rNum > 0){ ?>
+          <!-- DATA PGW_CALON -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Data Umum</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
               </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form class="form" role="form" enctype="multipart/form-data" data-parsley-validate=""  method="post" accept-charset="utf-8" action="<?php echo base_url().$class;?>/f_pegawai/crud/?rNum=<?php echo $rNum ?>">          
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="inp_pc_nama">Nama Lengkap</label>
-                        <input type="text" id="inp_pc_nama" class="form-control" placeholder="First Name" name="inp_pc_nama">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="inp_pc_no_ktp">No. KTP</label>
-                        <input type="number" id="inp_pc_no_ktp" class="form-control" placeholder="Last Name" name="inp_pc_no_ktp">
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table  table-striped">
+                <!-- <form role="form" enctype="multipart/form-data" data-parsley-validate="" class="form-horizontal form-label-left" method="post" accept-charset="utf-8" action="<?php echo base_url().$class;?>/f_pegawai/crud/?rNum=<?php echo $rNum ?>">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="input-data">
+                        <select class="form-control select2" name="inp_pd_id_divisi_lamar"  id="inp_pd_id_divisi_lamar">
+                          <option value="">---</option>
+                          <?php echo $list_divisi_lamar; ?>
+                        </select>
+                        <div class="underline"></div>
+                        <label for="inp_pd_id_divisi_lamar" id="select_opt">Posisi yand dilamar <code>*</code></label>
                       </div>
                     </div>
                   </div>
-                </div>
-                <!-- /.card-body -->
-
-                <div class="card-footer">
-                  <div class="input-data">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                      <!-- <button type="button" class="btn btn-info tambah-form">Tambah Form</button> -->
-                      <button type="submit" class="btn btn-primary" id="simpan_simpan" name="submit_crud" value="simpan" >Simpan</button>
-                      <button type="submit" class="btn btn-warning" id="submit_reset" name="submit_crud" value="reset" >Reset</button>
+                  <div class="card-footer">
+                    <div class="input-data">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button type="submit" class="btn btn-primary" id="simpan_simpan" name="submit_crud" value="simpan" >Simpan</button>
+                      </div>
                     </div>
                   </div>
-                  <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-                </div>
-              </form>
+                </form> -->
+                <?php
+                  $no = 1;
+                  foreach ($rec_pgw_calon->result() as $r){
+                ?>
+                  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+                  <tr>
+                    <td width="20%"></td>	
+                    <td width="2%"></td>	
+                    <td align="right">
+                      <?php if(!empty($r->pc_foto)){ ?>
+                        <img src="<?php echo base_url().'foto_pgw/'.$r->pc_foto; ?>" class="img-thumbnail" width="70px" height="70px">
+                      <?php } ?>
+                    </td>
+                  </tr>
+                  <!-- <tr>
+                    <td collspan="3"><?php echo $r->pc_foto ?></td>
+                  </tr> -->
+                  <tr>	
+                    <td width="20%">Posisi yang dilamar</td>	
+                    <td width="2%">:</td>	
+                    <td><?php echo $r->pd_nama_divisi ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Status Lamaran</td>	
+                    <td>:</td>	
+                    <td><?php echo $r->pss_nama ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Nama Lengkap</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pc_nama ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>No. KTP</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pc_no_ktp ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Tempat Tanggal Lahir</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pc_tmp_lahir ?>, <?php echo $r->pc_tgl_lahir ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Alamat Rumah (KTP)</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pc_alamat_ktp ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>Alamat Rumah (Sekarang)</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pc_alamat_sekarang ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>No. Telepon</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pc_telp ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>Email</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pc_email ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>Jenis Kelamin</td>	
+                    <td>:</td>	
+                    <td>
+                      <?php if(($r->pc_gender) === 1){
+                          echo 'Laki-laki';
+                        }else{
+                          echo 'Wanita';
+                        } 
+                      ?>
+                    </td>
+                  </tr>	
+                  <tr>	
+                    <td>Agama</td>	
+                    <td>:</td>	
+                    <td><?php echo $r->pa_nama ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>Kewarganegaraan</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pc_kewarganegaraan ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Anak ke</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pc_anak_ke ?> dari <?php echo $r->pc_anak_ke_dari ?> bersaudara</td>
+                  </tr>	
+                  <tr>	
+                    <td>Status Perkawinan</td>	
+                    <td>:</td>
+                    <td><?php echo $r->psn_nama ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Jumlah anak</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pc_jumlah_anak ?></td>
+                  </tr>	
+
+                <?php $no++; } ?>                
+              </table>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+          <!-- DATA PGW_CALON -->
+          <!-- DATA PGW_KELUARGA -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Data Keluarga</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                      <tr>
-                        <th>No.</th>
-                        <th>Nama Lengkap</th>
-                        <th>Foto</th>
-                        <th>Tempat Lahir</th>
-                        <th>Tanggal Lahir</th>
-
-                        <th>Alamat Rumah (KTP)</th>
-                        <th>Alamat Rumah (Sekarang)</th>
-                        <th>No. WA</th>
-                        <th>Email</th>
-                        <th>Jenis Kelamin</th>
-
-                        <th>Agama</th>
-                        <th>Kewarganegaraan</th>
-                        <th>Anak Ke</th>
-                        <th>Dari</th>
-                        <th>Status Pekawinan</th>
-                        
-                        <th>Jumlah Anak</th>
-                        <th>Eksport</th>
-                        <!-- <th>delete</th> -->
-                      </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                      $no = 1;
-                      foreach ($rec_pgwcalon->result() as $r){
-                    ?>
-                    <tr class="tr-class-<?php echo $active?> ">
-                      <!-- memanggil data sesuai nama field di view -->
-                      <td><?php echo $no ?></td>
-                      <td><?php echo $r->pc_nama ?></td>
-                      <!-- <td><?php echo $r->pc_foto ?></td> -->
-                      <td>
-                        <?php if(!empty($r->pc_foto)){ ?>
-                          <img src="<?php echo base_url().'foto_pgw/'.$r->pc_foto; ?>" class="img-thumbnail" width="70px" height="70px">
-                        <?php } ?>
-                      </td>
-                      <td><?php echo $r->pc_tmp_lahir ?></td>
-                      <td><?php echo $r->pc_tgl_lahir ?></td>
-
-                      <td><?php echo $r->pc_alamat_ktp ?></td>
-                      <td><?php echo $r->pc_alamat_sekarang ?></td>
-                      <td><?php echo $r->pc_telp ?></td>
-                      <td><?php echo $r->pc_email ?></td>
-                      <td><?php echo $r->pc_gender ?></td>
-
-                      <td><?php echo $r->pc_alamat_ktp ?></td>
-                      <td><?php echo $r->pc_kewarganegaraan ?></td>
-                      <td><?php echo $r->pc_anak_ke ?></td>
-                      <td><?php echo $r->pc_anak_ke_dari ?></td>
-                      <td><?php echo $r->pc_alamat_ktp ?></td>
-                      
-                      <td><?php echo $r->pc_jumlah_anak ?></td>
-                      <td>
-                        <!-- <a class="btn btn-app" href="<?php echo base_url('Pdfview'); ?>">
-                          <i class="fas fa-edit"></i> Edit
-                        </a> -->
-                        <!-- <a class="btn btn-app" href="<?php echo base_url('Home/laporan_pdf/'); ?>">
-                          <i class="fas fa-edit"></i> Edit
-                        </a> -->
-                        <a href="<?php echo base_url('Home/export_tcpdf/').$r->pc_id ?>" target="blank">
-                          <i class="fas fa-edit"></i> Edit
-                        </a>
-                      </td>
-                      <!-- <td><?php echo anchor('home/test/?rNum='.$r->pc_id, 'Update') ?></td> -->
-                      <!-- <td><?php echo anchor('home/hapus/'.$r->pc_id, 'Delete') ?></td> -->
-                    </tr>
-                    <?php
-                        $no++;
-                      }
-                    ?>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <?php
+                  $no = 1;
+                  foreach ($rec_pgw_keluarga->result() as $r){
+                ?>
+                  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+                  <tr>	
+                    <td width="20%">Nama</td>	
+                    <td width="2%">:</td>	
+                    <td><?php echo $r->pf_nama ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Hubungan</td>	
+                    <td>:</td>	
+                    <td><?php echo $r->pf_hubungan ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Tanggal Lahir</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pf_tgl_lahir ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>Pendidikan</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pf_pendidikan ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Pekerjaan</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pf_kerja ?></td>
+                  </tr>
+                  
+                  <tr>	
+                    <td collspan="3"></td>	
+                  </tr>	
+
+                <?php $no++; } ?>                
+              </table>
+            </div>
           </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
+          <!-- DATA PGW_KELUARGA -->
+          <!-- DATA PGW_PENDIDIKAN -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Riwayat Pendidikan</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <?php
+                  $no = 1;
+                  foreach ($rec_pgw_pendidikan->result() as $r){
+                ?>
+                  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+                  <tr>	
+                    <td width="20%">Nama Instansi</td>	
+                    <td width="2%">:</td>	
+                    <td><?php echo $r->ppend_nama ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Alamat Instansi</td>	
+                    <td>:</td>
+                    <td><?php echo $r->ppend_alamat ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>Tingkat</td>	
+                    <td>:</td>
+                    <td><?php echo $r->ppend_tingkat ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Jurusan</td>	
+                    <td>:</td>
+                    <td><?php echo $r->ppend_jurusan ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Tahun Masuk</td>	
+                    <td>:</td>
+                    <td><?php echo $r->ppend_masuk ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Tahun Keluar</td>	
+                    <td>:</td>
+                    <td><?php echo $r->ppend_keluar ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Lulus / Tidak Lulus</td>	
+                    <td>:</td>	
+                    <td><?php echo $r->ppend_keterangan ?></td>
+                  </tr>
+                  
+                  <tr>	
+                    <td collspan="3"></td>	
+                  </tr>	
+
+                <?php $no++; } ?>                
+              </table>
+            </div>
+          </div>
+          <!-- DATA PGW_PENDIDIKAN -->
+          <!-- DATA PGW_KERJA -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Riwayat Pekerjaan</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <?php
+                  $no = 1;
+                  foreach ($rec_pgw_kerja->result() as $r){
+                ?>
+                  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+                  <tr>	
+                    <td width="20%">Nama Perusahaan</td>	
+                    <td width="2%">:</td>	
+                    <td><?php echo $r->pk_nama ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Alamat Perusahaan</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pk_alamat ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>Divisi</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pk_divisi ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Jabatan</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pk_jabatan ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Tanggal Masuk</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pk_masuk ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Tanggal Keluar</td>	
+                    <td>:</td>
+                    <td><?php echo $r->pk_keluar ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Gaji Pokok</td>	
+                    <td>:</td>	
+                    <td><?php echo $r->pk_gapok ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Tunjangan Lainnya</td>	
+                    <td>:</td>	
+                    <td><?php echo $r->pk_tunjangan_lainnya ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Tugas Kerja</td>	
+                    <td>:</td>	
+                    <td><?php echo $r->pk_tugas_kerja ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Alasan Pindah</td>	
+                    <td>:</td>	
+                    <td><?php echo $r->pk_alasan_pindah ?></td>
+                  </tr>
+                  
+                  <tr>	
+                    <td collspan="3"></td>	
+                  </tr>	
+
+                <?php $no++; } ?>                
+              </table>
+            </div>
+          </div>
+          <!-- DATA PGW_KERJA -->
+          <!-- DATA PGW_REFERENSI_PRO -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Referensi Profesional</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <?php
+                  $no = 1;
+                  foreach ($rec_pgw_referensi_pro->result() as $r){
+                ?>
+                  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+                  <tr>	
+                    <td width="20%">Nama </td>	
+                    <td width="2%">:</td>	
+                    <td><?php echo $r->prp_nama ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Hubungan </td>	
+                    <td>:</td>
+                    <td><?php echo $r->prp_hubungan ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>Posisi / Jabatan</td>	
+                    <td>:</td>
+                    <td><?php echo $r->prp_jabatan ?></td>
+                  </tr>
+                  <tr>	
+                    <td>No. Telepon</td>	
+                    <td>:</td>
+                    <td><?php echo $r->prp_telp ?></td>
+                  </tr>
+                  
+                  <tr>	
+                    <td collspan="3"></td>	
+                  </tr>	
+
+                <?php $no++; } ?>                
+              </table>
+            </div>
+          </div>
+          <!-- DATA PGW_REFERENSI_PRO -->
+          <!-- DATA PGW_REFERENSI_KERABAT -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Referensi Kerabat</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <?php
+                  $no = 1;
+                  foreach ($rec_pgw_referensi_kerabat->result() as $r){
+                ?>
+                  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+                  <tr>	
+                    <td width="20%">Nama </td>	
+                    <td width="2%">:</td>	
+                    <td><?php echo $r->prk_nama ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Hubungan </td>	
+                    <td>:</td>
+                    <td><?php echo $r->prk_hubungan ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>Posisi / Jabatan</td>	
+                    <td>:</td>
+                    <td><?php echo $r->prk_jabatan ?></td>
+                  </tr>
+                  
+                  <tr>	
+                    <td collspan="3"></td>	
+                  </tr>	
+
+                <?php $no++; } ?>                
+              </table>
+            </div>
+          </div>
+          <!-- DATA PGW_REFERENSI_KERABAT -->
+          <!-- DATA PGW_REQUEST -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Minat</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <?php
+                  $no = 1;
+                  foreach ($rec_pgw_request->result() as $r){
+                ?>
+                  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+                  <tr>	
+                    <td width="40%">Minimum gaji yang diinginkan </td>	
+                    <td width="2%">:</td>	
+                    <td><?php echo $r->ppreq_gaji_min ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Kondisi kerja/tunjangan dan fasilitas yang diinginkan </td>	
+                    <td>:</td>
+                    <td><?php echo $r->ppreq_fasilitas ?></td>
+                  </tr>	
+                  <tr>	
+                    <td>Kapan bisa bergabung dengan GEMA INSANI?</td>	
+                    <td>:</td>
+                    <td><?php echo $r->ppreq_gabung ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Apakah Anda bersedia ditempatkan di luar Jakarta? </td>	
+                    <td>:</td>
+                    <td><?php echo $r->ppreq_penempatan ?></td>
+                  </tr>
+                  
+                  <tr>	
+                    <td collspan="3"></td>	
+                  </tr>	
+
+                <?php $no++; } ?>                
+              </table>
+            </div>
+          </div>
+          <!-- DATA PGW_REQUEST -->
+          <!-- DATA PGW_KURSUS -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Riwayat Kursus / Pelatihan</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <?php
+                  $no = 1;
+                  foreach ($rec_pgw_kursus->result() as $r){
+                ?>
+                  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+                  <tr>	
+                    <td width="20%">Nama Instansi </td>	
+                    <td width="2%">:</td>	
+                    <td><?php echo $r->ps_nama ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Tahun Masuk</td>	
+                    <td>:</td>
+                    <td><?php echo $r->ps_masuk ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Tahun Keluar </td>	
+                    <td>:</td>
+                    <td><?php echo $r->ps_keluar ?></td>
+                  </tr>	
+                  <tr>
+                    <td>Lulus / Tidak Lulus </td>	
+                    <td>:</td>
+                    <td><?php echo $r->ps_status ?></td>
+                  </tr>	
+                  
+                  <tr>	
+                    <td collspan="3"></td>	
+                  </tr>	
+
+                <?php $no++; } ?>                
+              </table>
+            </div>
+          </div>
+          <!-- DATA PGW_KURSUS -->
+          <!-- DATA PGW_BAHASA -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Kemampuan Bahasa</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <?php
+                  $no = 1;
+                  foreach ($rec_pgw_bahasa->result() as $r){
+                ?>
+                  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+                  <tr>	
+                    <td width="20%">Bahasa </td>	
+                    <td width="2%">:</td>	
+                    <td><?php echo $r->pb_nama ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Aktif / Pasif </td>	
+                    <td>:</td>
+                    <td><?php echo $r->pb_keterangan ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Tertulis </td>	
+                    <td>:</td>
+                    <td>
+                      <?php if(($r->pb_tulis) === "1"){
+                        echo "Sangat Baik";
+                      }elseif(($r->pb_tulis) === "2"){
+                        echo "Baik";
+                      }elseif(($r->pb_tulis) === "3"){
+                        echo "Cukup Baik";
+                      }else{
+                        echo "Kurang";
+                      } ?>
+                    </td>
+                  </tr>	
+                  <tr>
+                    <td>Lisan </td>	
+                    <td>:</td>
+                    <td>
+                      <?php if(($r->pb_lisan) === "1"){
+                        echo "Sangat Baik";
+                      }elseif(($r->pb_lisan) === "2"){
+                        echo "Baik";
+                      }elseif(($r->pb_lisan) === "3"){
+                        echo "Cukup Baik";
+                      }else{
+                        echo "Kurang";
+                      } ?>
+                    </td>
+                  </tr>	
+                  
+                  <tr>	
+                    <td collspan="3"></td>	
+                  </tr>	
+
+                <?php $no++; } ?>                
+              </table>
+            </div>
+          </div>
+          <!-- DATA PGW_BAHASA -->
+          <!-- DATA PGW_PERTANYAAN -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Informasi Tambahan</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <?php
+                  $no = 1;
+                  foreach ($rec_pgw_pertanyaan->result() as $r){
+                ?>
+                  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+                  <tr>	
+                    <td width="40%">Hobi/aktivitas yang dilakukan saat waktu senggang </td>	
+                    <td width="2%">:</td>	
+                    <td><?php echo $r->pp_hobi ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Apakah Anda buta warna? </td>	
+                    <td>:</td>
+                    <td><?php echo $r->pp_buta_warna ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Penyakit yang pernah menyebabkan Anda dirawat di rumah sakit. </td>	
+                    <td>:</td>
+                    <td><?php echo $r->pp_penyakit ?></td>
+                  </tr>
+                  <tr>	
+                    <td>Dirawat berapa lama? </td>	
+                    <td>:</td>
+                    <td><?php echo $r->pp_lama_rawat ?></td>
+                  </tr>
+                  <tr>
+                    <td>Penyakit tertentu yang masih dialami saat ini </td>	
+                    <td>:</td>
+                    <td><?php echo $r->pp_sakit_turunan ?></td>
+                  </tr>
+                  <tr>
+                    <td>Apakah Anda pernah terlibat tindak kriminal yang menyebabkan Anda berurusan dengan hukum? </td>	
+                    <td>:</td>
+                    <td><?php echo $r->pp_kriminal ?></td>
+                  </tr>	
+                  <tr>
+                    <td>Kapan Anda terlibat tindak kriminal tersebut? </td>	
+                    <td>:</td>
+                    <td><?php echo $r->pp_kriminal_waktu ?></td>
+                  </tr>
+                  <tr>
+                    <td>Mengapa anda melakukan tindak kriminal tersebut? </td>	
+                    <td>:</td>
+                    <td><?php echo $r->pp_kriminal_alasan ?></td>
+                  </tr>	
+                  <tr>
+                    <td>Organisasi sosial yang pernah Anda ikuti </td>	
+                    <td>:</td>
+                    <td><?php echo $r->pp_organisasi ?></td>
+                  </tr>
+                  
+                  <tr>	
+                    <td collspan="3"></td>	
+                  </tr>	
+
+                <?php $no++; } ?>                
+              </table>
+            </div>
+          </div>
+          <!-- DATA PGW_PERTANYAAN -->
+
+        <?php } ?>
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">List Data Calon Pegawai</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Nama Lengkap</th>
+                    <th>Posisi yang dilamar</th>
+                    <th>Alamat Rumah (Sekarang)</th>
+
+                    <th>No. WA</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Status Pekawinan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                    $no = 1;
+                    foreach ($rec_pgwcalon->result() as $r){
+                  ?>
+                  <tr class="tr-class-<?php echo $active?> ">
+                    <!-- memanggil data sesuai nama field di view -->
+                    <td><?php echo $no ?></td>
+                    <td><?php echo $r->pc_nama ?></td>
+                    <td><?php echo $r->pd_nama_divisi ?></td>
+                    <td><?php echo $r->pc_alamat_sekarang ?></td>
+
+                    <td><?php echo $r->pc_telp ?></td>
+                    <!-- <td><?php echo $r->pc_gender ?></td> -->
+                    <td>
+                      <?php if(($r->pc_gender) === "1"){
+                          echo 'Laki-laki';
+                        }else{
+                          echo 'Wanita';
+                        } 
+                      ?>
+                    </td>
+                    <td><?php echo $r->psn_nama ?></td>
+
+                    <!-- <td>
+                      <a href="<?php echo base_url('Home/export_tcpdf/').$r->pc_id ?>" target="blank">
+                        <i class="fas fa-edit"></i> Edit
+                      </a>
+                    </td> -->
+                    <td><?php echo anchor('home/formawal/?rNum='.$r->pc_id, 'View')?></td>
+                    <!-- <td><?php echo anchor('home/test/?rNum='.$r->pc_id, 'Update') ?></td> -->
+                    <!-- <td><?php echo anchor('home/hapus/'.$r->pc_id, 'Delete') ?></td> -->
+                  </tr>
+                  <?php
+                      $no++;
+                    }
+                  ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <!-- <div class="card-body"> -->
+          <!-- <table cellspacing="" cellpadding="3">	
+            <tr>
+              <td width="25%"><img src="/pgw_regis/assets/Logo Gema Insani - Horizontal.png"></td>
+              <td width="50%" align="center"></td>
+              <td width="25%"><img src="/pgw_regis/foto_pgw/foto/'<?php echo $row->pc_foto ?>'"></td>
+            </tr>	
+            <tr>	
+              <td width="50%" align="center"></td>	
+            </tr>	
+            <tr>	
+              <td width="50%" align="center"><h3>FORMULIR LAMARAN KERJA</h3></td>	
+            </tr>	
+            <tr>	
+              <td width="50%" align="center"></td>	
+            </tr>	
+            <tr>	
+              <td width="50%" align="center"></td>	
+            </tr>	
+            <tr>	
+              <td width="50%" align="center"></td>	
+            </tr>	
+          </table>	 -->
+          <!-- <table cellspacing="" cellpadding="3"> -->                
+        <!-- </div> -->
+
       </div>
       <!-- /.container-fluid -->
     </section>
@@ -440,13 +1030,14 @@
       "paging": false,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
+      scrollX: true,
       "paging": true,
       "lengthChange": false,
-      "searching": false,
+      "searching": true,
       "ordering": true,
       "info": true,
       "autoWidth": false,
-      "responsive": true,
+      // "responsive": true,
     });
   });
   function readURL(input) {

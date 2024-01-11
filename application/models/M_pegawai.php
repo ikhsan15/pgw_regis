@@ -35,12 +35,36 @@ class M_Pegawai extends CI_Model{
     return $list;
   }
 
+  // public function getPdf($pc_id){    
+  //   $this->db->select('*');
+  //   $this->db->from('pgw_calon');
+  //   $this->db->where('pc_id', $pc_id);
+  //   $query = $this->db->get();
+  //   return $query->result();
+  // }
+
   public function getPdf($pc_id){    
     $this->db->select('*');
-    $this->db->from('pgw_calon');
+    $this->db->from('view01');
     $this->db->where('pc_id', $pc_id);
     $query = $this->db->get();
     return $query->result();
+  }
+
+  public function getPdfKel($pc_id){    
+    $this->db->select('*');
+    $this->db->from('pgw_keluarga');
+    $this->db->where('pc_id', $pc_id);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  function tampil_data(){
+    // return $this->db->get('kategori');
+    $query = "SELECT * FROM pgw_calon
+              ORDER BY pc_id
+              ";
+    return $this->db->query($query);
   }
 
   function getData(){
