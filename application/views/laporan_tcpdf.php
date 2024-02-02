@@ -37,10 +37,28 @@
         </tr>
       </table>
 
+      
       ';
       // die($html);
       // die(print_r($row->pc_foto));
-    }
+  };
+
+    // foreach ($data_keluarga as $row) {
+    //   // die(base_url());
+    //   $html='
+    //     <table cellspacing="" cellpadding="3">
+    //         <td width="50%" align="left">'.$row->pf_nama.'</td>
+    //       </tr>
+    //       <tr bgcolor="#ffffff">
+    //         <td width="50%" align="center"></td>
+    //       </tr>
+    //       </tr>
+    //     </table>
+  
+    //     ';
+    //     // die($html);
+    //     // die(print_r($row->pc_foto));
+    // }
     
 
   $pdf->writeHTML($html, true, false, true, false, '');

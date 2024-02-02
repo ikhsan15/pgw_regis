@@ -45,7 +45,7 @@ class M_Pegawai extends CI_Model{
 
   public function getPdf($pc_id){    
     $this->db->select('*');
-    $this->db->from('view01');
+    $this->db->from('pgw_calon');
     $this->db->where('pc_id', $pc_id);
     $query = $this->db->get();
     return $query->result();

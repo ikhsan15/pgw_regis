@@ -300,7 +300,7 @@
                     <div class="input-data">
                       <input type="text" id="inp_ppend_tingkat" name="inp_ppend_tingkat[]" required>
                       <div class="underline"></div>
-                      <label for="inp_ppend_tingkat">Tingkat <code>*</code></label>
+                      <label for="inp_ppend_tingkat">Tingkat <code>(SD/SMP/SMA/dll)*</code></label>
                     </div>
                     <div class="input-data">
                       <input type="text" id="inp_ppend_jurusan" name="inp_ppend_jurusan[]" required>
@@ -554,21 +554,21 @@
                     <div class="input-data">
                       <input type="text" id="inp_ppreq_gaji_min" name="inp_ppreq_gaji_min" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" required>
                       <div class="underline"></div>
-                      <label for="inp_ppreq_gaji_min">Minimum gaji yang diinginkan <code>*</code> </label>
+                      <label for="inp_ppreq_gaji_min">Minimum gaji yang diharapkan <code>*</code> </label>
                     </div>
                   </div>
                   <div class="form-row textarea">
                     <div class="input-data textarea">
                       <textarea rows="3" cols="80" id="inp_ppreq_fasilitas" name="inp_ppreq_fasilitas" required></textarea>
                       <div class="underline"></div>
-                      <label for="inp_ppreq_fasilitas">Kondisi kerja/tunjangan dan fasilitas apa yang Anda inginkan? <code>*</code></label>
+                      <label for="inp_ppreq_fasilitas">Kondisi kerja/tunjangan dan fasilitas apa yang Anda harapkan? <code>*</code></label>
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="input-data">
                       <input type="date" id="inp_ppreq_gabung" name="inp_ppreq_gabung" required>
                       <div class="underline"></div>
-                      <label for="inp_ppreq_gabung">Kapan bisa bergabung dengan GEMA INSANI? <code>*</code></label>
+                      <label for="inp_ppreq_gabung">Kapan bisa bergabung dengan Gema Insani? <code>*</code></label>
                     </div>
                   </div>
                   <div class="form-row textarea">
@@ -779,7 +779,7 @@
                 <br><br>
 
                 <div class="container">
-                  <div class="row">
+                  <div class="row" align="justify">
                     <!-- <div class="input-data"> -->
                       <h6>
                         DENGAN INI SAYA MENYATAKAN BAHWA SELURUH INFORMASI YANG TERDAPAT 

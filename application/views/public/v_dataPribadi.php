@@ -26,10 +26,13 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../../index3.html" class="nav-link">Home</a>
+        <a href="<?php echo base_url(); ?>" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="<?php echo site_url('login/logout');?>" class="nav-link">Keluar</a>
       </li>
     </ul>
 
@@ -195,7 +198,7 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Tables
+                Calon Pegawai
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -282,6 +285,13 @@
                   foreach ($rec_pgw_calon->result() as $r){
                 ?>
                   <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+                  <tr>
+                    <td>
+                      <a href="<?php echo base_url('Home/exportPdf/?rNum=').$r->pc_id ?>" target="blank">
+                        <i class="fas fa-file-pdf"></i> pdf
+                      </a>
+                    </td>
+                  </tr>
                   <tr>
                     <td width="20%"></td>	
                     <td width="2%"></td>	
@@ -887,15 +897,16 @@
               </div>
             </div>
             <div class="card-body">
-              <table id="example2" class="table table-bordered table-striped">
+              <!-- <table id="example2" class="table table-bordered table-striped"> -->
+              <table id="dtHorizontalVerticalExample" class="table table-striped table-bordered table-sm " cellspacing="0" width="100%">
                 <thead>
                   <tr>
                     <th>No.</th>
                     <th>Nama Lengkap</th>
                     <th>Posisi yang dilamar</th>
                     <th>Alamat Rumah (Sekarang)</th>
-
                     <th>No. WA</th>
+
                     <th>Jenis Kelamin</th>
                     <th>Status Pekawinan</th>
                     <th>Aksi</th>
@@ -912,8 +923,8 @@
                     <td><?php echo $r->pc_nama ?></td>
                     <td><?php echo $r->pd_nama_divisi ?></td>
                     <td><?php echo $r->pc_alamat_sekarang ?></td>
-
                     <td><?php echo $r->pc_telp ?></td>
+                    
                     <!-- <td><?php echo $r->pc_gender ?></td> -->
                     <td>
                       <?php if(($r->pc_gender) === "1"){
@@ -925,12 +936,15 @@
                     </td>
                     <td><?php echo $r->psn_nama ?></td>
 
-                    <!-- <td>
-                      <a href="<?php echo base_url('Home/export_tcpdf/').$r->pc_id ?>" target="blank">
-                        <i class="fas fa-edit"></i> Edit
+                    <td>
+                      <a href="<?php echo base_url('Home/exportPdf/?rNum=').$r->pc_id ?>" target="blank">
+                        <i class="fas fa-file-pdf"></i>
                       </a>
-                    </td> -->
-                    <td><?php echo anchor('home/formawal/?rNum='.$r->pc_id, 'View')?></td>
+                      <a href="<?php echo base_url('Home/formawal/?rNum=').$r->pc_id ?>">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                    </td>
+                    <!-- <td><?php echo anchor('home/formawal/?rNum='.$r->pc_id, 'View')?></td> -->
                     <!-- <td><?php echo anchor('home/test/?rNum='.$r->pc_id, 'Update') ?></td> -->
                     <!-- <td><?php echo anchor('home/hapus/'.$r->pc_id, 'Delete') ?></td> -->
                   </tr>
@@ -942,31 +956,6 @@
               </table>
             </div>
           </div>
-        <!-- <div class="card-body"> -->
-          <!-- <table cellspacing="" cellpadding="3">	
-            <tr>
-              <td width="25%"><img src="/pgw_regis/assets/Logo Gema Insani - Horizontal.png"></td>
-              <td width="50%" align="center"></td>
-              <td width="25%"><img src="/pgw_regis/foto_pgw/foto/'<?php echo $row->pc_foto ?>'"></td>
-            </tr>	
-            <tr>	
-              <td width="50%" align="center"></td>	
-            </tr>	
-            <tr>	
-              <td width="50%" align="center"><h3>FORMULIR LAMARAN KERJA</h3></td>	
-            </tr>	
-            <tr>	
-              <td width="50%" align="center"></td>	
-            </tr>	
-            <tr>	
-              <td width="50%" align="center"></td>	
-            </tr>	
-            <tr>	
-              <td width="50%" align="center"></td>	
-            </tr>	
-          </table>	 -->
-          <!-- <table cellspacing="" cellpadding="3"> -->                
-        <!-- </div> -->
 
       </div>
       <!-- /.container-fluid -->
@@ -1012,7 +1001,7 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('/assets/adminlte3/dist/js/adminlte.min.js '); ?>"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url('/assets/adminlte3/dist/js/demo.js '); ?>"></script>
+<!-- <script src="<?php echo base_url('/assets/adminlte3/dist/js/demo.js '); ?>"></script> -->
 <!-- Page specific script -->
 <script>
   $(function () {

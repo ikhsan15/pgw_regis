@@ -7,6 +7,7 @@ class Home extends CI_Controller {
     parent::__construct();
 		error_reporting(0);
 		// $this->load->helper('security');
+		$this->load->model('M_pdf');
     $this->load->model('M_Pegawai');
 		$this->load->library('pdf_report');
     // $this->load->library('pdfgenerator');
@@ -317,7 +318,8 @@ class Home extends CI_Controller {
 
 						$data = array(
 							'pc_id'							=> $rNum,
-							'ppreq_gaji_min'		=> "'".pg_escape_string($inp_ppreq_gaji_min)."'",
+							// 'ppreq_gaji_min'		=> "'".pg_escape_string($inp_ppreq_gaji_min)."'",
+							'ppreq_gaji_min'		=> "'".pg_escape_string(str_replace(".", "",$inp_ppreq_gaji_min))."'",
 							'ppreq_fasilitas'		=> "'".pg_escape_string($inp_ppreq_fasilitas)."'",
 							'ppreq_gabung'			=> "'".pg_escape_string($inp_ppreq_gabung)."'",
 							'ppreq_penempatan'	=> "'".pg_escape_string($inp_ppreq_penempatan)."'"
@@ -366,7 +368,6 @@ class Home extends CI_Controller {
 
 				// insert into table pgw_pertanyaan
 				$inp_pp_hobi 						= $this->input->post('inp_pp_hobi');
-				$inp_ppreq_fasilitas 		= $this->input->post('inp_ppreq_fasilitas');
 				$inp_pp_buta_warna			= $this->input->post('inp_pp_buta_warna');
 				$inp_pp_penyakit				= $this->input->post('inp_pp_penyakit');
 				$inp_pp_lama_rawat 			= $this->input->post('inp_pp_lama_rawat');
@@ -380,8 +381,7 @@ class Home extends CI_Controller {
 				$data = array(
 					'pc_id'								=> $rNum,
 					'pp_hobi'							=> "'".pg_escape_string($inp_pp_hobi)."'",
-					'pp_buta_warna'				=> "'".pg_escape_string($inp_ppreq_fasilitas)."'",
-					'ppreq_gabung'				=> "'".pg_escape_string($inp_pp_buta_warna)."'",
+					'pp_buta_warna'				=> "'".pg_escape_string($inp_pp_buta_warna)."'",
 					'pp_penyakit'					=> "'".pg_escape_string($inp_pp_penyakit)."'",
 					'pp_lama_rawat'				=> "'".pg_escape_string($inp_pp_lama_rawat)."'",
 					'pp_sakit_turunan'		=> "'".pg_escape_string($inp_pp_sakit_turunan)."'",
@@ -415,7 +415,7 @@ class Home extends CI_Controller {
 		// $data['rNum2']				= $rNum2;
 		
 		// umum
-		$data['list_divisi_lamarl']		= $this->M_Pegawai->show_combo("public.pgw_divisi", "pd_id", "pd_nama_divisi", "pd_id > 0", "pd_nama_divisi", $pd_nama_divisi);
+		$data['list_divisi_lamar']		= $this->M_Pegawai->show_combo("public.pgw_divisi", "pd_id", "pd_nama_divisi", "pd_id > 0", "pd_nama_divisi", $pd_nama_divisi);
 		$data['pc_nama']							= $pc_nama;
 		$data['pc_no_ktp']						= $pc_no_ktp;
 		$data['pc_tmp_lahir']					= $pc_tmp_lahir;
@@ -505,38 +505,61 @@ class Home extends CI_Controller {
 		$this->load->view('v_home', $data);
 	}
 
-	public function export_tcpdf($pc_id){
-    $data['data_pribadi'] = $this->M_Pegawai->getPdf($pc_id);
-		$data['data_keluarga'] = $this->M_Pegawai->getPdfKel($pc_id);
-		$this->load->view('laporan_tcpdf', $data);
-  }
+	public function exportPdf() {
+		$rNum			= $this->input->get('rNum');
+		$pc_nama	= $this->input->get('pc_nama');
+		$p_lamar	= $this->input->get('p_lamar');
+		// die($pc_nama);
+		// Load model
+		$this->load->model('M_pdf');
+		// $this->load->model('model_tabel2');
 
-	public function formawal($mode='', $pc_id=0){
-		// if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'Magang'){
+		// Logika pengambilan data dari banyak tabel
+		$data['table1'] 	= $this->M_pdf->getPribadi($rNum);
+		$data['table2'] 	= $this->M_pdf->getKeluarga($rNum);
+		$data['table3'] 	= $this->M_pdf->getPendidikan($rNum);
+		$data['table4'] 	= $this->M_pdf->getPekerjaan($rNum);
+		$data['table5'] 	= $this->M_pdf->getReferensiPro($rNum);
+		$data['table6']		= $this->M_pdf->getReferensiKer($rNum);
+		$data['table7'] 	= $this->M_pdf->getRequest($rNum);
+		$data['table8']		= $this->M_pdf->getKursus($rNum);
+		$data['table9'] 	= $this->M_pdf->getBahasa($rNum);
+		$data['table10']	= $this->M_pdf->getPertanyaan($rNum);
+
+		// foreach ($table1 as $r){}
+
+		// Load TCPDF
+		$pdf = new TCPDF();
+
+		// Set properti PDF
+		$pdf->SetTitle('Formulir Lamaran - '.$pc_nama);
+
+		// Tambahkan halaman pertama
+		$pdf->AddPage();
+
+		// Tambahkan konten ke PDF
+		$html = $this->load->view('v_pdf_multi', $data, true);
+		$pdf->writeHTML($html, true, false, true, false, '');
+
+		// Output PDF ke browser atau simpan ke file
+		$pdf->Output($pc_nama.' - '.$p_lamar.'.pdf', 'I');
+	}
+
+	public function formawal($mode=''){
+		if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'Magang'){
 			// die($pc_id);
 			$judul			= 'Data Pegawai';
 			$rNum				= $this->input->get('rNum');
 
 			$pd_id_divisi_lamar = '';
-	
-			// if($mode == 'do_update'){
-			// 	$query = "select * from pgw_calon where pc_id = ".$pc_id;
-			// 	$row = $this->db->query($query);
-			// 	$rr = $row->row();
-	
-			// 	$pc_nama = $rr->pc_nama;   
-			// 	$pd_id_divisi_lamar = $rr->pd_id_divisi_lamar;
-			// }
-				
+			
 			$data['judul']				= $judul;
 			$data['current_url']	= current_url();
 			$data['class']				= $this->router->fetch_class();
 			$data['method']				= $this->router->fetch_method();
-			// $data['hSQL']			  	= $hSQL;
 			$data['rNum']			  	= $rNum;
 			
-			$data['rec_pgwcalon']				= $this->db->query("SELECT * FROM public.pgw_calon ");
-
+			$data['rec_pgwcalon']								= $this->db->query("SELECT * FROM public.v_dt_pgw_calon ");
 			$data['pd_id_divisi_lamar'] 				= $pd_id_divisi_lamar;			
 			$data['rec_pgw_calon']      				= $this->db->query("SELECT * FROM public.v_dt_pgw_calon WHERE pc_id = ".$rNum);
 			$data['rec_pgw_keluarga']						= $this->db->query("SELECT * FROM public.pgw_keluarga WHERE pc_id = ".$rNum);
@@ -548,16 +571,9 @@ class Home extends CI_Controller {
 			$data['rec_pgw_kursus']							= $this->db->query("SELECT * FROM public.pgw_kursus WHERE pc_id = ".$rNum);
 			$data['rec_pgw_bahasa']							= $this->db->query("SELECT * FROM public.pgw_bahasa WHERE pc_id = ".$rNum);
 			$data['rec_pgw_pertanyaan']					= $this->db->query("SELECT * FROM public.pgw_pertanyaan WHERE pc_id = ".$rNum);
-
-			//pgw_kerja
-			//pgw_referensi_pro
-			//pgw_referensi_kerabat
-			//pgw_request
-			//pgw_kursus
-			//pgw_bahasa
-			//pgw_pertanyaan
-
-			$this->load->view('public/v_dataPribadi', $data);
+		}
+		
+		$this->load->view('public/v_dataCPeg', $data);
 	}
 
 	public function updateuser(){
@@ -573,15 +589,21 @@ class Home extends CI_Controller {
 		exit;
 	}
 
-	public function hapus($pc_id){
-		$this->db->delete('pgw_calon', ['pc_id' => $pc_id]);
-		redirect(base_url());
-	}
+	public function hapus_pgw(){
+		$rNum				= $this->input->get('rNum');
+			$_idcover = $this->db->get_where('pgw_calon', ['pc_id' => $rNum])->row();
+			$query    = $this->db->delete('pgw_calon', ['pc_id' => $rNum]);
 
-	public function hapus_test($pt_id){
-		$this->db->delete('pgw_test', ['pt_id' => $pt_id]);
-		redirect(base_url());
+			if($query){
+				unlink("foto_pgw/".$_idcover->pc_foto);
+			}
+		
+		// $this->db->delete('pgw_calon', ['pc_id' => $pc_id]);
+		// redirect(base_url('calonPgw'));
+		// $rNum				= $this->input->get('rNum');
+		// $this->load->model('M_pegawai');
+		// $this->M_pegawai->delete_table('public.pgw_calon', 'pc_id='.$rNum);
+		redirect(base_url('calonPgw'));
 	}
-
 
 }
