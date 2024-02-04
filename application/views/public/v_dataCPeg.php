@@ -246,634 +246,57 @@
     </section>
     <!-- /.content -->
 
-    
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <?php if($rNum > 0){ ?>
-              <!-- DATA PGW_CALON -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Data Umum</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                  </div>
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Ubah Status Pelamar</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                 </div>
-                <div class="card-body">
-                  <table id="example1" class="table  table-striped">
-                    <?php
-                      $no = 1;
-                      foreach ($rec_pgw_calon->result() as $r){
-                    ?>
-                      <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-                      <tr>
-                        <td width="20%"></td>	
-                        <td width="2%"></td>	
-                        <td align="left">
-                          <?php if(!empty($r->pc_foto)){ ?>
-                            <img src="<?php echo base_url().'foto_pgw/'.$r->pc_foto; ?>" class="img-thumbnail" width="150px" height="170px">
-                          <?php } ?>
-                        </td>
-                      </tr>
-                      <!-- <tr>
-                        <td collspan="3"><?php echo $r->pc_foto ?></td>
-                      </tr> -->
-                      <tr>	
-                        <td width="20%">Posisi yang dilamar</td>	
-                        <td width="2%">:</td>	
-                        <td><?php echo $r->pd_nama_divisi ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Status Lamaran</td>	
-                        <td>:</td>	
-                        <td><?php echo $r->pss_nama ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Nama Lengkap</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pc_nama ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>No. KTP</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pc_no_ktp ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Tempat Tanggal Lahir</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pc_tmp_lahir ?>, <?php echo $r->pc_tgl_lahir ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Alamat Rumah (KTP)</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pc_alamat_ktp ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>Alamat Rumah (Sekarang)</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pc_alamat_sekarang ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>No. Telepon</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pc_telp ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>Email</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pc_email ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>Jenis Kelamin</td>	
-                        <td>:</td>	
-                        <td>
-                          <?php if(($r->pc_gender) === 1){
-                              echo 'Laki-laki';
+              </div>
+              
+              <div class="card-body">
+                <?php echo form_open('Home/updateKolom/do_save/?rNum='.$pc_id); ?>
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label>Nama</label>
+                      <input type="text" name="pc_nama" class="form-control" value="<?php echo $pc_nama; ?>" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Status Lamaran</label>
+                      <select class="form-control" name="pss_id_status_seleksi">
+                        <?php
+                          foreach($pss_id_status_seleksi as $k){
+                            if(!empty($pc_id)){
+                              echo "<option value='$k->pss_id'";
+                              echo $record['pss_id_status_seleksi'] == $k->pss_id ? 'selected' : '';
+                              echo ">$k->pss_nama</option>";
                             }else{
-                              echo 'Wanita';
-                            } 
-                          ?>
-                        </td>
-                      </tr>	
-                      <tr>	
-                        <td>Agama</td>	
-                        <td>:</td>	
-                        <td><?php echo $r->pa_nama ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>Kewarganegaraan</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pc_kewarganegaraan ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Anak ke</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pc_anak_ke ?> dari <?php echo $r->pc_anak_ke_dari ?> bersaudara</td>
-                      </tr>	
-                      <tr>	
-                        <td>Status Perkawinan</td>	
-                        <td>:</td>
-                        <td><?php echo $r->psn_nama ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Jumlah anak</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pc_jumlah_anak ?></td>
-                      </tr>	
-
-                    <?php $no++; } ?>                
-                  </table>
-                </div>
-              </div>
-              <!-- DATA PGW_CALON -->
-              <!-- DATA PGW_KELUARGA -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Data Keluarga</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                              echo "<option value='$k->pss_id'";
+                              echo ">$k->pss_nama</option>";
+                            }                              
+                          }
+                        ?>
+                      </select>
+                    </div>
+                    
                   </div>
-                </div>
-                <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <?php
-                      $no = 1;
-                      foreach ($rec_pgw_keluarga->result() as $r){
-                    ?>
-                      <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-                      <tr>	
-                        <td width="20%">Nama</td>	
-                        <td width="2%">:</td>	
-                        <td><?php echo $r->pf_nama ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Hubungan</td>	
-                        <td>:</td>	
-                        <td><?php echo $r->pf_hubungan ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Tanggal Lahir</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pf_tgl_lahir ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>Pendidikan</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pf_pendidikan ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Pekerjaan</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pf_kerja ?></td>
-                      </tr>
-                      
-                      <tr>	
-                        <td collspan="3"></td>	
-                      </tr>	
-
-                    <?php $no++; } ?>                
-                  </table>
-                </div>
-              </div>
-              <!-- DATA PGW_KELUARGA -->
-              <!-- DATA PGW_PENDIDIKAN -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Riwayat Pendidikan</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                  <div class="box-footer" align="center">
+                    <input type="submit" class="btn btn-block btn-outline-primary" style="width:100px;" value="Submit">
+                    <input type="reset" class="btn btn-block btn-outline-warning" style="width:100px;" value="Reset" onclick="location.href='<?php echo base_url('user'); ?>'">
                   </div>
-                </div>
-                <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <?php
-                      $no = 1;
-                      foreach ($rec_pgw_pendidikan->result() as $r){
-                    ?>
-                      <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-                      <tr>	
-                        <td width="20%">Nama Instansi</td>	
-                        <td width="2%">:</td>	
-                        <td><?php echo $r->ppend_nama ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Alamat Instansi</td>	
-                        <td>:</td>
-                        <td><?php echo $r->ppend_alamat ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>Tingkat</td>	
-                        <td>:</td>
-                        <td><?php echo $r->ppend_tingkat ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Jurusan</td>	
-                        <td>:</td>
-                        <td><?php echo $r->ppend_jurusan ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Tahun Masuk</td>	
-                        <td>:</td>
-                        <td><?php echo $r->ppend_masuk ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Tahun Keluar</td>	
-                        <td>:</td>
-                        <td><?php echo $r->ppend_keluar ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Lulus / Tidak Lulus</td>	
-                        <td>:</td>	
-                        <td><?php echo $r->ppend_keterangan ?></td>
-                      </tr>
-                      
-                      <tr>	
-                        <td collspan="3"></td>	
-                      </tr>	
-
-                    <?php $no++; } ?>                
-                  </table>
-                </div>
+                </form>
               </div>
-              <!-- DATA PGW_PENDIDIKAN -->
-              <!-- DATA PGW_KERJA -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Riwayat Pekerjaan</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <?php
-                      $no = 1;
-                      foreach ($rec_pgw_kerja->result() as $r){
-                    ?>
-                      <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-                      <tr>	
-                        <td width="20%">Nama Perusahaan</td>	
-                        <td width="2%">:</td>	
-                        <td><?php echo $r->pk_nama ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Alamat Perusahaan</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pk_alamat ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>Divisi</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pk_divisi ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Jabatan</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pk_jabatan ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Tanggal Masuk</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pk_masuk ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Tanggal Keluar</td>	
-                        <td>:</td>
-                        <td><?php echo $r->pk_keluar ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Gaji Pokok</td>	
-                        <td>:</td>	
-                        <td><?php echo $r->pk_gapok ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Tunjangan Lainnya</td>	
-                        <td>:</td>	
-                        <td><?php echo $r->pk_tunjangan_lainnya ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Tugas Kerja</td>	
-                        <td>:</td>	
-                        <td><?php echo $r->pk_tugas_kerja ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Alasan Pindah</td>	
-                        <td>:</td>	
-                        <td><?php echo $r->pk_alasan_pindah ?></td>
-                      </tr>
-                      
-                      <tr>	
-                        <td collspan="3"></td>	
-                      </tr>	
 
-                    <?php $no++; } ?>                
-                  </table>
-                </div>
-              </div>
-              <!-- DATA PGW_KERJA -->
-              <!-- DATA PGW_REFERENSI_PRO -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Referensi Profesional</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <?php
-                      $no = 1;
-                      foreach ($rec_pgw_referensi_pro->result() as $r){
-                    ?>
-                      <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-                      <tr>	
-                        <td width="20%">Nama </td>	
-                        <td width="2%">:</td>	
-                        <td><?php echo $r->prp_nama ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Hubungan </td>	
-                        <td>:</td>
-                        <td><?php echo $r->prp_hubungan ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>Posisi / Jabatan</td>	
-                        <td>:</td>
-                        <td><?php echo $r->prp_jabatan ?></td>
-                      </tr>
-                      <tr>	
-                        <td>No. Telepon</td>	
-                        <td>:</td>
-                        <td><?php echo $r->prp_telp ?></td>
-                      </tr>
-                      
-                      <tr>	
-                        <td collspan="3"></td>	
-                      </tr>	
-
-                    <?php $no++; } ?>                
-                  </table>
-                </div>
-              </div>
-              <!-- DATA PGW_REFERENSI_PRO -->
-              <!-- DATA PGW_REFERENSI_KERABAT -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Referensi Kerabat</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <?php
-                      $no = 1;
-                      foreach ($rec_pgw_referensi_kerabat->result() as $r){
-                    ?>
-                      <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-                      <tr>	
-                        <td width="20%">Nama </td>	
-                        <td width="2%">:</td>	
-                        <td><?php echo $r->prk_nama ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Hubungan </td>	
-                        <td>:</td>
-                        <td><?php echo $r->prk_hubungan ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>Posisi / Jabatan</td>	
-                        <td>:</td>
-                        <td><?php echo $r->prk_jabatan ?></td>
-                      </tr>
-                      
-                      <tr>	
-                        <td collspan="3"></td>	
-                      </tr>	
-
-                    <?php $no++; } ?>                
-                  </table>
-                </div>
-              </div>
-              <!-- DATA PGW_REFERENSI_KERABAT -->
-              <!-- DATA PGW_REQUEST -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Minat</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <?php
-                      $no = 1;
-                      foreach ($rec_pgw_request->result() as $r){
-                    ?>
-                      <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-                      <tr>	
-                        <td width="40%">Minimum gaji yang diharapkan </td>	
-                        <td width="2%">:</td>	
-                        <td><?php echo $r->ppreq_gaji_min ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Kondisi kerja/tunjangan dan fasilitas yang diharapkan </td>	
-                        <td>:</td>
-                        <td><?php echo $r->ppreq_fasilitas ?></td>
-                      </tr>	
-                      <tr>	
-                        <td>Kapan bisa bergabung dengan Gema Insani?</td>	
-                        <td>:</td>
-                        <td><?php echo $r->ppreq_gabung ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Apakah Anda bersedia ditempatkan di luar Jakarta? </td>	
-                        <td>:</td>
-                        <td><?php echo $r->ppreq_penempatan ?></td>
-                      </tr>
-                      
-                      <tr>	
-                        <td collspan="3"></td>	
-                      </tr>	
-
-                    <?php $no++; } ?>                
-                  </table>
-                </div>
-              </div>
-              <!-- DATA PGW_REQUEST -->
-              <!-- DATA PGW_KURSUS -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Riwayat Kursus / Pelatihan</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <?php
-                      $no = 1;
-                      foreach ($rec_pgw_kursus->result() as $r){
-                    ?>
-                      <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-                      <tr>	
-                        <td width="20%">Nama Instansi </td>	
-                        <td width="2%">:</td>	
-                        <td><?php echo $r->ps_nama ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Tahun Masuk</td>	
-                        <td>:</td>
-                        <td><?php echo $r->ps_masuk ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Tahun Keluar </td>	
-                        <td>:</td>
-                        <td><?php echo $r->ps_keluar ?></td>
-                      </tr>	
-                      <tr>
-                        <td>Lulus / Tidak Lulus </td>	
-                        <td>:</td>
-                        <td><?php echo $r->ps_status ?></td>
-                      </tr>	
-                      
-                      <tr>	
-                        <td collspan="3"></td>	
-                      </tr>	
-
-                    <?php $no++; } ?>                
-                  </table>
-                </div>
-              </div>
-              <!-- DATA PGW_KURSUS -->
-              <!-- DATA PGW_BAHASA -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Kemampuan Bahasa</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <?php
-                      $no = 1;
-                      foreach ($rec_pgw_bahasa->result() as $r){
-                    ?>
-                      <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-                      <tr>	
-                        <td width="20%">Bahasa </td>	
-                        <td width="2%">:</td>	
-                        <td><?php echo $r->pb_nama ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Aktif / Pasif </td>	
-                        <td>:</td>
-                        <td><?php echo $r->pb_keterangan ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Tertulis </td>	
-                        <td>:</td>
-                        <td>
-                          <?php if(($r->pb_tulis) === "1"){
-                            echo "Sangat Baik";
-                          }elseif(($r->pb_tulis) === "2"){
-                            echo "Baik";
-                          }elseif(($r->pb_tulis) === "3"){
-                            echo "Cukup Baik";
-                          }else{
-                            echo "Kurang";
-                          } ?>
-                        </td>
-                      </tr>	
-                      <tr>
-                        <td>Lisan </td>	
-                        <td>:</td>
-                        <td>
-                          <?php if(($r->pb_lisan) === "1"){
-                            echo "Sangat Baik";
-                          }elseif(($r->pb_lisan) === "2"){
-                            echo "Baik";
-                          }elseif(($r->pb_lisan) === "3"){
-                            echo "Cukup Baik";
-                          }else{
-                            echo "Kurang";
-                          } ?>
-                        </td>
-                      </tr>	
-                      
-                      <tr>	
-                        <td collspan="3"></td>	
-                      </tr>	
-
-                    <?php $no++; } ?>                
-                  </table>
-                </div>
-              </div>
-              <!-- DATA PGW_BAHASA -->
-              <!-- DATA PGW_PERTANYAAN -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Informasi Tambahan</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <?php
-                      $no = 1;
-                      foreach ($rec_pgw_pertanyaan->result() as $r){
-                    ?>
-                      <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-                      <tr>	
-                        <td width="40%">Hobi/aktivitas yang dilakukan saat waktu senggang </td>	
-                        <td width="2%">:</td>	
-                        <td><?php echo $r->pp_hobi ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Apakah Anda buta warna? </td>	
-                        <td>:</td>
-                        <td><?php echo $r->pp_buta_warna ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Penyakit yang pernah menyebabkan Anda dirawat di rumah sakit. </td>	
-                        <td>:</td>
-                        <td><?php echo $r->pp_penyakit ?></td>
-                      </tr>
-                      <tr>	
-                        <td>Dirawat berapa lama? </td>	
-                        <td>:</td>
-                        <td><?php echo $r->pp_lama_rawat ?></td>
-                      </tr>
-                      <tr>
-                        <td>Penyakit tertentu yang masih dialami saat ini </td>	
-                        <td>:</td>
-                        <td><?php echo $r->pp_sakit_turunan ?></td>
-                      </tr>
-                      <tr>
-                        <td>Apakah Anda pernah terlibat tindak kriminal yang menyebabkan Anda berurusan dengan hukum? </td>	
-                        <td>:</td>
-                        <td><?php echo $r->pp_kriminal ?></td>
-                      </tr>	
-                      <tr>
-                        <td>Kapan Anda terlibat tindak kriminal tersebut? </td>	
-                        <td>:</td>
-                        <td><?php echo $r->pp_kriminal_waktu ?></td>
-                      </tr>
-                      <tr>
-                        <td>Mengapa anda melakukan tindak kriminal tersebut? </td>	
-                        <td>:</td>
-                        <td><?php echo $r->pp_kriminal_alasan ?></td>
-                      </tr>	
-                      <tr>
-                        <td>Organisasi sosial yang pernah Anda ikuti </td>	
-                        <td>:</td>
-                        <td><?php echo $r->pp_organisasi ?></td>
-                      </tr>
-                      
-                      <tr>	
-                        <td collspan="3"></td>	
-                      </tr>	
-
-                    <?php $no++; } ?>                
-                  </table>
-                </div>
-              </div>
-              <!-- DATA PGW_PERTANYAAN -->
-
-            <?php } ?>
-            <!-- /.card -->
+            </div>
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
 
     <!-- Main content -->
     <section class="content">
@@ -926,7 +349,11 @@
                             } 
                           ?>
                         </td>
+                        <!-- <td><?php echo anchor('Home/updateKolom/do_update/?rNum='.$r->pc_id, 'Edit')?></td> -->
                         <td>
+                          <a href="<?php echo base_url('Home/updateKolom/do_update/?rNum='.$r->pc_id ) ?>" target="blank">
+                            <i class="fas fa-pen-nib"></i>
+                          </a>
                           <a href="<?php echo base_url('Home/exportPdf/?rNum='.$r->pc_id.'&pc_nama='.$r->pc_nama.'&p_lamar='.$r->pd_nama_divisi) ?>" target="blank">
                             <i class="fas fa-file-pdf"></i>
                           </a>

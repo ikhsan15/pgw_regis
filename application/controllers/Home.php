@@ -545,8 +545,45 @@ class Home extends CI_Controller {
 		$pdf->Output($pc_nama.' - '.$p_lamar.'.pdf', 'I');
 	}
 
+	public function updateKolom($mode=''){
+		$pc_id									= $this->input->get('rNum');
+		$pc_nama   							= '';
+		$pss_id_status_seleksi  = '';
+
+		// die($rNum);
+		
+		if($mode=='do_update'){
+			$query  = "SELECT * FROM public.pgw_calon WHERE pc_id = ".$pc_id;
+			$row    = $this->db->query($query);
+			$rr     = $row->row();
+
+			$pc_nama   							= $rr->pc_nama;
+			$pss_id_status_seleksi  = $rr->pss_id_status_seleksi;
+		}
+		elseif($mode == 'do_save'){
+			$pc_nama   							= $this->input->post('pc_nama');
+			$pss_id_status_seleksi  = $this->input->post('pss_id_status_seleksi');
+
+			$data= array(
+				// 'pc_nama'									=> "'".pg_escape_string($pc_nama)."'",
+				'pc_nama'     						=> "'".$pc_nama."'",
+				'pss_id_status_seleksi'		=> "'".$pss_id_status_seleksi."'"
+			);
+
+			// die(print_r($data));
+
+			$this->M_Pegawai->updateKolomTertentu($pc_id, $pc_nama, $pss_id_status_seleksi);
+		}
+		$data['pc_id'] 		 = $pc_id;
+		$data['pc_nama']   = $pc_nama;
+		$data['pss_id_status_seleksi'] = $this->M_Pegawai->tampil_data()->result();
+		$data['rec_pgwcalon']					= $this->db->query("SELECT * FROM public.v_dt_pgw_calon ");
+
+		$this->load->view('public/v_dataCPeg', $data);
+	}
+
 	public function formawal($mode=''){
-		if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'Magang'){
+		if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'hcsm'){
 			// die($pc_id);
 			$judul			= 'Data Pegawai';
 			$rNum				= $this->input->get('rNum');
@@ -567,13 +604,13 @@ class Home extends CI_Controller {
 			$data['rec_pgw_kerja']							= $this->db->query("SELECT * FROM public.pgw_kerja WHERE pc_id = ".$rNum);
 			$data['rec_pgw_referensi_pro']			= $this->db->query("SELECT * FROM public.pgw_referensi_pro WHERE pc_id = ".$rNum);
 			$data['rec_pgw_referensi_kerabat']	= $this->db->query("SELECT * FROM public.pgw_referensi_kerabat WHERE pc_id = ".$rNum);
-			$data['rec_pgw_request']						= $this->db->query("SELECT * FROM public.pgw_kursus WHERE pc_id = ".$rNum);
+			$data['rec_pgw_request']						= $this->db->query("SELECT * FROM public.pgw_request WHERE pc_id = ".$rNum);
 			$data['rec_pgw_kursus']							= $this->db->query("SELECT * FROM public.pgw_kursus WHERE pc_id = ".$rNum);
 			$data['rec_pgw_bahasa']							= $this->db->query("SELECT * FROM public.pgw_bahasa WHERE pc_id = ".$rNum);
 			$data['rec_pgw_pertanyaan']					= $this->db->query("SELECT * FROM public.pgw_pertanyaan WHERE pc_id = ".$rNum);
 		}
 		
-		$this->load->view('public/v_dataCPeg', $data);
+		$this->load->view('public/v_dtLengkapCPeg', $data);
 	}
 
 	public function updateuser(){

@@ -35,34 +35,20 @@ class M_Pegawai extends CI_Model{
     return $list;
   }
 
-  // public function getPdf($pc_id){    
-  //   $this->db->select('*');
-  //   $this->db->from('pgw_calon');
-  //   $this->db->where('pc_id', $pc_id);
-  //   $query = $this->db->get();
-  //   return $query->result();
-  // }
+  function updateKolomTertentu($pc_id, $pc_nama, $pss_id_status_seleksi) {
+    $escaped_input = $this->db->escape($pc_nama);
+    // Mengatur dua kolom yang ingin diupdate dan nilainya
+    $this->db->set('pc_nama', $escaped_input);
+    $this->db->set('pss_id_status_seleksi', $pss_id_status_seleksi);
 
-  public function getPdf($pc_id){    
-    $this->db->select('*');
-    $this->db->from('pgw_calon');
     $this->db->where('pc_id', $pc_id);
-    $query = $this->db->get();
-    return $query->result();
-  }
-
-  public function getPdfKel($pc_id){    
-    $this->db->select('*');
-    $this->db->from('pgw_keluarga');
-    $this->db->where('pc_id', $pc_id);
-    $query = $this->db->get();
-    return $query->result();
+    $this->db->update('public.pgw_calon');
   }
 
   function tampil_data(){
     // return $this->db->get('kategori');
-    $query = "SELECT * FROM pgw_calon
-              ORDER BY pc_id
+    $query = "SELECT * FROM pgw_status_seleksi
+              ORDER BY pss_id
               ";
     return $this->db->query($query);
   }

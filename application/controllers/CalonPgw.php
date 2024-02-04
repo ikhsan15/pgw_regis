@@ -11,7 +11,7 @@ class CalonPgw extends CI_Controller {
   }
 	
 	function index(){
-		if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'Magang'){
+		if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'hcsm'){
       $this->f_pegawai();
     }
     else{
@@ -22,7 +22,7 @@ class CalonPgw extends CI_Controller {
 	}
 
   function f_pegawai($mode = '', $pc_id=0){
-		if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'Magang'){
+		if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'hcsm'){
 			$judul			= 'Data Pegawai';
 			// $hSQL				= str_replace(' ', '+', $this->input->get('hSQL'));
 			$rNum				= $this->input->get('rNum');

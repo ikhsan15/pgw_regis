@@ -39,9 +39,9 @@ class Login extends CI_Controller {
             $this->session->set_userdata('name', $name);
             redirect('CalonPgw');
 
-          }else if($x['user_akses'] == '2'){ //Magang
+          }else if($x['user_akses'] == '2'){ //hcsm
             $name = $x['user_name'];
-            $this->session->set_userdata('access', 'Magang');
+            $this->session->set_userdata('access', 'hcsm');
             $this->session->set_userdata('id', $id);
             $this->session->set_userdata('name', $name);
             redirect('CalonPgw');

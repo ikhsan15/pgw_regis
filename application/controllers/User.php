@@ -10,7 +10,7 @@ class user extends CI_Controller{
   }
 
   function index(){
-    if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'Magang'){
+    if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'hcsm'){
       $this->formawal();
     }
     else{
