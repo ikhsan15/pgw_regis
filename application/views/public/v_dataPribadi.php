@@ -206,14 +206,20 @@
               <li class="nav-item">
                 <a href="<?php echo base_url('CalonPgw'); ?>" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>List Data Calon Pegawai</p>
+                  <p>Data Calon Pegawai</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('Home/form_divisi'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Posisi Terbuka</p>
                 </a>
               </li>
               <?php if($this->session->userdata('access') == 'Administrator'){ ?>
               <li class="nav-item">
                 <a href="<?php echo base_url('user'); ?>" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>User</p>
+                  <p>Data User</p>
                 </a>
               </li>
               <?php } ?>

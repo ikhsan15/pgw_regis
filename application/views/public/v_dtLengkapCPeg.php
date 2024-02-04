@@ -198,7 +198,7 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Dashboard
+                Menu Dashboard
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -213,6 +213,12 @@
                 <a href="" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Detail Calon Pegawai</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('Home/form_divisi'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Posisi Terbuka</p>
                 </a>
               </li>
               <?php if($this->session->userdata('access') == 'Administrator'){ ?>
@@ -239,12 +245,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Calon Pegawai</h1>
+            <h1>Detail Calon Pegawai</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Data Calon Pegawai</li>
+              <li class="breadcrumb-item active">Detail Calon Pegawai</li>
             </ol>
           </div>
         </div>

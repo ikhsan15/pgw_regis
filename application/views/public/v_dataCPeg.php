@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | DataTables</title>
+  <title>SI Calon Pegawai GIP</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -198,7 +198,7 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Calon Pegawai
+                Menu Dashboard
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -206,7 +206,13 @@
               <li class="nav-item">
                 <a href="<?php echo base_url('CalonPgw'); ?>" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>List Data Calon Pegawai</p>
+                  <p>Calon Pegawai</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('Home/form_divisi'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Posisi Terbuka</p>
                 </a>
               </li>
               <?php if($this->session->userdata('access') == 'Administrator'){ ?>
@@ -233,12 +239,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Calon Pegawai</h1>
+            <h1>Calon Pegawai</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Data Calon Pegawai</li>
+              <li class="breadcrumb-item active">Calon Pegawai</li>
             </ol>
           </div>
         </div>
@@ -253,7 +259,7 @@
           <div class="col-12">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Ubah Status Pelamar</h3>
+                <h3 class="card-title">Status Pelamar</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                 </div>
@@ -287,7 +293,7 @@
                   </div>
                   <div class="box-footer" align="center">
                     <input type="submit" class="btn btn-block btn-outline-primary" style="width:100px;" value="Submit">
-                    <input type="reset" class="btn btn-block btn-outline-warning" style="width:100px;" value="Reset" onclick="location.href='<?php echo base_url('user'); ?>'">
+                    <input type="reset" class="btn btn-block btn-outline-warning" style="width:100px;" value="Reset" onclick="location.href='<?php echo base_url('CalonPgw'); ?>'">
                   </div>
                 </form>
               </div>
@@ -351,13 +357,13 @@
                         </td>
                         <!-- <td><?php echo anchor('Home/updateKolom/do_update/?rNum='.$r->pc_id, 'Edit')?></td> -->
                         <td>
-                          <a href="<?php echo base_url('Home/updateKolom/do_update/?rNum='.$r->pc_id ) ?>" target="blank">
+                          <a href="<?php echo base_url('Home/updateKolom/do_update/?rNum='.$r->pc_id ) ?>" >
                             <i class="fas fa-pen-nib"></i>
                           </a>
                           <a href="<?php echo base_url('Home/exportPdf/?rNum='.$r->pc_id.'&pc_nama='.$r->pc_nama.'&p_lamar='.$r->pd_nama_divisi) ?>" target="blank">
                             <i class="fas fa-file-pdf"></i>
                           </a>
-                          <a href="<?php echo base_url('Home/formawal/?rNum=').$r->pc_id ?>">
+                          <a href="<?php echo base_url('Home/dashboardPgw/?rNum=').$r->pc_id ?>">
                             <i class="fas fa-eye"></i>
                           </a>
                           <a href="<?php echo base_url('Home/hapus_pgw/?rNum=').$r->pc_id ?>">
@@ -425,8 +431,6 @@
 <script src="<?php echo base_url('/assets/adminlte3/plugins/datatables-buttons/js/buttons.colVis.min.js '); ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('/assets/adminlte3/dist/js/adminlte.min.js '); ?>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url('/assets/adminlte3/dist/js/demo.js '); ?>"></script>
 <!-- Page specific script -->
 
 <script src="<?php echo base_url('/assets/js/v_data.js'); ?>"></script>

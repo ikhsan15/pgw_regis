@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | DataTables</title>
+  <title>SI Calon Pegawai GIP</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -198,7 +198,7 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Tables
+                Menu Dashboard
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -206,12 +206,18 @@
               <li class="nav-item">
                 <a href="<?php echo base_url('CalonPgw'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>List Data Calon Pegawai</p>
+                  <p>Calon Pegawai</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('Home/form_divisi'); ?>" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Posisi Terbuka</p>
                 </a>
               </li>
               <?php if($this->session->userdata('access') == 'Administrator'){ ?>
               <li class="nav-item">
-                <a href="<?php echo base_url('user'); ?>" class="nav-link active">
+                <a href="<?php echo base_url('user'); ?>" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>User</p>
                 </a>
@@ -233,12 +239,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data User</h1>
+            <h1>Posisi Terbuka</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">User</li>
+              <li class="breadcrumb-item active">Posisi Terbuka</li>
             </ol>
           </div>
         </div>
@@ -253,7 +259,7 @@
           <div class="col-md-12">
             <div class="card card-primary shadow-none">
               <div class="card-header">
-                <h3 class="card-title">Form Tambah Data User</h3>
+                <h3 class="card-title">Form Data Posisi Terbuka</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -263,47 +269,20 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <?php echo form_open('user/formawal/do_save/'.$user_id); ?>
-                  <div class="row">
-                    <div class="form-group col-md-6">
-                      <label>Username</label>
-                      <input type="text" name="u_name" class="form-control" value="<?php echo $u_name; ?>" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label>Email</label>
-                      <input type="email" name="u_email" class="form-control" value="<?php echo $u_email; ?>" required>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-md-6">
-                      <label>Password</label>
-                      <div class="input-group">
-                        <input type="password" name="u_pass" id="password-field" class="form-control" value="<?php echo $u_pass; ?>" required />
-                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password" ></span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- <div class="form-group">
-                    <input name="pass" id="password-field" type="password" class="form-control" placeholder="Password" required />
-                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password" ></span>
-                  </div> -->
+                <?php echo form_open('Home/form_divisi/do_save/'.$pd_id); ?>
 
                   <div class="row">
                     <div class="form-group col-md-6">
-                      <label>User Akses</label>
-                      <input type="text" name="u_akses" class="form-control" value="<?php echo $u_akses; ?>">
+                      <label>Nama Posisi</label>
+                      <input type="text" name="pd_nama_divisi" class="form-control" value="<?php echo $pd_nama_divisi; ?>" required>
                     </div>
                     <div class="form-group col-md-6">
-                      <label>User Status</label>
-                      <input type="text" name="u_status" class="form-control" value="<?php echo $u_status; ?>">
+                      <label for=""></label>
+                      <input type="submit" class="btn btn-block btn-outline-primary" style="width:100px;" value="Submit">
+                      <!-- <input type="reset" class="btn btn-block btn-outline-warning" style="width:100px;" value="Reset" onclick="location.href='<?php echo base_url('Home/form_divisi'); ?>'"> -->
                     </div>
                   </div>
-                  <div class="box-footer" align="center">
-                    <input type="submit" class="btn btn-block btn-outline-primary" style="width:100px;" value="Submit">
-                    <input type="reset" class="btn btn-block btn-outline-warning" style="width:100px;" value="Reset" onclick="location.href='<?php echo base_url('user'); ?>'">
-                  </div>
-
+             
                 </form>
               </div>
               <!-- /.card-body -->
@@ -324,7 +303,7 @@
           <div class="col-12">
             <div class="card card-primary shadow-none">
               <div class="card-header">
-                <h3 class="card-title">Data User</h3>
+                <h3 class="card-title">Data Posisi Terbuka</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -338,36 +317,24 @@
                   <thead>
                     <tr>
                       <th>No. </th>
-                      <th>Username</th>
-                      <th>Email</th>
-                      <th>Password</th>
-                      <th>User Akses</th>
-                      <th>User Status</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
+                      <th>ID</th>
+                      <th>Nama Posisi</th>
+                      <th>Ubah</th>
+                      <th>Hapus</th>
                     </tr>
                   </thead>
                   <tbody>
 
                     <?php
                       $no = 1;
-                      foreach ($record->result() as $r){
+                      foreach ($dt_div->result() as $r){
                     ?>
                       <tr>
                         <td><?php echo $no ?></td>
-                        <td><?php echo $r->user_name ?></td>
-                        <td><?php echo $r->user_email ?></td>
-                        <!-- <td><php echo $r->user_password ?></td> -->
-                        <td data-title="Password">
-                          <input name="viewPass" type="password" value="<?php echo $r->user_password ?>" readonly/>
-                          <button type="button" class="btn btn-default" name="dynamic">
-                            <span class="fa fa-eye" aria-hidden="true"></span>
-                          </button>
-                        </td>                                                  
-                        <td><?php echo $r->user_akses ?></td>
-                        <td><?php echo $r->user_status ?></td>
-                        <td><?php echo anchor('user/formawal/do_update/'.$r->user_id, 'Edit')?></td>
-                        <td><?php echo anchor('user/formawal/do_delete/'.$r->user_id, 'Delete') ?></td>
+                        <td><?php echo $r->pd_id ?></td>
+                        <td><?php echo $r->pd_nama_divisi ?></td>
+                        <td><?php echo anchor('Home/form_divisi/do_update/'.$r->pd_id, 'Ubah')?></td>
+                        <td><?php echo anchor('Home/form_divisi/do_delete/'.$r->pd_id, 'Hapus') ?></td>
                       </tr>
                     <?php
                         $no++;
@@ -428,8 +395,6 @@
 <script src="<?php echo base_url('/assets/adminlte3/plugins/datatables-buttons/js/buttons.colVis.min.js '); ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('/assets/adminlte3/dist/js/adminlte.min.js '); ?>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url('/assets/adminlte3/dist/js/demo.js '); ?>"></script>
 <!-- Page specific script -->
 
 <script src="<?php echo base_url('/assets/js/v_data.js'); ?>"></script>

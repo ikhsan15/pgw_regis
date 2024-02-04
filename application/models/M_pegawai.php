@@ -53,6 +53,22 @@ class M_Pegawai extends CI_Model{
     return $this->db->query($query);
   }
 
+  function show_dt_pos_terbuka(){
+    // return $this->db->get('kategori');
+    $query = "SELECT * FROM public.pgw_divisi
+              ORDER BY pd_id DESC
+              ";
+    return $this->db->query($query);
+  }
+
+  function insert($data){
+    $this->db->insert('public.pgw_divisi', $data);
+  }
+  function edit($data, $pd_id){
+    $this->db->where('pd_id', $pd_id);
+    $this->db->update('public.pgw_divisi', $data);
+  }
+
   function getData(){
 		$data_siswa = $this->db->get('pgw_calon');
 		return $data_siswa->result();

@@ -195,45 +195,6 @@ class CalonPgw extends CI_Controller {
 		$this->load->view('public/v_dataCPeg', $data);
 	}
 
-	function f_open_div($mode='', $pd_id=0){
-    if($this->session->userdata('access') == 'Administrator'){
-      $u_name   = '';
-
-      if($mode=='do_update'){
-        $query  = "select * from public.pgw_divisi where pd_id = ".$pd_id;
-        $row    = $this->db->query($query);
-        $rr     = $row->row();
-
-        $u_name   = $rr->user_name;
-      }
-      elseif($mode == 'do_save'){
-        $u_name   = $this->input->post('u_name');
-
-        $data= array(
-          'user_name'     => "'".$u_name."'"
-        );
-
-        if($pd_id > 0){       
-          $this->M_User->edit($data, $pd_id);
-        }else{
-          $this->M_User->insert($data);
-        }
-        redirect('user');
-      }
-      elseif($mode == 'do_delete'){
-        // die(print_r('asdadsad'));
-        // $this->M_User->delete($data, $pd_id);
-        $this->db->delete('public.user', ['pd_id' => $pd_id]);
-        redirect('user');
-      }
-      
-      $data['pd_id']  = $pd_id;
-      $data['u_name']   = $u_name;
-      $data['record']   = $this->M_User->show_user();
-    }
-    $this->load->view('public/v_dataDivisi', $data);
-  }
-
 }
 
 

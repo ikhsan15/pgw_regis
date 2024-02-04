@@ -21,7 +21,7 @@ class Home extends CI_Controller {
 	}
 
 	public function f_pegawai($mode = ''){
-		$judul			= 'Data Pegawai';
+		$judul			= 'SI Calon Pegawai GIP';
 		// $hSQL				= str_replace(' ', '+', $this->input->get('hSQL'));
 		$rNum				= $this->input->get('rNum');
 		// $rNum2			= $this->input->get('rNum2');
@@ -42,6 +42,7 @@ class Home extends CI_Controller {
 		$pc_anak_ke						= '';
 		$pc_anak_ke_dari			= '';
 		$psn_id_status_nikah	= '';
+		$pss_id_status_seleksi =  1;
 		$pc_jumlah_anak				= '';
 
 		//pgw_keluarga
@@ -164,6 +165,7 @@ class Home extends CI_Controller {
 						'pc_anak_ke_dari'			=> $inp_pc_anak_ke_dari,
 						'psn_id_status_nikah'	=> $inp_psn_id_status_nikah,
 						'pc_jumlah_anak'			=> $inp_pc_jumlah_anak,
+						'pss_id_status_seleksi' => $pss_id_status_seleksi,
 						'pc_tgl_lamar'        => 'now()',
 					);
 					// die(print_r($data));
@@ -431,6 +433,7 @@ class Home extends CI_Controller {
 		$data['pc_anak_ke_dari']			= $pc_anak_ke_dari;
 		$data['list_status_nikah']		= $this->M_Pegawai->show_combo("public.pgw_status_nikah", "psn_id", "psn_nama", "psn_id > 0", "psn_nama", $psn_nama);
 		$data['pc_jumlah_anak']				= $pc_jumlah_anak;
+		$data['pss_id_status_seleksi'] = $pss_id_status_seleksi;
 		$data['pc_tgl_lamar']					= $pc_tgl_lamar;
 		$data['pc_foto']							= $pc_foto;
 
@@ -546,43 +549,45 @@ class Home extends CI_Controller {
 	}
 
 	public function updateKolom($mode=''){
-		$pc_id									= $this->input->get('rNum');
-		$pc_nama   							= '';
-		$pss_id_status_seleksi  = '';
+		if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'hcsm'){
+			$pc_id									= $this->input->get('rNum');
+			$pc_nama   							= '';
+			$pss_id_status_seleksi  = '';
 
-		// die($rNum);
-		
-		if($mode=='do_update'){
-			$query  = "SELECT * FROM public.pgw_calon WHERE pc_id = ".$pc_id;
-			$row    = $this->db->query($query);
-			$rr     = $row->row();
+			// die($rNum);
+			
+			if($mode=='do_update'){
+				$query  = "SELECT * FROM public.pgw_calon WHERE pc_id = ".$pc_id;
+				$row    = $this->db->query($query);
+				$rr     = $row->row();
 
-			$pc_nama   							= $rr->pc_nama;
-			$pss_id_status_seleksi  = $rr->pss_id_status_seleksi;
+				$pc_nama   							= $rr->pc_nama;
+				$pss_id_status_seleksi  = $rr->pss_id_status_seleksi;
+			}
+			elseif($mode == 'do_save'){
+				$pc_nama   							= $this->input->post('pc_nama');
+				$pss_id_status_seleksi  = $this->input->post('pss_id_status_seleksi');
+
+				$data= array(
+					// 'pc_nama'									=> "'".pg_escape_string($pc_nama)."'",
+					'pc_nama'     						=> "'".$pc_nama."'",
+					'pss_id_status_seleksi'		=> "'".$pss_id_status_seleksi."'"
+				);
+
+				// die(print_r($data));
+
+				$this->M_Pegawai->updateKolomTertentu($pc_id, $pc_nama, $pss_id_status_seleksi);
+				redirect(base_url('CalonPgw'));
+			}
+			$data['pc_id'] 		 = $pc_id;
+			$data['pc_nama']   = $pc_nama;
+			$data['pss_id_status_seleksi'] = $this->M_Pegawai->tampil_data()->result();
+			$data['rec_pgwcalon']					= $this->db->query("SELECT * FROM public.v_dt_pgw_calon ");
 		}
-		elseif($mode == 'do_save'){
-			$pc_nama   							= $this->input->post('pc_nama');
-			$pss_id_status_seleksi  = $this->input->post('pss_id_status_seleksi');
-
-			$data= array(
-				// 'pc_nama'									=> "'".pg_escape_string($pc_nama)."'",
-				'pc_nama'     						=> "'".$pc_nama."'",
-				'pss_id_status_seleksi'		=> "'".$pss_id_status_seleksi."'"
-			);
-
-			// die(print_r($data));
-
-			$this->M_Pegawai->updateKolomTertentu($pc_id, $pc_nama, $pss_id_status_seleksi);
-		}
-		$data['pc_id'] 		 = $pc_id;
-		$data['pc_nama']   = $pc_nama;
-		$data['pss_id_status_seleksi'] = $this->M_Pegawai->tampil_data()->result();
-		$data['rec_pgwcalon']					= $this->db->query("SELECT * FROM public.v_dt_pgw_calon ");
-
 		$this->load->view('public/v_dataCPeg', $data);
 	}
 
-	public function formawal($mode=''){
+	public function dashboardPgw($mode=''){
 		if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'hcsm'){
 			// die($pc_id);
 			$judul			= 'Data Pegawai';
@@ -613,18 +618,42 @@ class Home extends CI_Controller {
 		$this->load->view('public/v_dtLengkapCPeg', $data);
 	}
 
-	public function updateuser(){
-		// POST values
-		$id = $this->input->post('id');
-		$field = $this->input->post('field');
-		$value = $this->input->post('value');
+	function form_divisi($mode='', $pd_id=0){
+    if($this->session->userdata('access') == 'Administrator' || $this->session->userdata('access') == 'hcsm'){
+      $pd_nama_divisi   = '';
 
-		// Update records
-		$this->M_Pegawai->updateUser($id, $field, $value);
+      if($mode=='do_update'){
+        $query  = "SELECT * FROM public.pgw_divisi WHERE pd_id = ".$pd_id;
+        $row    = $this->db->query($query);
+        $rr     = $row->row();
 
-		echo 1;
-		exit;
-	}
+        $pd_nama_divisi   = $rr->pd_nama_divisi;
+      }
+      elseif($mode == 'do_save'){
+        $pd_nama_divisi   = $this->input->post('pd_nama_divisi');
+
+        $data= array(
+          'pd_nama_divisi'     => "'".$pd_nama_divisi."'"
+        );
+
+        if($pd_id > 0){       
+          $this->M_Pegawai->edit($data, $pd_id);
+        }else{
+          $this->M_Pegawai->insert($data);
+        }
+				redirect('Home/form_divisi');
+      }
+      elseif($mode == 'do_delete'){
+        $this->db->delete('public.pgw_divisi', ['pd_id' => $pd_id]);
+        redirect('Home/form_divisi');
+      }
+      
+      $data['pd_id']  					= $pd_id;
+      $data['pd_nama_divisi']   = $pd_nama_divisi;
+			$data['dt_div']						= $this->db->query("SELECT * FROM public.pgw_divisi ORDER BY pd_id DESC");
+    }
+    $this->load->view('public/v_dataDivisi', $data);
+  }
 
 	public function hapus_pgw(){
 		$rNum				= $this->input->get('rNum');

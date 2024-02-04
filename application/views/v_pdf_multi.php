@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | DataTables</title>
+  <title>SI Calon Pegawai GIP</title>
 
   <style>
     td {
@@ -30,7 +30,7 @@
   </tr>
 </table>
 
-<table border="1" cellspacing="" cellpadding="3">
+<table  cellspacing="" cellpadding="3">
   <?php foreach ($table1 as $r){ ?>
     <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
     <tr style="display:table-row">
@@ -60,7 +60,7 @@
 </table>
 
 <!-- A. PRIBADI -->
-<table border="1" cellspacing="" cellpadding="3">
+<table  cellspacing="" cellpadding="3">
   <?php foreach ($table1 as $r){ ?>
     <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
     <tr style="display:table-row">
@@ -241,14 +241,14 @@
 </table>
 
 <!-- D. PEKERJAAN -->
-<table border="1" cellspacing="" cellpadding="3">
+<table  cellspacing="" cellpadding="3">
+  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+  <tr style="display:table-row">
+    <th colspan="4" style="font-size: 14px" align="left">
+      D. Riwayat Pekerjaan
+    </th>
+  </tr>
   <?php foreach ($table4 as $r){ ?>
-    <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-    <tr style="display:table-row">
-      <th colspan="4" style="font-size: 14px" align="left">
-        D. Riwayat Pekerjaan
-      </th>
-    </tr>
     <tr>
       <td width="4%"></td>
       <td width="30%">Nama Perusahaan</td>	
@@ -378,7 +378,7 @@
 </table>
 
 <!-- G. MINAT -->
-<table border="1" cellspacing="" cellpadding="3">
+<table  cellspacing="" cellpadding="3">
   <?php foreach ($table7 as $r){ ?>
     <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
     <tr style="display:table-row">
