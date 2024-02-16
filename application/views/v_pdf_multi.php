@@ -15,7 +15,7 @@
 <body>
 
 <br>
-<table border="1" cellspacing="" cellpadding="3">
+<table cellspacing="" cellpadding="3">
   <tr>
     <td width="25%" align="center"><img src="<?php echo base_url().'foto_pgw/logo/gip_horizontal.png'; ?>" width="80px" height="40px"></td>
     <td width="5%"></td>
@@ -60,14 +60,10 @@
 </table>
 
 <!-- A. PRIBADI -->
+<h3>A. Data Pribadi</h3>
 <table  cellspacing="" cellpadding="3">
   <?php foreach ($table1 as $r){ ?>
     <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-    <tr style="display:table-row">
-      <th colspan="4" style="font-size: 14px" align="left">
-        A. Data Pribadi
-      </th>
-    </tr>
     <tr>
       <td width="4%"></td>
       <td width="30%">Nama Lengkap</td>	
@@ -153,74 +149,57 @@
       <td>:</td>
       <td><?php echo $r->pc_jumlah_anak ?></td>
     </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
     
   <?php } ?>  
 </table>
+<br>
 
 <!-- B. KELUARGA -->
+<h3>B. Keluarga</h3>
 <table border="1" cellspacing="" cellpadding="3">
-  <tr style="display:table-row">
+  <!-- <tr style="display:table-row">
     <th colspan="4" style="font-size: 14px" align="left">
       B. Keluarga
     </th>
-  </tr>
-  <?php foreach ($table2 as $r){ ?>
+  </tr> -->
     <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
     <tr style="display:table-row">
-      <td width="4%"></td>
+      <td width="5%">No.</td>
       <td width="20%" align="center">Hubungan</td>
       <td width="20%" align="center">Nama</td>	
-      <td width="16%" align="center">Tanggal Lahir</td>	
+      <td width="15%" align="center">Tanggal Lahir</td>	
       <td width="20%" align="center">Pendidikan</td>
       <td width="20%" align="center">Pekerjaan</td>
     </tr>
+  <?php $no = 1; foreach ($table2 as $r){ ?>
     <tr>
-      <td></td>
+      <td><?php echo $no ?></td>
       <td><?php echo $r->pf_hubungan ?></td>
       <td><?php echo $r->pf_nama ?></td>
       <td><?php echo $r->pf_tgl_lahir ?></td>
       <td><?php echo $r->pf_pendidikan ?></td>
       <td><?php echo $r->pf_kerja ?></td>
     </tr>
-
-    <br>
-  <?php } ?>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+  <?php $no++; } ?>
 </table>
+<br>
 
 <!-- C. PENDIDIKAN -->
+<h3>C. Pendidikan</h3>
 <table border="1" cellspacing="" cellpadding="3">
-  <tr style="display:table-row">
-    <th colspan="4" style="font-size: 14px" align="left">
-      C. Pendidikan
-    </th>
-  </tr>
   <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
   <tr style="display:table-row">
-    <td width="4%"></td>
+    <td width="5%">No.</td>
     <td width="16%" align="center">Tingkat</td>
     <td width="16%" align="center">Instansi</td>	
     <td width="16%" align="center">Jurusan</td>	
     <td width="16%" align="center">Tahun Masuk</td>
     <td width="16%" align="center">Tahun Keluar</td>
-    <td width="16%" align="center">Keterangan</td>
+    <td width="15%" align="center">Keterangan</td>
   </tr>
-  <?php foreach ($table3 as $r){ ?>
+  <?php $no = 1; foreach ($table3 as $r){ ?>
     <tr>
-      <td></td>
+      <td><?php echo $no ?></td>
       <td><?php echo $r->ppend_tingkat ?></td>
       <td><?php echo $r->ppend_nama ?></td>
       <td><?php echo $r->ppend_jurusan ?></td>
@@ -228,26 +207,14 @@
       <td><?php echo $r->ppend_keluar ?></td>
       <td><?php echo $r->ppend_keterangan ?></td>
     </tr>
-  <?php } ?>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+  <?php $no++; } ?>
 </table>
+<br>
 
 <!-- D. PEKERJAAN -->
-<table  cellspacing="" cellpadding="3">
+<h3>D. Riwayat Pekerjaan</h3>
+<table cellspacing="" cellpadding="3">
   <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-  <tr style="display:table-row">
-    <th colspan="4" style="font-size: 14px" align="left">
-      D. Riwayat Pekerjaan
-    </th>
-  </tr>
   <?php foreach ($table4 as $r){ ?>
     <tr>
       <td width="4%"></td>
@@ -314,78 +281,54 @@
 </table>
 
 <!-- E. REFERENSI PRO -->
+<h3>E. Referensi Profesional</h3>
 <table border="1" cellspacing="" cellpadding="3">
-  <tr style="display:table-row">
-    <th colspan="4" style="font-size: 14px" align="left">
-      E. Referensi Profesional
-    </th>
-  </tr>
   <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
   <tr style="display:table-row">
-    <td width="4%"></td>
+    <td width="5%">No.</td>
     <td width="24%" align="center">Nama</td>
     <td width="24%" align="center">Hubungan</td>
     <td width="24%" align="center">Jabatan</td>
-    <td width="24%" align="center">No. Telp</td>
+    <td width="23%" align="center">No. Telp</td>
   </tr>
-  <?php foreach ($table5 as $r){ ?>
+  <?php $no = 1; foreach ($table5 as $r){ ?>
     <tr>
-      <td></td>
+      <td><?php echo $no ?></td>
       <td><?php echo $r->prp_nama ?></td>
       <td><?php echo $r->prp_hubungan ?></td>
       <td><?php echo $r->prp_jabatan ?></td>
       <td><?php echo $r->prp_telp ?></td>
     </tr>
-  <?php } ?>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+  <?php $no++; } ?>
 </table>
+<br>
 
 <!-- F. REFERENSI KERABAT -->
+<h3>F. Referensi Kerabat</h3>
 <table border="1" cellspacing="" cellpadding="3">
-  <tr style="display:table-row">
-    <th colspan="4" style="font-size: 14px" align="left">
-      F. Referensi Kerabat
-    </th>
-  </tr>
   <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
   <tr style="display:table-row">
-    <td width="4%"></td>
+    <td width="5%">No.</td>
     <td width="32%" align="center">Nama</td>
     <td width="32%" align="center">Hubungan</td>
-    <td width="32%" align="center">Jabatan</td>
+    <td width="31%" align="center">Jabatan</td>
   </tr>
-  <?php foreach ($table6 as $r){ ?>
+  <?php $no = 1; foreach ($table6 as $r){ ?>
     <tr>
-      <td></td>
+      <td><?php echo $no ?></td>
       <td><?php echo $r->prk_nama ?></td>
       <td><?php echo $r->prk_hubungan ?></td>
       <td><?php echo $r->prk_jabatan ?></td>
     </tr>
-  <?php } ?>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+  <?php $no++; } ?>
 </table>
+<br>
 
 <!-- G. MINAT -->
+<h3>G. Minat</h3>
 <table  cellspacing="" cellpadding="3">
   <?php foreach ($table7 as $r){ ?>
     <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-    <tr style="display:table-row">
-      <th colspan="2" style="font-size: 14px" align="left">
-        G. Minat
-      </th>
-    </tr>
     <tr>
       <td width="4%"></td>
       <td width="96%">1. Minimum gaji yang diharapkan</td>	
@@ -427,80 +370,56 @@
 </table>
 
 <!-- H. KURSUS/PELATIHAN -->
+<h3>H. Kursus/Pelatihan</h3>
 <table border="1" cellspacing="" cellpadding="3">
-  <tr style="display:table-row">
-    <th colspan="4" style="font-size: 14px" align="left">
-      H. Kursus/Pelatihan
-    </th>
-  </tr>
   <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
   <tr style="display:table-row">
-    <td width="4%"></td>
+    <td width="5%">No.</td>
     <td width="24%" align="center">Nama Instansi</td>
     <td width="24%" align="center">Tahun Masuk</td>
     <td width="24%" align="center">Tahun Keluar</td>
-    <td width="24%" align="center">Keterangan</td>
+    <td width="23%" align="center">Keterangan</td>
   </tr>
-  <?php foreach ($table8 as $r){ ?>
+  <?php $no = 1; foreach ($table8 as $r){ ?>
     <tr>
-      <td></td>
+      <td><?php echo $no ?></td>
       <td><?php echo $r->ps_nama ?></td>
       <td><?php echo $r->ps_masuk ?></td>
       <td><?php echo $r->ps_keluar ?></td>
       <td><?php echo $r->ps_status ?></td>
     </tr>
-  <?php } ?>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+  <?php $no++; } ?>
 </table>
+<br>
 
 <!-- I. BAHASA -->
+<h3>I. Kemampuan Bahasa</h3>
 <table border="1" cellspacing="" cellpadding="3">
-  <tr style="display:table-row">
-    <th colspan="4" style="font-size: 14px" align="left">
-      I. Kemampuan Bahasa
-    </th>
-  </tr>
   <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
   <tr style="display:table-row">
-    <td width="4%"></td>
+    <td width="5%">No.</td>
     <td width="24%" align="center">Bahasa</td>
     <td width="24%" align="center">Tertulis</td>
     <td width="24%" align="center">Lisan</td>
-    <td width="24%" align="center">Keterangan</td>
+    <td width="23%" align="center">Keterangan</td>
   </tr>
-  <?php foreach ($table9 as $r){ ?>
+  <?php $no = 1; foreach ($table9 as $r){ ?>
     <tr>
-      <td></td>
+      <td><?php echo $no ?></td>
       <td><?php echo $r->bahasa ?></td>
       <td><?php echo $r->tulis ?></td>
       <td><?php echo $r->lisan ?></td>
       <td><?php echo $r->keterangan ?></td>
     </tr>
-  <?php } ?>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+  <?php $no++; } ?>
 </table>
+<br>
 
 <!-- J. INFORMASI TAMBAHAN -->
-<table border="1" cellspacing="" cellpadding="3">
+<h3>J. Informasi Tambahan</h3>
+<table cellspacing="" cellpadding="3">
   <?php foreach ($table10 as $r){ ?>
     <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-    <tr style="display:table-row">
-      <th colspan="2" style="font-size: 14px" align="left">
-        J. Informasi Tambahan
-      </th>
-    </tr>
     <tr>
       <td width="4%"></td>
       <td width="96%">1. Hobi/aktivitas yang dilakukan saat waktu senggang</td>	
@@ -576,7 +495,7 @@
 </table>
 
 <!-- PERNYATAAN -->
-<table border="1" cellspacing="" cellpadding="3">
+<table cellspacing="" cellpadding="3">
     <tr style="display:table-row">
       <th align="justify">
         <b>
