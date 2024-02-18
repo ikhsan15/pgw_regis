@@ -407,7 +407,7 @@ class Home extends CI_Controller {
 
 				
 				// redirect($this->router->fetch_class().'/'.$this->router->fetch_method().'/?rNum='.$rNum);
-				redirect(base_url());
+				redirect('Home/sukses');
 			}
 			// elseif($action == 'hapus'){
 			// 	$this->Mainmodel->delete_table('public.pgw_keluarga', 'pc_id='.$rNum);
@@ -516,6 +516,10 @@ class Home extends CI_Controller {
 		$data['pp_organisasi']			= $pp_organisasi;
 				
 		$this->load->view('v_home', $data);
+	}
+
+	public function sukses(){
+		$this->load->view('v_sukses');
 	}
 
 	public function exportPdf() {
