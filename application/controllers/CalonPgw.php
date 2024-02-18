@@ -188,7 +188,7 @@ class CalonPgw extends CI_Controller {
 
 			// $data['rec_pgwcalon']					= $this->M_Pegawai->show_combo("public.pgw_calon", "pc_id", "pc_nama", "pc_id > 0", "pc_nama", $pc_nama);
 			// $data['rec_pgwcalon']					= $this->db->query("SELECT * FROM public.pgw_calon");
-			$data['rec_pgwcalon']					= $this->db->query("SELECT * FROM public.v_dt_pgw_calon ");
+			$data['rec_pgwcalon']					= $this->db->query("SELECT * FROM public.v_dt_pgw_calon ORDER BY pc_id DESC");
 			
 		}
 		// $this->load->view('public/v_dataPribadi', $data);

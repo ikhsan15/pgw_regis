@@ -85,7 +85,7 @@
                     <?php echo $list_divisi_lamar; ?>
                   </select>
                   <div class="underline"></div>
-                  <label for="inp_pd_id_divisi_lamar" id="select_opt">Posisi yand dilamar <code>*</code></label>
+                  <label for="inp_pd_id_divisi_lamar" id="select_opt">Posisi yang di dilamar <code>*</code></label>
                 </div>
               </div>
               <div class="form-row">
