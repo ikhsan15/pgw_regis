@@ -536,12 +536,13 @@
                     <tr>	
                       <td>Gaji Pokok</td>	
                       <td>:</td>	
-                      <td><?php echo $r->pk_gapok ?></td>
+                      <!-- <td>Rp.<?php $asc = $r->pk_gapok ?></td> -->
+                      <td>Rp.<?php echo number_format((floatval($r->pk_gapok)), 0, ",", "."); ?></td>
                     </tr>
                     <tr>	
                       <td>Tunjangan Lainnya</td>	
-                      <td>:</td>	
-                      <td><?php echo $r->pk_tunjangan_lainnya ?></td>
+                      <td>:</td>
+                      <td>Rp.<?php echo number_format((floatval($r->pk_tunjangan_lainnya)), 0, ",", "."); ?></td>
                     </tr>
                     <tr>	
                       <td>Tugas Kerja</td>	
@@ -666,7 +667,8 @@
                     <tr>	
                       <td width="40%">Minimum gaji yang diharapkan </td>	
                       <td width="2%">:</td>	
-                      <td><?php echo $r->ppreq_gaji_min ?></td>
+                      <!-- <td><?php echo $r->ppreq_gaji_min ?></td> -->
+                      <td>Rp.<?php echo number_format((floatval($r->ppreq_gaji_min)), 0, ",", "."); ?></td>
                     </tr>
                     <tr>	
                       <td>Kondisi kerja/tunjangan dan fasilitas yang diharapkan </td>	
@@ -823,11 +825,26 @@
                       <td width="2%">:</td>	
                       <td><?php echo $r->pp_hobi ?></td>
                     </tr>
-                    <tr>	
+                    <!-- <tr>	
                       <td>Apakah Anda buta warna? </td>	
                       <td>:</td>
                       <td><?php echo $r->pp_buta_warna ?></td>
-                    </tr>
+                    </tr> -->
+                    <tr>	
+                      <td>Apakah Anda buta warna?</td>	
+                      <td>:</td>	
+                      <td>
+                        <?php if(($r->pp_buta_warna) === 1){
+                            echo 'Tidak';
+                          }elseif(($r->pp_buta_warna) === 2){
+                            echo 'Buta warna sebagian';
+                          }
+                          else{
+                            echo 'Buta warna total';
+                          } 
+                        ?>
+                      </td>
+                    </tr>	
                     <tr>	
                       <td>Penyakit yang pernah menyebabkan Anda dirawat di rumah sakit. </td>	
                       <td>:</td>
@@ -843,10 +860,22 @@
                       <td>:</td>
                       <td><?php echo $r->pp_sakit_turunan ?></td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <td>Apakah Anda pernah terlibat tindak kriminal yang menyebabkan Anda berurusan dengan hukum? </td>	
                       <td>:</td>
                       <td><?php echo $r->pp_kriminal ?></td>
+                    </tr>	 -->
+                    <tr>	
+                      <td>Apakah Anda pernah terlibat tindak kriminal yang menyebabkan Anda berurusan dengan hukum? </td>	
+                      <td>:</td>	
+                      <td>
+                        <?php if(($r->pp_kriminal) === 1){
+                            echo 'Iya';
+                          } else{
+                            echo 'Tidak';
+                          } 
+                        ?>
+                      </td>
                     </tr>	
                     <tr>
                       <td>Kapan Anda terlibat tindak kriminal tersebut? </td>	
@@ -922,7 +951,7 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('/assets/adminlte3/dist/js/adminlte.min.js '); ?>"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url('/assets/adminlte3/dist/js/demo.js '); ?>"></script>
+<!-- <script src="<?php echo base_url('/assets/adminlte3/dist/js/demo.js '); ?>"></script> -->
 <!-- Page specific script -->
 
 <script src="<?php echo base_url('/assets/js/v_data.js'); ?>"></script>

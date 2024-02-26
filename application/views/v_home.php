@@ -575,7 +575,7 @@
                     <div class="input-data textarea">
                       <textarea rows="3" cols="80" id="inp_ppreq_penempatan" name="inp_ppreq_penempatan" required></textarea>
                       <div class="underline"></div>
-                      <label for="inp_ppreq_penempatan">Apakah Anda bersedia ditempatkan di luar Jakarta? (Ya / Tidak). Berikan Alasan Anda. <code>*</code></label>
+                      <label for="inp_ppreq_penempatan">Apakah Anda bersedia ditempatkan di luar Jakarta? Berikan Alasan Anda. <code>*</code></label>
                     </div>
                   </div>
                 </div>
@@ -711,11 +711,35 @@
                       <label for="inp_pp_hobi">1. Hobi/aktivitas yang dilakukan saat waktu senggang <code>*</code></label>
                     </div>
                   </div>
-                  <div class="form-row textarea">
+                  <!-- <div class="form-row textarea">
                     <div class="input-data textarea">
                       <textarea rows="3" cols="80" id="inp_pp_buta_warna" name="inp_pp_buta_warna" required></textarea>
                       <div class="underline"></div>
                       <label for="inp_pp_buta_warna">2. Apakah Anda buta warna? <code>*<br>(a)Tidak / (b)Buta warna sebagian / (c)Buta warna total</code></label>
+                    </div>
+                  </div> -->
+                  <div class="row">
+                    <div class="col-md-12" id="buta_warna_label">
+                      <label for="inp_pp_buta_warna">2. Apakah Anda buta warna? <code>*<br>(a)Tidak / (b)Buta warna sebagian / (c)Buta warna total</code></label>
+                      <div class="form-row">
+                        <div class="wrapper" id="radio_pp_buta_warna">
+                          <input type="radio" name="inp_pp_buta_warna" value="1" id="pp_buta_warna_1" checked>
+                          <input type="radio" name="inp_pp_buta_warna" value="2" id="pp_buta_warna_2">
+                          <input type="radio" name="inp_pp_buta_warna" value="3" id="pp_buta_warna_3">
+                          <label for="pp_buta_warna_1" class="option pp_buta_warna_1">
+                            <div class="dot"></div>
+                            <span>Tidak</span>
+                          </label>
+                          <label for="pp_buta_warna_2" class="option pp_buta_warna_2">
+                            <div class="dot"></div>
+                            <span>Buta warna sebagian</span>
+                          </label>
+                          <label for="pp_buta_warna_3" class="option pp_buta_warna_3">
+                            <div class="dot"></div>
+                            <span>Buta warna total</span>
+                          </label>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="form-row textarea">
@@ -746,11 +770,23 @@
                       <label for="inp_pp_sakit_sekarang">5.	Penyakit tertentu yang masih dialami saat ini.  <code>*</code></label>
                     </div>
                   </div>
-                  <div class="form-row textarea">
-                    <div class="input-data textarea">
-                      <textarea rows="3" cols="80" id="inp_pp_kriminal" name="inp_pp_kriminal" required></textarea>
-                      <div class="underline"></div>
-                      <label for="inp_pp_kriminal">6.	Apakah Anda pernah terlibat tindak kriminal yang menyebabkan Anda berurusan dengan hukum? <code>* (Ya/Tidak)</code></label>
+                  <div class="row">
+                    <div class="col-md-12" id="kriminal_label">
+                      <label for="inp_pp_kriminal">6.	Apakah Anda pernah terlibat tindak kriminal yang menyebabkan Anda berurusan dengan hukum? <code>* </code></label>
+                      <div class="form-row">
+                        <div class="wrapper" id="radio_pp_kriminal">
+                          <input type="radio" name="inp_pp_kriminal" value="1" id="pp_kriminal_1" checked>
+                          <input type="radio" name="inp_pp_kriminal" value="2" id="pp_kriminal_2">
+                          <label for="pp_kriminal_1" class="option pp_kriminal_1">
+                            <div class="dot"></div>
+                            <span>Iya</span>
+                          </label>
+                          <label for="pp_kriminal_2" class="option pp_kriminal_2">
+                            <div class="dot"></div>
+                            <span>Tidak</span>
+                          </label>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="form-row textarea">
@@ -856,13 +892,13 @@
                 '<div class="input-data">'+
                   '<input type="text" name="inp_pf_nama[]" id="inp_pf_nama'+i+'" alt="'+i+'" required>'+
                   '<div class="underline"></div>'+
-                  '<label for="inp_pf_nama">Nama '+i+
+                  '<label for="inp_pf_nama">Nama '+
                   '</label>'+
                 '</div>'+
                 '<div class="input-data">'+
                   '<input type="text" name="inp_pf_hubungan[]" id="inp_pf_hubungan'+i+'" alt="'+i+'" required>'+
                   '<div class="underline"></div>'+
-                  '<label for="inp_pf_hubungan">Hubungan '+i+
+                  '<label for="inp_pf_hubungan">Hubungan '+
                   '</label>'+
                 '</div>'+
               '</div>'+
@@ -871,14 +907,14 @@
                 '<div class="input-data">'+
                   '<input type="date" name="inp_pf_tgl_lahir[]" id="inp_pf_tgl_lahir'+i+'" alt="'+i+'" required>'+
                   '<div class="underline"></div>'+
-                  '<label for="inp_pf_tgl_lahir">Tanggal Lahir '+i+
+                  '<label for="inp_pf_tgl_lahir">Tanggal Lahir '+
                   '</label>'+
                 '</div>'+
 
                 '<div class="input-data">'+
                   '<input type="text" name="inp_pf_pendidikan[]" id="inp_pf_pendidikan'+i+'" alt="'+i+'" required>'+
                   '<div class="underline"></div>'+
-                  '<label for="inp_pf_pendidikan">Pendidikan '+i+
+                  '<label for="inp_pf_pendidikan">Pendidikan '+
                   '</label>'+
                 '</div>'+
               '</div>'+
@@ -887,7 +923,7 @@
                 '<div class="input-data">'+
                   '<input type="text" name="inp_pf_kerja[]" id="inp_pf_kerja'+i+'" alt="'+i+'" required>'+
                   '<div class="underline"></div>'+
-                  '<label for="inp_pf_kerja">Pekerjaan '+i+
+                  '<label for="inp_pf_kerja">Pekerjaan '+
                   '</label>'+
                 '</div>'+
                 '<div class="input-data">'+
@@ -937,13 +973,13 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_ppend_nama[]" id="inp_ppend_nama'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_ppend_nama">Nama Instansi '+i+
+              '<label for="inp_ppend_nama">Nama Instansi '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="text" name="inp_ppend_keterangan[]" id="inp_ppend_keterangan'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_ppend_keterangan">Lulus / Tidak Lulus '+i+
+              '<label for="inp_ppend_keterangan">Lulus / Tidak Lulus '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -951,7 +987,7 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_ppend_alamat[]" id="inp_ppend_alamat'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_ppend_alamat">Alamat Instansi '+i+
+              '<label for="inp_ppend_alamat">Alamat Instansi '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -959,13 +995,13 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_ppend_tingkat[]" id="inp_ppend_tingkat'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_ppend_tingkat">Tingkat '+i+
+              '<label for="inp_ppend_tingkat">Tingkat '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="text" name="inp_ppend_jurusan[]" id="inp_ppend_jurusan'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_ppend_jurusan">Jurusan '+i+
+              '<label for="inp_ppend_jurusan">Jurusan '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -973,13 +1009,13 @@
             '<div class="input-data">'+
               '<input type="date" name="inp_ppend_masuk[]" id="inp_ppend_masuk'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_ppend_masuk">Tahun Masuk '+i+
+              '<label for="inp_ppend_masuk">Tahun Masuk '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="date" name="inp_ppend_keluar[]" id="inp_ppend_keluar'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_ppend_keluar">Tahun Keluar '+i+
+              '<label for="inp_ppend_keluar">Tahun Keluar '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1023,7 +1059,7 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_pk_nama[]" id="inp_pk_nama'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_nama">Nama Perusahaan '+i+
+              '<label for="inp_pk_nama">Nama Perusahaan '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1031,7 +1067,7 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_pk_alamat[]" id="inp_pk_alamat'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_alamat">Alamat Perusahaan '+i+
+              '<label for="inp_pk_alamat">Alamat Perusahaan '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1039,13 +1075,13 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_pk_divisi[]" id="inp_pk_divisi'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_divisi">Divisi '+i+
+              '<label for="inp_pk_divisi">Divisi '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="text" name="inp_pk_jabatan[]" id="inp_pk_jabatan'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_jabatan">Jabatan '+i+
+              '<label for="inp_pk_jabatan">Jabatan '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1053,13 +1089,13 @@
             '<div class="input-data">'+
               '<input type="date" name="inp_pk_masuk[]" id="inp_pk_masuk'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_masuk">Tanggal Masuk '+i+
+              '<label for="inp_pk_masuk">Tanggal Masuk '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="date" name="inp_pk_keluar[]" id="inp_pk_keluar'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_keluar">Tanggal Keluar '+i+
+              '<label for="inp_pk_keluar">Tanggal Keluar '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1067,13 +1103,13 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_pk_gapok[]" id="inp_pk_gapok'+i+'" alt="'+i+'" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_gapok">Gaji Pokok '+i+
+              '<label for="inp_pk_gapok">Gaji Pokok '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="text" name="inp_pk_tunjangan_lainnya[]" id="inp_pk_tunjangan_lainnya'+i+'" alt="'+i+'" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_tunjangan_lainnya">Tunjangan Lainnya '+i+
+              '<label for="inp_pk_tunjangan_lainnya">Tunjangan Lainnya '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1081,7 +1117,7 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_pk_tugas_kerja[]" id="inp_pk_tugas_kerja'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_tugas_kerja">Tugas Kerja '+i+
+              '<label for="inp_pk_tugas_kerja">Tugas Kerja '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1089,7 +1125,7 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_pk_alasan_pindah[]" id="inp_pk_alasan_pindah'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pk_alasan_pindah">Alasan Pindah '+i+
+              '<label for="inp_pk_alasan_pindah">Alasan Pindah '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1133,13 +1169,13 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_prp_nama[]" id="inp_prp_nama'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_prp_nama">Nama '+i+
+              '<label for="inp_prp_nama">Nama '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="text" name="inp_prp_hubungan[]" id="inp_prp_hubungan'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_prp_hubungan">Hubungan '+i+
+              '<label for="inp_prp_hubungan">Hubungan '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1147,13 +1183,13 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_prp_jabatan[]" id="inp_prp_jabatan'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_prp_jabatan">Jabatan '+i+
+              '<label for="inp_prp_jabatan">Jabatan '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="text" name="inp_prp_telp[]" id="inp_prp_telp'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_prp_telp">No. Telp '+i+
+              '<label for="inp_prp_telp">No. Telp '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1197,13 +1233,13 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_prk_nama[]" id="inp_prk_nama'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_prk_nama">Nama '+i+
+              '<label for="inp_prk_nama">Nama '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="text" name="inp_prk_hubungan[]" id="inp_prk_hubungan'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_prk_hubungan">Hubungan '+i+
+              '<label for="inp_prk_hubungan">Hubungan '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1211,7 +1247,7 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_prk_jabatan[]" id="inp_prk_jabatan'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_prk_jabatan">Jabatan '+i+
+              '<label for="inp_prk_jabatan">Jabatan '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1255,13 +1291,13 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_ps_nama[]" id="inp_ps_nama'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_ps_nama">Nama Instansi '+i+
+              '<label for="inp_ps_nama">Nama Instansi '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="text" name="inp_ps_status[]" id="inp_ps_status'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_ps_status">Lulus / Tidak Lulus '+i+
+              '<label for="inp_ps_status">Lulus / Tidak Lulus '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1269,13 +1305,13 @@
             '<div class="input-data">'+
               '<input type="date" name="inp_ps_masuk[]" id="inp_ps_masuk'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_ps_masuk">Tahun Masuk '+i+
+              '<label for="inp_ps_masuk">Tahun Masuk '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="date" name="inp_ps_keluar[]" id="inp_ps_keluar'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_ps_keluar">Tahun Keluar '+i+
+              '<label for="inp_ps_keluar">Tahun Keluar '+
               '</label>'+
             '</div>'+
           '</div>'+
@@ -1319,13 +1355,13 @@
             '<div class="input-data">'+
               '<input type="text" name="inp_pb_nama[]" id="inp_pb_nama'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pb_nama">Bahasa '+i+
+              '<label for="inp_pb_nama">Bahasa '+
               '</label>'+
             '</div>'+
             '<div class="input-data">'+
               '<input type="text" name="inp_pb_keterangan[]" id="inp_pb_keterangan'+i+'" alt="'+i+'" required>'+
               '<div class="underline"></div>'+
-              '<label for="inp_pb_keterangan">Aktif / Pasif '+i+
+              '<label for="inp_pb_keterangan">Aktif / Pasif '+
               '</label>'+
             '</div>'+
           '</div>'+

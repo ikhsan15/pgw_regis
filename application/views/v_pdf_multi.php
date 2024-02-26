@@ -250,13 +250,15 @@
       <td></td>
       <td>Gaji Pokok</td>	
       <td>:</td>
-      <td><?php echo $r->pk_gapok ?></td>
+      <!-- <td>Rp.<?php echo $r->pk_gapok ?></td> -->
+      <td>Rp.<?php echo number_format((floatval($r->pk_gapok)), 0, ",", "."); ?></td>
     </tr>	
     <tr>	
       <td></td>
       <td>Tunjangan Lain</td>	
       <td>:</td>
-      <td><?php echo $r->pk_tunjangan_lainnya ?></td>
+      <!-- <td><?php echo $r->pk_tunjangan_lainnya ?></td> -->
+      <td>Rp.<?php echo number_format((floatval($r->pk_tunjangan_lainnya)), 0, ",", "."); ?></td>
     </tr>	
     <tr>	
       <td></td>
@@ -335,7 +337,7 @@
     </tr>	
     <tr>
       <td></td>
-      <td><?php echo $r->ppreq_gaji_min ?></td>
+      <td>Rp.<?php echo number_format((floatval($r->ppreq_gaji_min)), 0, ",", "."); ?></td>
     </tr>	
     <tr>
       <td></td>
@@ -434,7 +436,17 @@
     </tr>	
     <tr>
       <td></td>
-      <td><?php echo $r->pp_buta_warna ?></td>
+      <td>
+        <?php if(($r->pp_buta_warna) === 1){
+            echo 'Tidak';
+          }elseif(($r->pp_buta_warna) === 2){
+            echo 'Buta warna sebagian';
+          }
+          else{
+            echo 'Buta warna total';
+          } 
+        ?>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -466,7 +478,14 @@
     </tr>	
     <tr>
       <td></td>
-      <td><?php echo $r->pp_kriminal ?>, Kapan? <?php echo $r->pp_kriminal_waktu ?></td>
+      <td>
+        <?php if(($r->pp_kriminal) === 1){
+            echo 'Iya';
+          } else{
+            echo 'Tidak';
+          } 
+        ?>, Kapan? <?php echo $r->pp_kriminal_waktu ?>
+      </td>
     </tr>
     <tr>
       <td></td>
