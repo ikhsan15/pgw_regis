@@ -157,20 +157,15 @@
 <!-- B. KELUARGA -->
 <h3>B. Keluarga</h3>
 <table border="1" cellspacing="" cellpadding="3">
-  <!-- <tr style="display:table-row">
-    <th colspan="4" style="font-size: 14px" align="left">
-      B. Keluarga
-    </th>
-  </tr> -->
-    <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
-    <tr style="display:table-row">
-      <td width="5%">No.</td>
-      <td width="20%" align="center">Hubungan</td>
-      <td width="20%" align="center">Nama</td>	
-      <td width="15%" align="center">Tanggal Lahir</td>	
-      <td width="20%" align="center">Pendidikan</td>
-      <td width="20%" align="center">Pekerjaan</td>
-    </tr>
+  <!-- <tr class="tr-class-<?php echo $active?> "></tr> -->
+  <tr style="display:table-row">
+    <td width="5%">No.</td>
+    <td width="15%" align="center">Hubungan</td>
+    <td width="20%" align="center">Nama</td>	
+    <td width="15%" align="center">Tanggal Lahir</td>	
+    <td width="20%" align="center">Pendidikan</td>
+    <td width="25%" align="center">Pekerjaan</td>
+  </tr>
   <?php $no = 1; foreach ($table2 as $r){ ?>
     <tr>
       <td><?php echo $no ?></td>

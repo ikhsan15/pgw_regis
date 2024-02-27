@@ -637,7 +637,7 @@
             <!-- Section 9 - Data Bahasa -- START -->
             <h4></h4>
             <section>
-              <h4>H. Kemampuan Bahasa</h4>
+              <h4>I. Kemampuan Bahasa</h4>
               <div class="container">
 
                 <div class="container">
@@ -695,7 +695,7 @@
             <!-- Section 10 - Data Pertanyaan -- START -->
             <h4></h4>
             <section>
-              <h4>H.	Informasi Tambahan</h4>
+              <h4>J.	Informasi Tambahan</h4>
               <div class="container">
 
                 <div class="container">
